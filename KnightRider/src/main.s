@@ -101,7 +101,7 @@ backward_loop:
 
 # Busy loop
 delay:
-	ldr r12, =0x000F0000
+	ldr r12, =0x00080000
 
 1:
 	subs r12, r12, #1
