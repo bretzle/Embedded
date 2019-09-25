@@ -23,7 +23,7 @@
 
 main:
 
-	# turn on gpiob
+	# turn on GPIOB
 
 	ldr r1, =RCC_BASE
 
@@ -47,9 +47,12 @@ main:
 
 	str r2, [r1, #GPIO_MODER]
 
+
+	# load constant 1 and default shift into registers
 	movw R0, #15
 	movw R4, #1
 
+# toggles lights going forward
 forward_loop:
 	lsl R5, R4, R0
 	bl toggle_light
@@ -62,14 +65,17 @@ forward_loop:
 	add R0, R0, #1
 	b backward_loop
 
+# decrement shift
 1:
 	sub R0, R0, #1
 	b forward_loop
 
+# decrement shift by two
 2:
 	sub R0, R0, #2
 	b forward_loop
 
+# toggles lights going backward
 backward_loop:
 	lsl R5, R4, R0
 	bl toggle_light
@@ -82,14 +88,18 @@ backward_loop:
 	sub R0, R0, #1
 	b forward_loop
 
+# incremnt shift
 1:
 	add R0, R0, #1
 	b backward_loop
 
+# increment shift by two
 2:
 	add R0, R0, #2
 	b backward_loop
 
+
+# Busy loop
 delay:
 	ldr r12, =0x000F0000
 
@@ -98,10 +108,10 @@ delay:
 	bne 1b
 	bx LR
 
+# will toggle a light on based on a given mask stored in R5
 toggle_light:
-	# light mask in R5
 	ldr R2, [R1, #GPIO_ODR]
-	movw R3, #0xF7E0        // load mask
+	movw R3, #0xF7E0        // load clear mask
 	bic R2, R2, R3          // turn all lights off
 	orr R2, R2, R5          // enable light in R0
 	str R2, [R1, #GPIO_ODR] // write
