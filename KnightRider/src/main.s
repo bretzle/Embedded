@@ -51,6 +51,10 @@ main:
 begin:
 
 	# run forward
+	movw R0, #0x8000
+	bl toggle_light
+	bl delay
+
 	movw R0, #0x4000
 	bl toggle_light
 	bl delay
@@ -60,10 +64,6 @@ begin:
 	bl delay
 
 	movw R0, #0x1000
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x800
 	bl toggle_light
 	bl delay
 
@@ -92,7 +92,6 @@ begin:
 	bl delay
 
 	# run back
-
 	movw R0, #0x40
 	bl toggle_light
 	bl delay
@@ -113,10 +112,6 @@ begin:
 	bl toggle_light
 	bl delay
 
-	movw R0, #0x800
-	bl toggle_light
-	bl delay
-
 	movw R0, #0x1000
 	bl toggle_light
 	bl delay
@@ -133,7 +128,7 @@ begin:
 	b begin
 
 delay:
-	ldr r12, =0x00200000
+	ldr r12, =0x000F0000
 
 1:
 	subs r12, r12, #1
