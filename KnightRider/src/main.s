@@ -25,27 +25,27 @@ main:
 
 	# turn on GPIOB
 
-	ldr r1, =RCC_BASE
+	ldr R1, =RCC_BASE
 
-	ldr r2, [r1, #RCC_AHB1ENR]
-	orr r2, r2, #RCC_GPIOBEN
-	str r2, [r1, #RCC_AHB1ENR]
+	ldr R2, [R1, #RCC_AHB1ENR]
+	orr R2, R2, #RCC_GPIOBEN
+	str R2, [R1, #RCC_AHB1ENR]
 
 
 	# enable pb5-pb10m pb12-pb15 to output
 
-	ldr r1, =GPIOB_BASE
-	ldr r2, [r1, #GPIO_MODER]
+	ldr R1, =GPIOB_BASE
+	ldr R2, [R1, #GPIO_MODER]
 
-	movw r3, #0x5400
-	movt r3, #0x5515
-	orr r2, r2, r3
+	movw R3, #0x5400
+	movt R3, #0x5515
+	orr R2, R2, R3
 
-	movw r3, #0xA800
-	movt r3, #0xAA2A
-	bic r2, r2, r3
+	movw R3, #0xA800
+	movt R3, #0xAA2A
+	bic R2, R2, R3
 
-	str r2, [r1, #GPIO_MODER]
+	str R2, [R1, #GPIO_MODER]
 
 
 	# load constant 1 and default shift into registers
@@ -101,10 +101,10 @@ backward_loop:
 
 # Busy loop
 delay:
-	ldr r12, =0x00040000
+	ldr R12, =0x00040000
 
 1:
-	subs r12, r12, #1
+	subs R12, R12, #1
 	bne 1b
 	bx LR
 
