@@ -51,81 +51,48 @@ main:
 begin:
 
 	# run forward
-	movw R0, #0x8000
+	movw R0, #15
+	movw R4, #1
+
+forward_loop:
+	lsl R5, R4, R0
 	bl toggle_light
 	bl delay
+	cmp R0, #12
+	beq 2f
+	cmp R0, #5
+	bgt 1f
 
-	movw R0, #0x4000
+	add R0, R0, #1
+	b backward_loop
+
+1:
+	sub R0, R0, #1
+	b forward_loop
+
+2:
+	sub R0, R0, #2
+	b forward_loop
+
+backward_loop:
+	lsl R5, R4, R0
 	bl toggle_light
 	bl delay
+	cmp R0, #10
+	beq 2f
+	cmp R0, #15
+	blt 1f
 
-	movw R0, #0x2000
-	bl toggle_light
-	bl delay
+	sub R0, R0, #1
+	b forward_loop
 
-	movw R0, #0x1000
-	bl toggle_light
-	bl delay
+1:
+	add R0, R0, #1
+	b backward_loop
 
-	movw R0, #0x400
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x200
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x100
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x80
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x40
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x20
-	bl toggle_light
-	bl delay
-
-	# run back
-	movw R0, #0x40
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x80
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x100
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x200
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x400
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x1000
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x2000
-	bl toggle_light
-	bl delay
-
-	movw R0, #0x4000
-	bl toggle_light
-	bl delay
-
-	# goto turn all on
-	b begin
+2:
+	add R0, R0, #2
+	b backward_loop
 
 delay:
 	ldr r12, =0x000F0000
@@ -136,10 +103,10 @@ delay:
 	bx LR
 
 toggle_light:
-	# light mask in R0
+	# light mask in R5
 	ldr R2, [R1, #GPIO_ODR]
 	movw R3, #0xF7E0
 	bic R2, R2, R3 // turn all lights off
-	orr R2, R2, R0      // enable light in R0
+	orr R2, R2, R5      // enable light in R0
 	str R2, [R1, #GPIO_ODR] // write
 	bx LR
