@@ -57,7 +57,7 @@ forward_loop:
 	lsl R5, R4, R0
 	bl toggle_light
 	bl delay
-	cmp R0, #12
+	cmp R0, #12   // skip pin 11
 	beq 2f
 	cmp R0, #5
 	bgt 1f
@@ -81,7 +81,7 @@ backward_loop:
 	bl toggle_light
 	bl delay
 	cmp R0, #10
-	beq 2f
+	beq 2f         // skip pin 11
 	cmp R0, #15
 	blt 1f
 
@@ -101,7 +101,7 @@ backward_loop:
 
 # Busy loop
 delay:
-	ldr r12, =0x00080000
+	ldr r12, =0x00040000
 
 1:
 	subs r12, r12, #1
