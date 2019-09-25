@@ -47,10 +47,6 @@ main:
 
 	str r2, [r1, #GPIO_MODER]
 
-
-begin:
-
-	# run forward
 	movw R0, #15
 	movw R4, #1
 
@@ -105,8 +101,8 @@ delay:
 toggle_light:
 	# light mask in R5
 	ldr R2, [R1, #GPIO_ODR]
-	movw R3, #0xF7E0
-	bic R2, R2, R3 // turn all lights off
-	orr R2, R2, R5      // enable light in R0
+	movw R3, #0xF7E0        // load mask
+	bic R2, R2, R3          // turn all lights off
+	orr R2, R2, R5          // enable light in R0
 	str R2, [R1, #GPIO_ODR] // write
 	bx LR
