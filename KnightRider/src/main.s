@@ -25,17 +25,17 @@ main:
 
 	# turn on GPIOB
 
-	ldr R1, =RCC_BASE
+	ldr  R1, =RCC_BASE
 
-	ldr R2, [R1, #RCC_AHB1ENR]
-	orr R2, R2, #RCC_GPIOBEN
-	str R2, [R1, #RCC_AHB1ENR]
+	ldr  R2, [R1, #RCC_AHB1ENR]
+	orr  R2, R2, #RCC_GPIOBEN
+	str  R2, [R1, #RCC_AHB1ENR]
 
 
 	# enable pb5-pb10m pb12-pb15 to output
 
-	ldr R1, =GPIOB_BASE
-	ldr R2, [R1, #GPIO_MODER]
+	ldr  R1, =GPIOB_BASE
+	ldr  R2, [R1, #GPIO_MODER]
 
 	movw R3, #0x5400
 	movt R3, #0x5515
