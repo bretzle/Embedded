@@ -12,9 +12,9 @@
 .global main
 
 main:
-    bl num_to_LED_init
+    bl LED_init
 
-    mov R0, #917
+    mov R0, #1234
     bl num_to_LED
 
 end:
