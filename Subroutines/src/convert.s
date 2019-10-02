@@ -4,6 +4,7 @@
 .section .text
 
 .global num_to_bcd
+.global bcd_to_ascii
 
 @ Input : R1  only accepts 12 bit numbers
 @ output: R0  stores bcd
@@ -54,3 +55,28 @@ check_bcd:
 	addgt R0, R0, #0x300 @ add 3 to hundreds column if > 4
 
 	pop {PC}
+
+@ input  : R1
+@ output : R0
+@ temp   : R2  store temp bit field extracts
+bcd_to_ascii:
+	push {R2, LR}
+	mov R0, #0x30303030
+
+	ubfx R2, R1, #12, #4
+	lsl  R2, R2, #24
+	orr  R0, R0, R2
+
+	ubfx R2, R1, #8, #4
+	lsl  R2, R2, #16
+	orr  R0, R0, R2
+
+	ubfx R2, R1, #4, #4
+	lsl  R2, R2, #8
+	orr  R0, R0, R2
+
+	ubfx R2, R1, #0, #4
+	lsl  R2, R2, #0
+	orr  R0, R0, R2
+
+	pop  {R2, PC}

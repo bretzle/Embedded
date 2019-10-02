@@ -20,6 +20,9 @@ main:
 	mov R1, #1234
 
 	bl num_to_bcd
+	mov R1, R0
+
+	bl bcd_to_ascii
 
 end:
 	b end
