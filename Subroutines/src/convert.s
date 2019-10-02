@@ -56,6 +56,7 @@ check_bcd:
 
 	pop {PC}
 
+@ convert a 16 bit bcd number to ascii
 @ input  : R1
 @ output : R0
 @ temp   : R2  store temp bit field extracts
