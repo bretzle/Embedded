@@ -34,28 +34,16 @@ num_to_bcd:
 	lsl R3, R1, #20		@ copy input to a mutable register
 
 loop:
-	@bl check_bcd
-	@lsl R0, R0, #1 	    @ shift bcd
-	@ubfx R4, R1, #0, #1 @ get lsb of input
-	@add R0, R0, R4      @ add to bcd
 
-	@lsr R1, R1, #1
-	@lsl R3, R3, #1      @ shift input
+	bl check_bcd         @ add 3 to any columns who > 4
 
-	@subs R2, R2, #1
-	@bne  loop
+	lsl R0, R0, #1       @ shift bcd
+	ubfx R4, R3, #31, #1 @ get msb of input
+	add R0, R0, R4       @ make msb of input lsb of bcd
 
-	@bl check_bcd
+	lsl R3, R3, #1       @ shift input
 
-	bl check_bcd
-
-	lsl R0, R0, #1
-	ubfx R4, R3, #31, #1
-	add R0, R0, R4
-
-	lsl R3, R3, #1
-
-	subs R2, R2, #1
+	subs R2, R2, #1      @ decrement counter
 	bne loop
 	
 	pop  {R2-R5, PC}
@@ -67,18 +55,18 @@ check_bcd:
 	ubfx R5, R0, #0, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #3
+	addgt R0, R0, #3     @ add 3 to ones columns if > 4
 
 	@ tens
 	ubfx R5, R0, #4, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #0x30
+	addgt R0, R0, #0x30  @ add 3 to tens column if > 4
 
 	@ hundreds
 	ubfx R5, R0, #8, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #0x300
+	addgt R0, R0, #0x300 @ add 3 to hundreds column if > 4
 
 	pop {PC}
