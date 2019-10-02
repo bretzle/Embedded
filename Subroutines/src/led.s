@@ -15,9 +15,9 @@
 .global num_to_LED
 
 
-# enable leds
+@ enables the LED pins
 LED_init:
-    # enable gpio
+    @ enable gpiob
     push {R1-R3, LR}
     ldr  R1, =RCC_BASE
 
@@ -26,7 +26,7 @@ LED_init:
 	str  R2, [R1, #RCC_AHB1ENR]
 
 
-	# enable led pins
+	@ enable led pins
 	ldr  R1, =GPIOB_BASE
 	ldr  R2, [R1, #GPIO_MODER]
 
@@ -41,25 +41,29 @@ LED_init:
 	str  R2, [R1, #GPIO_MODER]
     pop  {R1-R3, PC}
 
-# print a binary number to the leds.
+@ prints a 10 bit number to the LEDs.
 @ input : R1
+@ temp  : R2  location to gpio
+@ temp  : R3  location to odr
+@ temp  : R4  mask to disable all LEDs
+@ temp  : R5  mask of LEDs to enable
 num_to_LED:
 	push {R2-R5, LR}
 
 	ldr  R2, =GPIOB_BASE
     ldr  R3, [R2, #GPIO_ODR]
     mov  R4, 0xF7E0
-    bic  R3, R3, R4
+    bic  R3, R3, R4           @ disable all LEDs
 
     lsl R4, R1, #22
-    bic R4, R4, #0x0FFFFFFF // first 4
+    bic R4, R4, #0x0FFFFFFF   @ create mask for the first 4 LEDs
 
-    bic R5, R1, #0xFFFFFFC0 // clear everything but the last 6 bits
-    lsl R5, R5, #21
+    bic R5, R1, #0xFFFFFFC0
+    lsl R5, R5, #21			  @ create mask for the bottom 6 LEDs
 
-    orr R3, R3, R4
-    orr R3, R3, R5
-	lsr R3, R3, #16
-    str R3, [R2, #GPIO_ODR]
+    orr R3, R3, R4			  @ merge masks
+    orr R3, R3, R5			  @ merge masks
+	lsr R3, R3, #16		      @ shift mask to correct location
+    str R3, [R2, #GPIO_ODR]   @ write to odr
 
 	pop {R2-R5, PC}
