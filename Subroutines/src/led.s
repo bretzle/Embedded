@@ -54,7 +54,7 @@ num_to_LED:
     lsl R3, R0, #22
     bic R3, R3, #0x0FFFFFFF // first 4
 
-    bic R4, R0, #0xFFFFFFC0
+    bic R4, R0, #0xFFFFFFC0 // clear everything but the last 6 bits
     lsl R4, R4, #21
 
     orr R2, R2, R3

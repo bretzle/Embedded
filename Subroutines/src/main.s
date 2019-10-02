@@ -12,10 +12,16 @@
 .global main
 
 main:
-    bl LED_init
+    @bl LED_init
 
-    mov R0, #1234
-    bl num_to_LED
+    @mov R0, #0b1111111111
+    @bl num_to_LED
+
+	@mov R1, #1
+	@bl byte_to_ASCII
+
+	mov R1, #1234
+	bl num_to_bcd
 
 end:
 	b end
