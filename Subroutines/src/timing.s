@@ -7,13 +7,14 @@
 
 .global busy_delay_ms
 
-# runs a busy loop that will last R0 ms
+# runs a busy loop that will last R1 ms
 busy_delay_ms:
-	push {R1, LR}
-    mov  R1, INST_MS
+	push {R2, LR}
+2:
+    mov  R2, INST_MS
 1:
-    subs R1, R1, #1
+    subs R2, R2, #1
     bne  1b
-    subs R0, R0, #1
-    bne  delay_ms
+    subs R1, R1, #1
+    bne  2b
     pop  {R1, PC}

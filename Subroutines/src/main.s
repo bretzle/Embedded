@@ -24,8 +24,26 @@ main:
 
 	bl bcd_to_ascii
 
+	ubfx R1, R0, #24, #8
+	bl num_to_LED
+	mov R1, #500
+	bl busy_delay_ms
+
+	ubfx R1, R0, #16, #8
+	bl num_to_LED
+	mov R1, #500
+	bl busy_delay_ms
+
+	ubfx R1, R0, #8, #8
+	bl num_to_LED
+	mov R1, #500
+	bl busy_delay_ms
+
+	ubfx R1, R0, #0, #8
+	bl num_to_LED
+	mov R1, #500
+	bl busy_delay_ms
+
+
 end:
 	b end
-
-num_to_ASCII:
-    bx LR

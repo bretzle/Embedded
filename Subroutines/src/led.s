@@ -42,24 +42,24 @@ LED_init:
     pop  {R1-R3, PC}
 
 # print a binary number to the leds.
-# number stored in R0
+@ input : R1
 num_to_LED:
-	push {R1-R4, LR}
+	push {R2-R5, LR}
 
-	ldr  R1, =GPIOB_BASE
-    ldr  R2, [R1, #GPIO_ODR]
-    mov  R3, 0xF7E0
-    bic  R2, R2, R3
+	ldr  R2, =GPIOB_BASE
+    ldr  R3, [R2, #GPIO_ODR]
+    mov  R4, 0xF7E0
+    bic  R3, R3, R4
 
-    lsl R3, R0, #22
-    bic R3, R3, #0x0FFFFFFF // first 4
+    lsl R4, R1, #22
+    bic R4, R4, #0x0FFFFFFF // first 4
 
-    bic R4, R0, #0xFFFFFFC0 // clear everything but the last 6 bits
-    lsl R4, R4, #21
+    bic R5, R1, #0xFFFFFFC0 // clear everything but the last 6 bits
+    lsl R5, R5, #21
 
-    orr R2, R2, R3
-    orr R2, R2, R4
-	lsr R2, R2, #16
-    str R2, [R1, #GPIO_ODR]
+    orr R3, R3, R4
+    orr R3, R3, R5
+	lsr R3, R3, #16
+    str R3, [R2, #GPIO_ODR]
 
-	pop {R1-R4, PC}
+	pop {R2-R5, PC}
