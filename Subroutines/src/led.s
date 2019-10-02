@@ -42,6 +42,7 @@ LED_init:
     pop  {R1-R3, PC}
 
 @ prints a 10 bit number to the LEDs.
+@
 @ input : R1
 @ temp  : R2  location to gpio
 @ temp  : R3  location to odr

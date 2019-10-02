@@ -3,6 +3,8 @@
 .thumb
 .section .text
 
+	.equ ERR, 0x4552522E
+
 .global num_to_bcd
 .global bcd_to_ascii
 
@@ -20,8 +22,7 @@ num_to_bcd:
 	mov R2, #28           @ bit counter
 	lsl R3, R1, #4		  @ copy input to a mutable register
 
-loop:
-
+1:
 	bl check_bcd          @ add 3 to any columns who > 4
 
 	lsl R0, R0, #1        @ shift bcd
@@ -31,7 +32,7 @@ loop:
 	lsl R3, R3, #1        @ shift input
 
 	subs R2, R2, #1       @ decrement counter
-	bne loop
+	bne 1b
 	
 	pop  {R2-R5, PC}
 
@@ -83,11 +84,19 @@ check_bcd:
 	pop {PC}
 
 @ convert a 16 bit bcd number to ascii
+@
 @ input  : R1
 @ output : R0
 @ temp   : R2  store temp bit field extracts
 bcd_to_ascii:
 	push {R2, LR}
+
+	lsl R2, R1, #16 @
+	lsr R2, R2, #16 @
+	cmp R2, R1      @
+	ldr R0, =ERR    @ verify bcd is 16 bit.
+	bne 1f          @ if it isnt return 'Err.' in ascii
+
 	mov R0, #0x30303030
 
 	ubfx R2, R1, #12, #4
@@ -106,4 +115,5 @@ bcd_to_ascii:
 	lsl  R2, R2, #0
 	orr  R0, R0, R2
 
+1:
 	pop  {R2, PC}
