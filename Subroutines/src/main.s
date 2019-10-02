@@ -17,7 +17,7 @@
 
 main:
     bl LED_init
-	mov R1, #9999
+	mov R1, #1234
 
 	bl num_to_bcd
 	mov R1, R0

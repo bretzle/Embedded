@@ -6,7 +6,9 @@
 .global num_to_bcd
 .global bcd_to_ascii
 
-@ Input : R1  only accepts 12 bit numbers
+@ Converts a 28-bit binary number into 32-bit BCD
+@
+@ Input : R1  28 bit binary number
 @ output: R0  stores bcd
 @ temp  : R2  bit counter
 @ temp  : R3  copy of input
@@ -14,21 +16,21 @@
 @ temp  : R5  used for checking bcd
 num_to_bcd:
 	push {R2-R5, LR}
-	mov R0, #0          @ BCD will be stored here
-	mov R2, #12         @ bit counter
-	lsl R3, R1, #20		@ copy input to a mutable register
+	mov R0, #0            @ BCD will be stored here
+	mov R2, #28           @ bit counter
+	lsl R3, R1, #4		  @ copy input to a mutable register
 
 loop:
 
-	bl check_bcd         @ add 3 to any columns who > 4
+	bl check_bcd          @ add 3 to any columns who > 4
 
-	lsl R0, R0, #1       @ shift bcd
-	ubfx R4, R3, #31, #1 @ get msb of input
-	add R0, R0, R4       @ make msb of input lsb of bcd
+	lsl R0, R0, #1        @ shift bcd
+	ubfx R4, R3, #31, #1  @ get msb of input
+	add R0, R0, R4        @ make msb of input lsb of bcd
 
-	lsl R3, R3, #1       @ shift input
+	lsl R3, R3, #1        @ shift input
 
-	subs R2, R2, #1      @ decrement counter
+	subs R2, R2, #1       @ decrement counter
 	bne loop
 	
 	pop  {R2-R5, PC}
@@ -40,19 +42,43 @@ check_bcd:
 	ubfx R5, R0, #0, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #3     @ add 3 to ones columns if > 4
+	addgt R0, R0, #3      @ add 3 to columns if > 4
 
 	@ tens
 	ubfx R5, R0, #4, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #0x30  @ add 3 to tens column if > 4
+	addgt R0, R0, #0x30   @ add 3 to column if > 4
 
 	@ hundreds
 	ubfx R5, R0, #8, #4
 	cmp R5, #4
 	it gt
-	addgt R0, R0, #0x300 @ add 3 to hundreds column if > 4
+	addgt R0, R0, #0x300  @ add 3 to column if > 4
+
+	@ thousands
+	ubfx R5, R0, #12, #4
+	cmp R5, #4
+	it gt
+	addgt R0, R0, #0x3000 @ add 3 to column if > 4
+
+	@ ten-thousands
+	ubfx R5, R0, #12, #4
+	cmp R5, #4
+	it gt
+	addgt R0, R0, #0x30000 @ add 3 to column if > 4
+
+	@ hundred-thousands
+	ubfx R5, R0, #12, #4
+	cmp R5, #4
+	it gt
+	addgt R0, R0, #0x300000 @ add 3 to column if > 4
+
+	@ millions
+	ubfx R5, R0, #12, #4
+	cmp R5, #4
+	it gt
+	addgt R0, R0, #0x3000000 @ add 3 to column if > 4
 
 	pop {PC}
 
