@@ -11,16 +11,14 @@
 
 .global main
 
+@ convert 1234 to bcd
+@ convert each column to ascii
+@ print each ascii code to led with 500ms delay
+
 main:
-    @bl LED_init
-
-    @mov R0, #0b1111111111
-    @bl num_to_LED
-
-	@mov R1, #1
-	@bl byte_to_ASCII
-
+    bl LED_init
 	mov R1, #1234
+
 	bl num_to_bcd
 
 end:

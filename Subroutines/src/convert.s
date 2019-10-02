@@ -3,23 +3,7 @@
 .thumb
 .section .text
 
-.global num_to_ASCII
-.global byte_to_ASCII
 .global num_to_bcd
-
-@ input : R0
-@ output: R0
-num_to_ASCII:
-	bx   LR
-
-@ Input : R1
-@ Output: R1
-byte_to_ASCII:
-	push {LR}
-
-	orr  R1, R1, 0x30
-
-	pop  {PC}
 
 @ Input : R1  only accepts 12 bit numbers
 @ output: R0  stores bcd
