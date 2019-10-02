@@ -2,7 +2,7 @@
 @ John Bretz
 @ CE 2801
 @ Lab 3
-@ Description: Subroutines
+@ Description: main file
 
 .syntax unified
 .cpu cortex-m4

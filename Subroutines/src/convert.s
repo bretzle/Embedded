@@ -1,3 +1,9 @@
+@ convert.s
+@ John Bretz
+@ CE 2801
+@ Lab 3
+@ Description: convert binary number into other formats
+
 .syntax unified
 .cpu cortex-m4
 .thumb
