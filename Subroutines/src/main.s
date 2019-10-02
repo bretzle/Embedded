@@ -24,6 +24,7 @@ main:
 
 	bl bcd_to_ascii
 
+loop:
 	ubfx R1, R0, #24, #8
 	bl num_to_LED
 	mov R1, #500
@@ -44,6 +45,4 @@ main:
 	mov R1, #500
 	bl busy_delay_ms
 
-
-end:
-	b end
+	b loop
