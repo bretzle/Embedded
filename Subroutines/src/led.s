@@ -23,16 +23,14 @@
 
 @ enables the LED pins
 LED_init:
-    @ enable gpiob
     push {R1-R3, LR}
+
     ldr  R1, =RCC_BASE
 
 	ldr  R2, [R1, #RCC_AHB1ENR]
 	orr  R2, R2, #RCC_GPIOBEN
-	str  R2, [R1, #RCC_AHB1ENR]
+	str  R2, [R1, #RCC_AHB1ENR] @ enable gpiob
 
-
-	@ enable led pins
 	ldr  R1, =GPIOB_BASE
 	ldr  R2, [R1, #GPIO_MODER]
 
@@ -44,7 +42,7 @@ LED_init:
 	movt R3, #0xAA2A
 	bic  R2, R2, R3
 
-	str  R2, [R1, #GPIO_MODER]
+	str  R2, [R1, #GPIO_MODER]  @ enable led pins
     pop  {R1-R3, PC}
 
 @ prints a 10 bit number to the LEDs.
@@ -59,6 +57,7 @@ num_to_LED:
 
 	ldr  R2, =GPIOB_BASE
     ldr  R3, [R2, #GPIO_ODR]
+
     mov  R4, 0xF7E0
     bic  R3, R3, R4           @ disable all LEDs
 
