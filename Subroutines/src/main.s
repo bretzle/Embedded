@@ -17,8 +17,8 @@
 
 main:
     bl LED_init
-	mov R1, #1234
-	mov R2, #500
+	mov R1, #1234        @ default number to print in ascii
+	mov R2, #500         @ default delay
 
 	bl num_to_bcd
 	mov R1, R0
