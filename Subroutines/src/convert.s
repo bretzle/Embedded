@@ -106,20 +106,16 @@ bcd_to_ascii:
 	mov R0, #0x30303030
 
 	ubfx R2, R1, #12, #4
-	lsl  R2, R2, #24
-	orr  R0, R0, R2
+	bfi  R0, R2, #24, #4
 
 	ubfx R2, R1, #8, #4
-	lsl  R2, R2, #16
-	orr  R0, R0, R2
+	bfi  R0, R2, #16, #4
 
 	ubfx R2, R1, #4, #4
-	lsl  R2, R2, #8
-	orr  R0, R0, R2
+	bfi  R0, R2, #8, #4
 
 	ubfx R2, R1, #0, #4
-	lsl  R2, R2, #0
-	orr  R0, R0, R2
+	bfi  R0, R2, #0, #4
 
 1:
 	pop  {R2, PC}
