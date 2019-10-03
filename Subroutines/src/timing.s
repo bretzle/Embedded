@@ -15,15 +15,15 @@
 
 @ runs a busy loop that will last X ms
 @
-@ input : R1
-@ temp  : R2 counter
+@ input : R2
+@ temp  : R3 counter
 busy_delay_ms:
-	push {R2, LR}
+	push {R2, R3, LR}
 2:
-    mov  R2, INST_MS
+    mov  R3, INST_MS
 1:
-    subs R2, R2, #1  @ decrement instruction counter
+    subs R3, R3, #1  @ decrement instruction counter
     bne  1b
-    subs R1, R1, #1  @ 1 ms has elapsed
+    subs R2, R2, #1  @ 1 ms has elapsed
     bne  2b
-    pop  {R1, PC}
+    pop  {R2, R3, PC}
