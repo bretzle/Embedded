@@ -16,7 +16,7 @@
 @ print each ascii code to led with 500ms delay
 
 main:
-    bl LED_init
+	bl LED_init
 	mov R1, #1234        @ default number to print in ascii
 	mov R2, #500         @ default delay
 

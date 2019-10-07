@@ -9,7 +9,7 @@
 .thumb
 .section .text
 
-	.equ INST_MS, 0x148F @ instructions to run in one ms
+    .equ INST_MS, 0x148F @ instructions to run in one ms
 
 .global busy_delay_ms
 
@@ -18,7 +18,7 @@
 @ input : R2
 @ temp  : R3 counter
 busy_delay_ms:
-	push {R2, R3, LR}
+    push {R2, R3, LR}
 2:
     mov  R3, INST_MS
 1:
