@@ -22,7 +22,6 @@ start:
 	@ wait a second
 	mov R2, #1000
 	bl delay_ms
-
 	bl lcd_clear
 
 	@ print an invalid number
@@ -31,9 +30,15 @@ start:
 
 	mov R2, #1000
 	bl delay_ms
+	bl lcd_clear
 
+	@ print a string
 	mov R1, string
 	bl lcd_print_string
+
+	mov R2, #1000
+	bl delay_ms
+	bl lcd_clear
 
 	b start
 

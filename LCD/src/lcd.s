@@ -197,6 +197,9 @@ lcd_set_postion:
 @ R0 : output : number of characters written
 lcd_print_string:
 	push {R1, LR}
+
+
+
 	pop  {R1, PC}
 
 @ Prints a decimal number to the display
@@ -209,6 +212,25 @@ lcd_print_num:
 	movw R2, #9999
 	cmp R1, R2
 
+	bgt error
+
+	@ number is valid
+	bl num_to_ascii
+	ubfx R1, R0, #24, #8
+	bl write_data
+
+	ubfx R1, R0, #16, #8
+	bl write_data
+
+	ubfx R1, R0, #8, #8
+	bl write_data
+
+	ubfx R1, R0, #0, #8
+	bl write_data
+
+	pop {R1-R2, PC}
+
+error:
 	@ Error
 	mov R1, 'E'
 	bl write_data
@@ -219,4 +241,4 @@ lcd_print_num:
 	mov R1, 'r'
 	bl write_data
 
-	pop  {R1-R2, PC}
+	pop {R1-R2, PC}
