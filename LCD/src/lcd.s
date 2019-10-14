@@ -219,18 +219,4 @@ lcd_print_num:
 	mov R1, 'r'
 	bl write_data
 
-
 	pop  {R1-R2, PC}
-
-#Helper function you probably want to move somewhere else...
-# about r1 mircoseonds
-delay_us:
-	push {R1, LR}
-
-	lsl R1, R1, #3
-
-1:
-	subs R1, R1, #1
-	bne 1b
-
-	pop {R1, PC}
