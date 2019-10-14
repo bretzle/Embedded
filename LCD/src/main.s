@@ -19,7 +19,7 @@
 	.equ GPIOC_BASE, 0x40020800
 	.equ GPIO_MODER, 0x0
 	.equ GPIO_ODR, 0x14
-	.equ GPIO_BSRR, 0x18
+	.equ BSRR_OFFSET, 0x18
 
 #What pin is each of these?
 	.equ RS, 0x8
@@ -27,23 +27,23 @@
 	.equ E,  0xA
 
 #Commands for BSRR
-	.equ RS_SET, 1<<RS
-	.equ RS_CLR, 1<<(RS+16)
-	.equ RW_SET, 1<<RW
-	.equ RW_CLR, 1<<(RW+16)
-	.equ E_SET, 1<<E
-	.equ E_CLR, 1<<(E+16)
+	.equ E_SET,  0x400
+	.equ RW_SET, 0x200
+	.equ RS_SET, 0x100
 
 .global main
 .global LcdInit
 
 main:
 	bl LcdInit
+
+	mov R1, #8
+	bl lcd_print_num
 end:
 	b end
 
 LcdInit:
-	push {LR}
+	push {R1, LR}
 
     #Set up Ports
     bl setup_ports
@@ -53,21 +53,21 @@ LcdInit:
     bl delay_us
 
     #Write Function Set (0x38)
-    mov R0, #0x38
+    mov R1, #0x38
     bl write_instruction
 
     mov R1, #37
     bl delay_us
 
     #Write Function Set (0x38)
-    mov R0, #0x38
+    mov R1, #0x38
     bl write_instruction
 
     mov R1, #37
     bl delay_us
 
     #Write Display On/Off(0x0F)
-    mov R0, #0x0F
+    mov R1, #0x0F
     bl write_instruction
 
     mov R1, #37
@@ -77,16 +77,16 @@ LcdInit:
     bl lcd_clear
 
     #Write Entry Mode Set (0x06)
-	mov R0, #0x06
+	mov R1, #0x06
 	bl write_instruction
 
 	mov R1, #37
     bl delay_us
 
-	pop {PC}
+	pop {R1, PC}
 
 setup_ports:
-    push {LR}
+    push {R1-R3, LR}
     #Turn on Ports in RCC
 	ldr R1, =RCC_BASE
 
@@ -113,89 +113,70 @@ setup_ports:
 
     str R2, [R1, #GPIO_MODER]
 
-	pop {PC}
+	pop {R1-R3, PC}
 
 #Writes instruction
-#RS=0 RW=0  R0-Arg
+#RS=0 RW=0  R1-Arg
 #No returns
 write_instruction:
-	push {LR}
+	push {R1-R5, LR}
 
-	#Set RS=0,RW=0,E=0
-	ldr R1, =(GPIOC_BASE+GPIO_ODR)
-	mov R2, #7<<8
-	bic R3, R1, R2
-	str R3, [R1]
+	ldr R2, =GPIOA_BASE
+	ldr R3, =GPIOC_BASE
 
-	#Set E=1
-	ldr R1, =(GPIOC_BASE + GPIO_ODR)
-	mov R2, #0x1<<8
-	orr R3, R1, R2
-	str R3, [R1]
+	#Set RS=0,RW=0,E=1
+	mov R4, #0
+	bic R4, R4, #RS_SET
+	bic R4, R4, #RW_SET
+	orr R4, R4, #E_SET
+	str R4, [R3, #GPIO_ODR]
 
-	#Set R0 -> DataBus
-	ldr R1, =(GPIOA_BASE + GPIO_ODR)
-	mov R3, R1
-	bic R3, R3, #0xFF0
-	orr R3, R3, R0, LSL #4
-	str R3, [R1]
+	#Set R1 -> DataBus
+	bfi R5, R1, #4, #8
+	str R5, [R2, #GPIO_ODR]
 
 	#Set E=0
-	ldr R1, =(GPIOC_BASE + GPIO_ODR)
-	mov R2, #0x1<<8
-	bic R3, R1, R2
-	str R3, [R1]
+	bic R4, R4, #E_SET
+	str R4, [R3, #GPIO_ODR]
 
-	pop {PC}
-
+	pop {R1-R5, PC}
 
 
 #Writes data
-#RS=0 RW=0  R0-Arg
+#RS=1 RW=0  R1-Arg
 #No returns
 write_data:
-	push {LR}
+	push {R1-R5, LR}
 
-	#Set RS=1,RW=0,E=0
-	ldr R1, =(GPIOC_BASE+GPIO_ODR)
-	mov R2, #7<<8
-	bic R3, R1, R2
-	orr R3, R3, #4<<8
-	str R3, [R1]
+	ldr R2, =GPIOA_BASE
+	ldr R3, =GPIOC_BASE
 
-	#Set E=1
-	ldr R1, =(GPIOC_BASE + GPIO_ODR)
-	mov R2, #0x1<<8
-	orr R3, R1, R2
-	str R3, [R1]
+	mov R4, #0
+	bic R4, R4, #RW_SET
+	orr R4, R4, #RS_SET
+	orr R4, R4, #E_SET
+	str R4, [R3, #GPIO_ODR]
 
-	#Set R0 -> DataBus
-	ldr R1, =(GPIOA_BASE + GPIO_ODR)
-	mov R3, R1
-	bic R3, R3, #0xFF0
-	orr R3, R3, R0, LSL #4
-	str R3, [R1]
+	@ write actual data
+	ubfx R5, R1, #0, #8
+	lsl R5, R5, #4
+	str R5, [R2, #GPIO_ODR]
 
-	#Set E=0
-	ldr R1, =(GPIOC_BASE + GPIO_ODR)
-	mov R2, #0x1<<8
-	bic R3, R1, R2
-	str R3, [R1]
+	bic R4, R4, #E_SET
+	str R4, [R3, #GPIO_ODR]
 
-	#Wait for appropriate delay
-	mov R1, #1000 @ TODO
+	mov R1, #37
 	bl delay_us
 
-	pop {PC}
+	pop  {R1-R5, PC}
 
-#Write other global functions
 
 @ Clears the screen
 @ includes delay
 lcd_clear:
 	push {R0-R1, LR}
 
-	mov R0, #0x01
+	mov R1, #0x01
     bl write_instruction
 
     mov R1, #1520
@@ -224,8 +205,8 @@ lcd_set_postion:
 @ R1 : input  : address to the string
 @ R0 : output : number of characters written
 lcd_print_string:
-	push {LR}
-	pop  {PC}
+	push {R1, LR}
+	pop  {R1, PC}
 
 @ Prints a decimal number to the display
 @ can only print number between 0 and 9999
@@ -233,8 +214,22 @@ lcd_print_string:
 @
 @ R1 : input : the binary number to print
 lcd_print_num:
-	push {LR}
-	pop  {PC}
+	push {R1-R2, LR}
+	movw R2, #9999
+	cmp R1, R2
+
+	@ Error
+	mov R1, 'E'
+	bl write_data
+
+	mov R1, 'r'
+	bl write_data
+
+	mov R1, 'r'
+	bl write_data
+
+
+	pop  {R1-R2, PC}
 
 #Helper function you probably want to move somewhere else...
 # about r1 mircoseonds
