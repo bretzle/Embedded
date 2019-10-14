@@ -56,13 +56,22 @@ LcdInit:
     mov R0, #0x38
     bl write_instruction
 
+    mov R1, #37
+    bl delay_us
+
     #Write Function Set (0x38)
     mov R0, #0x38
     bl write_instruction
 
+    mov R1, #37
+    bl delay_us
+
     #Write Display On/Off(0x0F)
     mov R0, #0x0F
     bl write_instruction
+
+    mov R1, #37
+    bl delay_us
 
     #Write Display Clear (0x01)
     bl lcd_clear
@@ -70,6 +79,9 @@ LcdInit:
     #Write Entry Mode Set (0x06)
 	mov R0, #0x06
 	bl write_instruction
+
+	mov R1, #37
+    bl delay_us
 
 	pop {PC}
 
@@ -111,7 +123,7 @@ write_instruction:
 
 	#Set RS=0,RW=0,E=0
 	ldr R1, =(GPIOC_BASE+GPIO_ODR)
-	mov R2, #3<<8
+	mov R2, #7<<8
 	bic R3, R1, R2
 	str R3, [R1]
 
@@ -122,18 +134,17 @@ write_instruction:
 	str R3, [R1]
 
 	#Set R0 -> DataBus
-	ldr R1, =GPIOA_BASE
-	bfi R3, R1, #4, #8
+	ldr R1, =(GPIOA_BASE + GPIO_ODR)
+	mov R3, R1
+	bic R3, R3, #0xFF0
+	orr R3, R3, R0, LSL #4
+	str R3, [R1]
 
 	#Set E=0
 	ldr R1, =(GPIOC_BASE + GPIO_ODR)
 	mov R2, #0x1<<8
 	bic R3, R1, R2
 	str R3, [R1]
-
-	#Wait for appropriate delay
-	mov R1, #37
-	bl delay_us
 
 	pop {PC}
 
@@ -146,14 +157,34 @@ write_data:
 	push {LR}
 
 	#Set RS=1,RW=0,E=0
+	ldr R1, =(GPIOC_BASE+GPIO_ODR)
+	mov R2, #7<<8
+	bic R3, R1, R2
+	orr R3, R3, #4<<8
+	str R3, [R1]
 
 	#Set E=1
+	ldr R1, =(GPIOC_BASE + GPIO_ODR)
+	mov R2, #0x1<<8
+	orr R3, R1, R2
+	str R3, [R1]
 
 	#Set R0 -> DataBus
+	ldr R1, =(GPIOA_BASE + GPIO_ODR)
+	mov R3, R1
+	bic R3, R3, #0xFF0
+	orr R3, R3, R0, LSL #4
+	str R3, [R1]
 
 	#Set E=0
+	ldr R1, =(GPIOC_BASE + GPIO_ODR)
+	mov R2, #0x1<<8
+	bic R3, R1, R2
+	str R3, [R1]
 
 	#Wait for appropriate delay
+	mov R1, #1000 @ TODO
+	bl delay_us
 
 	pop {PC}
 
@@ -162,12 +193,15 @@ write_data:
 @ Clears the screen
 @ includes delay
 lcd_clear:
-	push {R0, LR}
+	push {R0-R1, LR}
 
 	mov R0, #0x01
     bl write_instruction
 
-	pop  {PC}
+    mov R1, #1520
+    bl delay_us
+
+	pop  {R0-R1, PC}
 
 @ Moves cursor to the home position
 @ includes delay
