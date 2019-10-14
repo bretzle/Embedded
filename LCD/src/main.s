@@ -11,15 +11,15 @@
 
 #Fill in addresses
 	.equ RCC_BASE, 0x40023800
-    .equ RCC_AHB1ENR, 0x30
-    .equ RCC_GPIOAEN, 0x0
-    .equ RCC_GPIOCEN, 0x3
+	.equ RCC_AHB1ENR, 0x30
+	.equ RCC_GPIOAEN, 0x1
+	.equ RCC_GPIOCEN, 0x4
 
-    .equ GPIOA_BASE, 0x40020000
-    .equ GPIOC_BASE, 0x40020800
-    .equ GPIO_MODER, 0x0
-    .equ GPIO_ODR, 0x14
-    .equ GPIO_BSRR, 0x18
+	.equ GPIOA_BASE, 0x40020000
+	.equ GPIOC_BASE, 0x40020800
+	.equ GPIO_MODER, 0x0
+	.equ GPIO_ODR, 0x14
+	.equ GPIO_BSRR, 0x18
 
 #What pin is each of these?
 	.equ RS, 0x8
@@ -73,31 +73,33 @@ LcdInit:
 
 	pop {PC}
 
-#Local helper function
 setup_ports:
     push {LR}
     #Turn on Ports in RCC
 	ldr R1, =RCC_BASE
 
 	ldr R2, [R1, #RCC_AHB1ENR]
-	orr R2, R2, #RCC_GPIOAEN
-	str R2, [R1, #RCC_AHB1ENR] @ enable gpioa
-
-	ldr R3, [R1, #RCC_AHB1ENR]
-	orr R3, R3, #RCC_GPIOAEN
-	str R3, [R1, #RCC_AHB1ENR] @ enable gpioc
+	orr R2, R2, #RCC_GPIOAEN   @ enable gpioa
+	orr R2, R2, #RCC_GPIOCEN   @ enable gpioc
+	str R2, [R1, #RCC_AHB1ENR]
 
     #Set DB Pins to Outputs
     ldr R1, =GPIOA_BASE
-    mov R4, #0xFF0
-    orr R2, R2, R4
-	str R2, [R1, #GPIO_MODER]
+    ldr R2, [R1, #GPIO_MODER]
+
+    ldr R3, =0x555500
+    orr R2, R2, R3
+
+    str R2, [R1, #GPIO_MODER]
 
     #Set RS RW E Pins to Outputs
     ldr R1, =GPIOC_BASE
-    mov R4, #0x700
-    orr R3, R3, R4
-    str R3, [R1, #GPIO_MODER]
+    ldr R2, [R1, #GPIO_MODER]
+
+    ldr R3, =0x150000
+    orr R2, R2, R3
+
+    str R2, [R1, #GPIO_MODER]
 
 	pop {PC}
 
@@ -120,6 +122,8 @@ write_instruction:
 	str R3, [R1]
 
 	#Set R0 -> DataBus
+	ldr R1, =GPIOA_BASE
+	bfi R3, R1, #4, #8
 
 	#Set E=0
 	ldr R1, =(GPIOC_BASE + GPIO_ODR)
