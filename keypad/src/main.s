@@ -12,4 +12,7 @@
 .global main
 
 main:
-	b main
+	bl key_init
+
+end:
+	b end
