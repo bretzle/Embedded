@@ -23,6 +23,9 @@
 	.equ BSRR_OFFSET, 0x18
 
 .global key_init
+.global key_get_key_no_block
+.global key_get_key
+.global key_get_char
 
 key_init:
 	push {R1-R2, LR}
@@ -48,3 +51,27 @@ key_init:
 	str R2, [R1, #GPIO_PUPDR]
 
 	pop  {R1-R2, PC}
+
+@ Gets the key that was pressed (1-16)
+@
+@ R0 : output : key else 0
+key_get_key_no_block:
+	push {LR}
+	pop  {PC}
+
+@ Waits until a key is pressed and returns the key
+@
+@ R0 : output : key
+key_get_key:
+	push {LR}
+	pop  {PC}
+
+@ Waits until a key is pressed and returns the ascii value of the key
+@
+@ R0 : output : ascii value of key
+key_get_char:
+	push {LR}
+	pop  {PC}
+
+.section .rodata
+	values: .ascii "123A456B789C*0#D"
