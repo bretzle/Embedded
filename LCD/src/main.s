@@ -1,8 +1,8 @@
-@ main.s
-@ John Bretz
-@ CE 2801
-@ Lab 4
-@ Description: main file
+# main.s
+# John Bretz
+# CE 2801
+# Lab 4
+# Description: main file
 
 .syntax unified
 .cpu cortex-m4
@@ -15,16 +15,16 @@ main:
 	bl LcdInit
 
 start:
-	@ print valid number
+	# print valid number
 	mov R1, #1234
 	bl lcd_print_num
 
-	@ wait a second
+	# wait a second
 	mov R2, #2000
 	bl delay_ms
 	bl lcd_clear
 
-	@ print an invalid number
+	# print an invalid number
 	mov R1, #0xFFFF
 	bl lcd_print_num
 
@@ -32,7 +32,7 @@ start:
 	bl delay_ms
 	bl lcd_clear
 
-	@ print a string
+	# print a string
 	ldr R1, =msg
 	bl lcd_print_string
 
