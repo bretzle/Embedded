@@ -13,6 +13,7 @@
 
 main:
 	bl key_init
+	bl lcd_init
 
 end:
 	b end
