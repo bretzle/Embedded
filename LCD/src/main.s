@@ -20,7 +20,7 @@ start:
 	bl lcd_print_num
 
 	@ wait a second
-	mov R2, #1000
+	mov R2, #2000
 	bl delay_ms
 	bl lcd_clear
 
@@ -28,7 +28,7 @@ start:
 	mov R1, #0xFFFF
 	bl lcd_print_num
 
-	mov R2, #1000
+	mov R2, #2000
 	bl delay_ms
 	bl lcd_clear
 
@@ -36,9 +36,24 @@ start:
 	ldr R1, =msg
 	bl lcd_print_string
 
-	mov R2, #1000
+	mov R2, #2000
+	bl delay_ms
+
+	bl lcd_home
+
+	mov R2, #2000
 	bl delay_ms
 	bl lcd_clear
+
+	mov R0, #1
+	mov R1, #5
+
+	bl lcd_set_position
+
+	mov R2, #2000
+	bl delay_ms
+
+	bl lcd_home
 
 	b start
 

@@ -36,38 +36,38 @@
 LcdInit:
 	push {R1, LR}
 
-    #Set up Ports
+    @ Set up Ports
     bl setup_ports
 
-    #Wait 40ms
+    @ Wait 40ms
     mov R1, #40
     bl delay_us
 
-    #Write Function Set (0x38)
+    @ Write Function Set (0x38)
     mov R1, #0x38
     bl write_instruction
 
     mov R1, #37
     bl delay_us
 
-    #Write Function Set (0x38)
+    @ Write Function Set (0x38)
     mov R1, #0x38
     bl write_instruction
 
     mov R1, #37
     bl delay_us
 
-    #Write Display On/Off(0x0F)
+    @ Write Display On/Off(0x0F)
     mov R1, #0x0F
     bl write_instruction
 
     mov R1, #37
     bl delay_us
 
-    #Write Display Clear (0x01)
+    @ Write Display Clear (0x01)
     bl lcd_clear
 
-    #Write Entry Mode Set (0x06)
+    @ Write Entry Mode Set (0x06)
 	mov R1, #0x06
 	bl write_instruction
 
@@ -78,7 +78,8 @@ LcdInit:
 
 setup_ports:
     push {R1-R3, LR}
-    #Turn on Ports in RCC
+
+    @ Turn on Ports in RCC
 	ldr R1, =RCC_BASE
 
 	ldr R2, [R1, #RCC_AHB1ENR]
@@ -178,17 +179,49 @@ lcd_clear:
 @ Moves cursor to the home position
 @ includes delay
 lcd_home:
-	push {LR}
-	pop  {PC}
+	push {R1, LR}
+
+	mov R1, #0x2
+	bl write_instruction
+
+	mov R1, #1520
+	bl delay_us
+
+	pop  {R1, PC}
 
 @ Moves cursor to a location
 @ includes delay
 @
 @ R0 : input : row
 @ R1 : input : col
-lcd_set_postion:
-	push {LR}
-	pop  {PC}
+lcd_set_position:
+	push {R1-R2, LR}
+
+	bl lcd_home
+
+	mov R2, R1
+	cmp R0, #0
+	beq no_change_line
+
+	@ second line starts at 41st digit.
+	add R2, R2, #40
+
+no_change_line:
+	cmp R2, #0
+	beq not_move_cursor
+
+1:
+	mov R1, #0x14
+ 	bl write_instruction
+
+	mov R1,#37
+	bl delay_us
+
+	subs R2, R2, #1
+	bne 1b
+
+not_move_cursor:
+	pop {R1-R2, PC}
 
 @ Prints a null terminated string to the display
 @ includes delay
