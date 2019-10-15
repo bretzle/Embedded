@@ -76,6 +76,7 @@ LcdInit:
 
 	pop {R1, PC}
 
+@ Setups the ports for the LCD
 setup_ports:
     push {R1-R3, LR}
 
@@ -87,7 +88,7 @@ setup_ports:
 	orr R2, R2, #RCC_GPIOCEN   @ enable gpioc
 	str R2, [R1, #RCC_AHB1ENR]
 
-    #Set DB Pins to Outputs
+    @ Set DB Pins to Outputs
     ldr R1, =GPIOA_BASE
     ldr R2, [R1, #GPIO_MODER]
 
@@ -96,7 +97,7 @@ setup_ports:
 
     str R2, [R1, #GPIO_MODER]
 
-    #Set RS RW E Pins to Outputs
+    @ Set RS RW E Pins to Outputs
     ldr R1, =GPIOC_BASE
     ldr R2, [R1, #GPIO_MODER]
 
@@ -107,42 +108,43 @@ setup_ports:
 
 	pop {R1-R3, PC}
 
-#Writes instruction
-#RS=0 RW=0  R1-Arg
-#No returns
+@ Writes an instruction to the LCD
+@
+@ R1 : input : instruction to write
 write_instruction:
 	push {R1-R5, LR}
 
 	ldr R2, =GPIOA_BASE
 	ldr R3, =GPIOC_BASE
 
-	#Set RS=0,RW=0,E=1
+	@ Set RS=0,RW=0,E=1
 	mov R4, #0
 	bic R4, R4, #RS_SET
 	bic R4, R4, #RW_SET
 	orr R4, R4, #E_SET
 	str R4, [R3, #GPIO_ODR]
 
-	#Set R1 -> DataBus
+	@ Set R1 -> DataBus
 	bfi R5, R1, #4, #8
 	str R5, [R2, #GPIO_ODR]
 
-	#Set E=0
+	@ Set E=0
 	bic R4, R4, #E_SET
 	str R4, [R3, #GPIO_ODR]
 
 	pop {R1-R5, PC}
 
 
-#Writes data
-#RS=1 RW=0  R1-Arg
-#No returns
+@ Writes an ascii value to the current location of the LCD
+@
+@ R1 : input : ascii byte to write
 write_data:
 	push {R1-R5, LR}
 
 	ldr R2, =GPIOA_BASE
 	ldr R3, =GPIOC_BASE
 
+	@ set RW=0, RS=1 E=1
 	mov R4, #0
 	bic R4, R4, #RW_SET
 	orr R4, R4, #RS_SET
@@ -154,6 +156,7 @@ write_data:
 	lsl R5, R5, #4
 	str R5, [R2, #GPIO_ODR]
 
+	@ set E=0
 	bic R4, R4, #E_SET
 	str R4, [R3, #GPIO_ODR]
 

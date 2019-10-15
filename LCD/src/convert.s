@@ -17,12 +17,12 @@
 
 @ Converts a 28-bit binary number into 32-bit BCD
 @
-@ Input : R1  28 bit binary number
-@ output: R0  stores bcd
-@ temp  : R2  bit counter
-@ temp  : R3  copy of input
-@ temp  : R4  used by bit field extract
-@ temp  : R5  used for checking bcd
+@ R1 : input  : 28 bit binary number
+@ R0 : output :  stores bcd
+@ R2 : temp   : bit counter
+@ R3 : temp   : copy of input
+@ R4 : temp   : used by bit field extract
+@ R5 : temp   : used for checking bcd
 num_to_bcd:
 	push {R2-R5, LR}
 	mov R0, #0            @ BCD will be stored here
@@ -92,9 +92,9 @@ check_bcd:
 
 @ convert a 16 bit bcd number to ascii
 @
-@ input  : R1
-@ output : R0
-@ temp   : R2  store temp bit field extracts
+@ R1 : input  :
+@ R0 : output :
+@ R2 : temp   : store temp bit field extracts
 bcd_to_ascii:
 	push {R2, LR}
 
