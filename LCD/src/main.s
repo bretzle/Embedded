@@ -33,7 +33,7 @@ start:
 	bl lcd_clear
 
 	@ print a string
-	mov R1, string
+	ldr R1, =msg
 	bl lcd_print_string
 
 	mov R2, #1000
@@ -42,5 +42,5 @@ start:
 
 	b start
 
-.section .data
-	string: .asciz "Im a string"
+.data
+	msg: .asciz "Im a very long string"

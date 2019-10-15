@@ -196,11 +196,25 @@ lcd_set_postion:
 @ R1 : input  : address to the string
 @ R0 : output : number of characters written
 lcd_print_string:
-	push {R1, LR}
+	push {R1-R3, LR}
 
+	mov R0, #0 @ counter
+	mov R2, R1 @ base address
+	mov R3, #0 @ offset
 
+ld_next_byte:
+	ldrb R1, [R2, R3]
 
-	pop  {R1, PC}
+	cmp R1, #0
+	beq exit_print_string
+
+	bl write_data
+	add R3, R3, #1
+	add R0, R0, #1
+	b ld_next_byte
+
+exit_print_string:
+	pop  {R1-R3, PC}
 
 @ Prints a decimal number to the display
 @ can only print number between 0 and 9999
