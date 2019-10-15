@@ -84,8 +84,8 @@ setup_ports:
 	ldr R1, =RCC_BASE
 
 	ldr R2, [R1, #RCC_AHB1ENR]
-	orr R2, R2, #RCC_GPIOAEN   # enable gpioa
-	orr R2, R2, #RCC_GPIOCEN   # enable gpioc
+	orr R2, R2, #RCC_GPIOAEN   // enable gpioa
+	orr R2, R2, #RCC_GPIOCEN   // enable gpioc
 	str R2, [R1, #RCC_AHB1ENR]
 
     # Set DB Pins to Outputs
@@ -234,9 +234,9 @@ not_move_cursor:
 lcd_print_string:
 	push {R1-R3, LR}
 
-	mov R0, #0 # counter
-	mov R2, R1 # base address
-	mov R3, #0 # offset
+	mov R0, #0 // counter
+	mov R2, R1 // base address
+	mov R3, #0 // offset
 
 ld_next_byte:
 	ldrb R1, [R2, R3]

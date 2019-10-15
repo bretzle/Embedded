@@ -43,19 +43,16 @@ start:
 
 	mov R2, #2000
 	bl delay_ms
-	bl lcd_clear
 
 	mov R0, #1
 	mov R1, #5
-
 	bl lcd_set_position
 
 	mov R2, #2000
 	bl delay_ms
-
-	bl lcd_home
+	bl lcd_clear
 
 	b start
 
 .data
-	msg: .asciz "Im a very long string"
+	msg: .asciz "Im a string"
