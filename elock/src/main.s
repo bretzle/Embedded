@@ -26,12 +26,14 @@ main:
 	ldr R3, =userp
 	// offset
 	mov R4, #0
+	mov R1, '*'
 
 1:
 	bl key_get_char
 	cmp R0, '*'
 	beq check_password
 
+	bl lcd_write_data
 	strb R0, [R3, R4]
 	add R4, R4, #1
 	b 1b
@@ -59,22 +61,42 @@ check_password:
 
 wrong_password:
 	ldr R1, =nay
+	bl lcd_clear
 	bl lcd_print_string
+
+	bl play_bad_sound
+
 	b end
 
 correct_password:
 	ldr R1, =yay
+	bl lcd_clear
 	bl lcd_print_string
+
+	bl energize_led
+	bl play_good_sound
 
 end:
 	b end
 
 
+energize_led:
+	push {LR}
+	pop  {PC}
+
+play_bad_sound:
+	push {LR}
+	pop  {PC}
+
+play_good_sound:
+	push {LR}
+	pop  {PC}
+
 .data
 
 	prompt: .asciz "Enter password"
 
-	passw: .asciz "123A"
+	passw: .asciz "1234"
 
 	yay: .asciz "Success"
 
