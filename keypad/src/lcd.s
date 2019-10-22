@@ -31,6 +31,7 @@
 .global lcd_set_position
 .global lcd_print_num
 .global lcd_print_string
+.global lcd_write_data
 
 
 lcd_init:
@@ -279,6 +280,14 @@ lcd_print_num:
 	bl write_data
 
 	pop {R1-R2, PC}
+
+# R1 : input : an ascii code byte
+lcd_write_data:
+	push {LR}
+
+	bl write_data
+
+	pop  {PC}
 
 error:
 	# Error

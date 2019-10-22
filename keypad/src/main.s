@@ -11,15 +11,43 @@
 
 .global main
 
-@ R3 : main : cursor position
+@ R2 : main : characters left on row
 main:
 	bl key_init
 	bl lcd_init
 
-	mov R3, #0
-
+clean:
 	bl key_get_char
-	bl lcd_print_num
 
-end:
-	b end
+	// clear after getting key incase their is data already on LCD
+	bl lcd_clear
+	bl lcd_home
+	mov R1, R0
+	bl lcd_write_data
+
+	mov R2, #15
+
+1:
+	bl key_get_char
+	mov R1, R0
+	bl lcd_write_data
+
+	subs R2, R2, #1
+	bne 1b
+
+	// move to second line
+	mov R0, #1
+	mov R1, #0
+	bl lcd_set_position
+
+	mov R2, #16
+
+1:
+	bl key_get_char
+	mov R1, R0
+	bl lcd_write_data
+
+	subs R2, R2, #1
+	bne 1b
+
+	b clean
