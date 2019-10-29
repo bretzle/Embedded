@@ -2,7 +2,7 @@
 # John Bretz
 # CE 2801
 # Lab 5
-# Description: timer/counter api file
+# Description: controls timer 3 / speaker
 
 .syntax unified
 .cpu cortex-m4
