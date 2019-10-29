@@ -11,6 +11,18 @@
 
     .equ INST_MS, 0x148F // instructions to run in one ms
 
+    .equ SYSTICK_BASE, 0xE000E010
+	.equ STK_CTRL, 0x00
+	.equ STK_LOAD, 0x04
+	.equ STK_VAL, 0x08
+	.equ STK_CALIB, 0x0C
+	.equ COUNTFLAG, 1<<16
+	.equ CLKSOURCE, 1<<2
+	.equ TICKINT, 1<<1
+	.equ ENABLE, 1<<0
+
+.global one_sec_delay_by_using_systick
+.global reset_bits_for_systick
 .global delay_ms
 .global delay_us
 
@@ -42,3 +54,38 @@ delay_us:
 	bne 1b
 
 	pop {R1, PC}
+
+reset_bits_for_systick:
+	push {r0-r1,lr}
+
+	# reset all bits.
+	ldr r0,=SYSTICK_BASE
+	ldr r1,[r0,STK_CTRL]
+	and r1,r1,#0
+	str r1,[r0,STK_CTRL]
+	ldr r1,[r0,STK_LOAD]
+	and r1,r1,#0
+	str r1,[r0,STK_LOAD]
+
+	pop {r0-r1,pc}
+
+# Cause a delay for 1 second by using systick counter.
+one_sec_delay_by_using_systick:
+	push {r0-r1,lr}
+
+	bl reset_bits_for_systick
+
+	# cause a delay by using the systick.
+	ldr r0,=SYSTICK_BASE
+	ldr r1,=16000000
+	str r1,[r0,STK_LOAD]
+	# start the clock.
+	mov r1,ENABLE|CLKSOURCE
+	str r1,[r0,STK_CTRL]
+	# determine when is timeout.
+1:
+	ldr r1,[r0,STK_CTRL]
+	ands r1,r1,COUNTFLAG
+	beq 1b
+
+	pop {r0-r1,pc}
