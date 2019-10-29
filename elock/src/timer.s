@@ -37,78 +37,78 @@ timer3_init:
 	push {R0-R1, LR}
 
 	# init clock for GPIOB.
-	ldr r0,=RCC_BASE
-	ldr r1,[r0,AHB1ENR_OFFSET]
-	orr r1,r1,GPIOB_EN
-	str r1,[r0,AHB1ENR_OFFSET]
+	ldr R0, =RCC_BASE
+	ldr R1, [R0, AHB1ENR_OFFSET]
+	orr R1, R1, GPIOB_EN
+	str R1, [R0, AHB1ENR_OFFSET]
 
 	# init clock for TIM3
-	ldr r0,=RCC_BASE
-	ldr r1,[r0,APB1ENR_OFFSET]
-	orr r1,r1,TIM3_EN
-	str r1,[r0,APB1ENR_OFFSET]
+	ldr R0, =RCC_BASE
+	ldr R1, [R0, APB1ENR_OFFSET]
+	orr R1, R1, TIM3_EN
+	str R1, [R0, APB1ENR_OFFSET]
 
 	# enable alternate function for PB4.
-	ldr r0,=GPIOB_BASE
+	ldr R0, =GPIOB_BASE
 	# PB4 is between bit 19 and bit 16.
-	ldr r1,[r0,AFRL_OFFSET]
-	orr r1,r1,#(0b0010<<16)
-	str r1,[r0,AFRL_OFFSET]
+	ldr R1, [R0, AFRL_OFFSET]
+	orr R1, R1, #(0b0010<<16)
+	str R1, [R0, AFRL_OFFSET]
 
 	# set GPIOB into alternate function mode.
-	ldr r0,=GPIOB_BASE
-	ldr r1,[r0,MODER_OFFSET]
+	ldr R0, =GPIOB_BASE
+	ldr R1, [R0, MODER_OFFSET]
 	# PB4 is between bit 9 and bit 8.
-	bic r1,r1,#(0b11<<8)
-	orr r1,r1,#(0b10<<8)
-	str r1,[r0,MODER_OFFSET]
+	bic R1, R1, #(0b11<<8)
+	orr R1, R1, #(0b10<<8)
+	str R1, [R0, MODER_OFFSET]
 
 	pop  {R0-R1, PC}
 
 set_timer3:
-	push {r0-r1,lr}
+	push {R0-R1, LR}
 
-	ldr r0,=TIM3_BASE
+	ldr R0, =TIM3_BASE
 
 	# 8000 ticks for 500us high.
 	# set the auto reload value and the
 	# compare value of TIM3.
 
 	# set the reset count.
-	str r1,[r0,TIMx_ARR_OFFSET]
+	str R1, [R0, TIMx_ARR_OFFSET]
 
 	# set the position of the toggle.
-	mov r1,#0
-	str r1,[r0,TIMx_CCR1_OFFSET]
+	mov R1, #0
+	str R1, [R0, TIMx_CCR1_OFFSET]
 
 	# select output mode - toggle.
-	movw r1,#(0b011 << 4)
-	str r1,[r0,TIMx_CCMR1_OFFSET]
+	movw R1, #(0b011 << 4)
+	str R1, [R0, TIMx_CCMR1_OFFSET]
 
 	# compare output enable
-	movw r1,#1
-	str r1,[r0,TIMx_CCER_OFFSET]
+	movw R1,#1
+	str R1, [R0, TIMx_CCER_OFFSET]
 
-	pop {r0-r1,pc}
+	pop {R0-R1, PC}
 
 enable_tim3:
-	push {r0-r1,lr}
+	push {R0-R1, LR}
 
 	# enable counter.
-	ldr r0,=TIM3_BASE
-	ldr r1,[r0,TIMx_CR1_OFFSET]
-	mov r1,#1
-	str r1,[r0,TIMx_CR1_OFFSET]
+	ldr R0, =TIM3_BASE
+	ldr R1, [R0, TIMx_CR1_OFFSET]
+	mov R1, #1
+	str R1, [R0, TIMx_CR1_OFFSET]
 
-	pop {r0-r1,pc}
+	pop {R0-R1, PC}
 
 disable_tim3:
-	push {r0-r1,lr}
+	push {R0-R1, LR}
 
 	# stop making sound.
-	ldr r0,=TIM3_BASE
-	ldr r1,[r0,TIMx_CR1_OFFSET]
-	mov r1,#0
-	str r1,[r0,TIMx_CR1_OFFSET]
+	ldr R0, =TIM3_BASE
+	ldr R1, [R0, TIMx_CR1_OFFSET]
+	mov R1, #0
+	str R1, [R0, TIMx_CR1_OFFSET]
 
-	pop {r0-r1,pc}
+	pop {R0-R1, PC}

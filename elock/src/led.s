@@ -49,22 +49,22 @@ led_init:
 
 # The subroutine turns on the right most led.
 turn_on_edge_led:
-	push {r0-r1,lr}
+	push {R0-R1, LR}
 
-	ldr r0,=GPIOB_BASE
-	ldr r1,[r0,GPIO_ODR]
-	orr r1,r1,#(0b1<<5)
-	str r1,[r0,GPIO_ODR]
+	ldr R0, =GPIOB_BASE
+	ldr R1, [R0, GPIO_ODR]
+	orr R1, R1, #(0b1<<5)
+	str R1, [R0, GPIO_ODR]
 
-	pop {r0-r1,pc}
+	pop {R0-R1, PC}
 
 # The subroutine turns off the right most led.
 turn_off_edge_led:
-	push {r0-r1,lr}
+	push {R0-R1, LR}
 
-	ldr r0,=GPIOB_BASE
-	ldr r1,[r0,GPIO_ODR]
-	bic r1,r1,#(0b1<<5)
-	str r1,[r0,GPIO_ODR]
+	ldr R0, =GPIOB_BASE
+	ldr R1, [R0, GPIO_ODR]
+	bic R1, R1, #(0b1<<5)
+	str R1, [R0, GPIO_ODR]
 
-	pop {r0-r1,pc}
+	pop {R0-R1, PC}

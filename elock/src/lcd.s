@@ -249,7 +249,6 @@ ld_next_byte:
 	add R3, R3, #1
 	add R0, R0, #1
 	b ld_next_byte
-
 exit_print_string:
 	pop  {R1-R3, PC}
 
