@@ -39,7 +39,7 @@ loop:
 
 	ldr R1, [R0, #ADC_DR]
 
-	bl lcd_print_num
+	bl lcd_print_num // value in mV
 
 	mov R0, R1
 
@@ -52,10 +52,10 @@ loop:
 	sub R1, R1, R2
 	add R1, R1, R0
 
-	bl lcd_print_num
+	bl lcd_print_num // value in C
 
 	bl convert_to_f
-	bl lcd_print_num
+	bl lcd_print_num // value in F
 
 	mov R1, #0
 
