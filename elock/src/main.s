@@ -15,6 +15,7 @@ main:
 	bl led_init
 	bl lcd_init
 	bl lcd_clear
+	bl lcd_home
 	bl key_init
 	bl timer3_init
 
@@ -142,15 +143,12 @@ clear_previous_password:
 
 	pop {R0-R2, PC}
 
-.section .data
-# display message.
-message_for_enter_password:
-	.asciz "Enter Password:"
-
 .section .rodata
 # The correct password.
+message_for_enter_password:
+	.asciz "Enter Password:"
 password:
-	.asciz "ABCD123"
+	.asciz "123A456"
 
 .section .bss
 entered_password:

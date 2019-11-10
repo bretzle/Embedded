@@ -53,25 +53,15 @@ delay_ms:
 //
 // R1 : input : num of us
 delay_us:
-	push {R0-R2, LR}
+	push {R1, LR}
 
-	bl reset_bits_for_systick
+	lsl R1, R1, #3
 
-	# cause a delay by using the systick.
-	ldr R0, =SYSTICK_BASE
-	ldr R2, =16
-	mul R2, R2, R1
-	str R2, [R0, STK_LOAD]
-	# start the clock.
-	mov R2, ENABLE|CLKSOURCE
-	str R2, [r0,STK_CTRL]
-	# determine when is timeout.
 1:
-	ldr R2, [R0, STK_CTRL]
-	ands R2, R2, COUNTFLAG
-	beq 1b
+	subs R1, R1, #1
+	bne 1b
 
-	pop {R0-R2, PC}
+	pop {R1, PC}
 
 reset_bits_for_systick:
 	push {R0-R1, LR}
