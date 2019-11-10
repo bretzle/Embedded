@@ -78,3 +78,19 @@ convert_to_f:
 	add R1, R1, #320
 
 	pop  {R2, PC}
+
+.section .data
+
+	// booleans
+	buffer_mode:     .byte 0 // 0->dont write to buffer | 1->write to buffer
+	temp_mode:       .byte 0 // 0->Celsius | 1->Fahrenheit
+	continuous_mode: .byte 0 // 1-> write values to lcd when calculated
+
+	// integers
+	interval:        .byte 0 // [1-9]
+	buffer_size:     .byte 0 // [1-99]
+	buffer_pos:      .byte 0 // [1-buffer_size]
+
+	.balign 4
+	temperature_buffer:
+		.space 100
