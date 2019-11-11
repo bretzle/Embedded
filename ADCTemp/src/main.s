@@ -83,6 +83,9 @@ pretty_print:
 	mov R1, R4
 	bl lcd_write_data
 
+	mov R1, '~'
+	bl lcd_write_data
+
 	bl get_temp_abbr
 	bl lcd_write_data
 
