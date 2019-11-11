@@ -119,8 +119,8 @@ TIM2_Interrupt_Handler:
 
 	// do something
 	mov R11, LR
-	mov R1, #1337
-	# bl lcd_print_num
+
+	bl start_convert
 
 	mov LR, R11
 

@@ -22,8 +22,7 @@
 	.equ ISER0_OFFSET, 0x100
 
 .global adc_init
-.global set_adc
-.global start_adc
+.global start_convert
 
 adc_init:
 	push {R0-R2, LR}
@@ -51,3 +50,12 @@ adc_init:
 
 	pop {R0-R2, PC}
 
+start_convert:
+	push {R0-R1, LR}
+
+	ldr R0, =ADC1_BASE
+	ldr R1, [R0, #ADC_CR2_OFFSET]
+	orr R1, R1, #(1<<30)
+	str R1, [R0, #ADC_CR2_OFFSET]
+
+	pop  {R0-R1, PC}

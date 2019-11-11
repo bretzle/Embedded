@@ -22,46 +22,59 @@ main:
 	bl temp_init
 	bl adc_init
 
-	#bl tim2_init
+	bl tim2_init
 
 loop:
 
-	// start conversion
-	ldr R0, =ADC1_BASE
-	ldr R1, [R0, #ADC_CR2]
-	orr R1, R1, #(1<<30)
-	str R1, [R0, #ADC_CR2]
-
 1:  // poll status register
+	ldr R0, =ADC1_BASE
 	ldr R1, [R0, #ADC_SR]
 	ands R1, R1, #(1<<1)
 	beq 1b
 
 	ldr R1, [R0, #ADC_DR]
+	#bl lcd_print_num // value in mV
 
-	bl lcd_print_num // value in mV
-
-	mov R0, R1
-
-	mov R1, #3300
-	mov R2, #4095
-	mul R1, R1, R0
-	udiv R1, R1, R2
-	mov R0, #250
-	mov R2, #750
-	sub R1, R1, R2
-	add R1, R1, R0
-
-	bl lcd_print_num // value in C
+	bl convert_to_c
+	#bl lcd_print_num // value in C
 
 	bl convert_to_f
-	bl lcd_print_num // value in F
+	bl lcd_home
+	bl pretty_print // value in F
 
 	mov R1, #0
 
 end:
 	b loop
 
+// R1 : input : binary time
+pretty_print:
+	push {R0-R4, LR}
+
+	bl num_to_bcd
+
+	ubfx R2, R0, #8, #4  // tens
+	ubfx R3, R0, #4, #4  // ones
+	ubfx R4, R0, #0, #4  // mantissa
+
+	// convert to ascii
+	add R2, R2, #0x30
+	add R3, R3, #0x30
+	add R4, R4, #0x30
+
+	mov R1, R2
+	bl lcd_write_data
+
+	mov R1, R3
+	bl lcd_write_data
+
+	mov R1, '.'
+	bl lcd_write_data
+
+	mov R1, R4
+	bl lcd_write_data
+
+	pop  {R0-R4, PC}
 
 // converts celsius register to farhenheit
 // celcius must be in tenths of a degree
@@ -79,21 +92,25 @@ convert_to_f:
 
 	pop  {R2, PC}
 
-// converts farhenheit register to celcius
-// farhenheit must be in tenths of a degree
+// converts mV register to celcius
 //
 // R1 : input
 // R1 : output
 convert_to_c:
-	push {R2, LR}
+	push {R0, R2, LR}
 
-	sub  R1, R1, #320
-	mov  R2, #5
-	mul  R1, R1, R2
-	mov  R2, #9
+	mov R0, R1
+
+	mov R1, #3300
+	mov R2, #4095
+	mul R1, R1, R0
 	udiv R1, R1, R2
+	mov R0, #250
+	mov R2, #750
+	sub R1, R1, R2
+	add R1, R1, R0
 
-	pop  {R2, PC}
+	pop  {R0, R2, PC}
 
 .section .data
 
@@ -103,8 +120,8 @@ convert_to_c:
 	continuous_mode: .byte 0 // 1-> write values to lcd when calculated
 
 	// integers
-	interval:        .byte 0 // [1-9]
-	buffer_size:     .byte 0 // [1-99]
+	interval:        .byte 1 // [1-9]
+	buffer_size:     .byte 1 // [1-100]
 	buffer_pos:      .byte 0 // [1-buffer_size]
 
 	.balign 4

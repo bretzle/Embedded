@@ -17,8 +17,10 @@ Use a analog temperature sensor and an ADC to read the temperature of the room a
 
 - [x]  Convert mV into a °C and °F
 
-- [ ]  Transform temperature number into a human readable form
+- [x]  Modularize ADC
 
-- [ ]  Have samples collected via timer interrupts
+- [x]  Transform temperature number into a human readable form
+
+- [x]  Have samples collected via timer interrupts
 
 - [ ]  Work on commands
