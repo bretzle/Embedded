@@ -1,0 +1,24 @@
+# ADC Temperature
+
+Use a analog temperature sensor and an ADC to read the temperature of the room and write the temperature to a display
+
+## Commands
+
+| Key | Command Name             | Description                                                          |
+| --- | ------------------------ | -------------------------------------------------------------------- |
+| \*  | Buffer mode              | When on, all samples are stored in RAM                               |
+| #   | Set interval             | Allows user to set interval between samples            (1-9 seconds) |
+| B   | Set buffer size          | Set the size of buffer (1 - 99 samples)                              |
+| D   | Toggle display unit      | Toggle between °C and °F                                             |
+| A   | Display buffered results |                                                                      |
+| C   | Continuous Mode          | Display results as they are computed                                 |
+
+- [x]  Convert analog signal to mV
+
+- [x]  Convert mV into a °C and °F
+
+- [ ]  Transform temperature number into a human readable form
+
+- [ ]  Have samples collected via timer interrupts
+
+- [ ]  Work on commands

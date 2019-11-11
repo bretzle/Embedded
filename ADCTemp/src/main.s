@@ -63,7 +63,7 @@ end:
 	b loop
 
 
-// converts celsius register to farienheight
+// converts celsius register to farhenheit
 // celcius must be in tenths of a degree
 //
 // R1 : input
@@ -76,6 +76,22 @@ convert_to_f:
 	mov R2, #5
 	udiv R1, R1, R2
 	add R1, R1, #320
+
+	pop  {R2, PC}
+
+// converts farhenheit register to celcius
+// farhenheit must be in tenths of a degree
+//
+// R1 : input
+// R1 : output
+convert_to_c:
+	push {R2, LR}
+
+	sub  R1, R1, #320
+	mov  R2, #5
+	mul  R1, R1, R2
+	mov  R2, #9
+	udiv R1, R1, R2
 
 	pop  {R2, PC}
 
