@@ -15,6 +15,9 @@
 	.equ ADC1_BASE, 0x40012000
 
 .global main
+.global convert_to_c
+.global convert_to_f
+.global pretty_print
 
 main:
 	bl key_init
@@ -24,28 +27,8 @@ main:
 
 	bl tim2_init
 
-loop:
-
-1:  // poll status register
-	ldr R0, =ADC1_BASE
-	ldr R1, [R0, #ADC_SR]
-	ands R1, R1, #(1<<1)
-	beq 1b
-
-	ldr R1, [R0, #ADC_DR]
-	#bl lcd_print_num // value in mV
-
-	bl convert_to_c
-	#bl lcd_print_num // value in C
-
-	bl convert_to_f
-	bl lcd_home
-	bl pretty_print // value in F
-
-	mov R1, #0
-
 end:
-	b loop
+	b end
 
 // R1 : input : binary time
 pretty_print:

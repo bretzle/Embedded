@@ -27,26 +27,40 @@
 adc_init:
 	push {R0-R2, LR}
 
-	# Enable the clock.
 	ldr R0, =RCC_BASE
 
+	// enable gpio b
 	ldr R1, [R0, #AHB1ENR_OFFSET]
 	orr R1, R1, #GPIOB_EN
 	str R1, [R0, #AHB1ENR_OFFSET]
 
+	// RCC
 	ldr R1, [R0, #APB2ENR_OFFSET]
 	orr R1, R1, #ADC1_EN
 	str R1, [R0, #APB2ENR_OFFSET]
 
+	// turn on ADC
 	ldr R0, =ADC1_BASE
 	ldr R1, [R0, #ADC_CR2_OFFSET]
 	orr R1, R1, #(1<<0)
 	str R1, [R0, #ADC_CR2_OFFSET]
 
+	// watch channel 8
 	ldr R1, [R0, #ADC_SQR3_OFFSET]
 	mov R2, #8
 	bfi R1, R2, #0, #5
 	str R1, [R0, #ADC_SQR3_OFFSET]
+
+	// enable interrupt
+	ldr r0,=NVIC_BASE
+	ldr r1,[r0,ISER0_OFFSET]
+	orr r1,r1,#(1<<18)
+	str r1,[r0,ISER0_OFFSET]
+
+	ldr r1,=ADC1_BASE
+	ldr r2,[r1,ADC_CR1_OFFSET]
+	orr r2,r2,#(1<<5) // Enable interrupt for EOC.
+	str r2,[r1,ADC_CR1_OFFSET]
 
 	pop {R0-R2, PC}
 
@@ -59,3 +73,19 @@ start_convert:
 	str R1, [R0, #ADC_CR2_OFFSET]
 
 	pop  {R0-R1, PC}
+
+
+.global ADC_Convert_Handler
+.thumb_func
+ADC_Convert_Handler:
+	mov R12, LR
+
+	ldr R0, =ADC1_BASE
+	ldr R1, [R0, #ADC_DR_OFFSET]
+	bl convert_to_c
+	bl convert_to_f
+	bl lcd_home
+	bl pretty_print
+
+	mov LR, R12
+	bx LR

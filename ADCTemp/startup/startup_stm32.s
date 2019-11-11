@@ -381,7 +381,7 @@ g_pfnVectors:
     .thumb_set DMA1_Stream4_IRQHandler,Default_Handler
     .thumb_set DMA1_Stream5_IRQHandler,Default_Handler
     .thumb_set DMA1_Stream6_IRQHandler,Default_Handler
-    .thumb_set ADC_IRQHandler,Default_Handler
+    .thumb_set ADC_IRQHandler,ADC_Convert_Handler
     .thumb_set CAN1_TX_IRQHandler,Default_Handler
     .thumb_set CAN1_RX0_IRQHandler,Default_Handler
     .thumb_set CAN1_RX1_IRQHandler,Default_Handler
