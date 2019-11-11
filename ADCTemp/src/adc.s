@@ -82,8 +82,7 @@ ADC_Convert_Handler:
 
 	ldr R0, =ADC1_BASE
 	ldr R1, [R0, #ADC_DR_OFFSET]
-	bl convert_to_c
-	bl convert_to_f
+	bl convert_to_temp
 	bl lcd_home
 	bl pretty_print
 

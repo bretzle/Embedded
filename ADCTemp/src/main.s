@@ -15,8 +15,7 @@
 	.equ ADC1_BASE, 0x40012000
 
 .global main
-.global convert_to_c
-.global convert_to_f
+.global convert_to_temp
 .global pretty_print
 
 main:
@@ -24,11 +23,38 @@ main:
 	bl lcd_init
 	bl temp_init
 	bl adc_init
-
 	bl tim2_init
 
+loop:
+	bl key_get_char
+
+	cmp R0, 'D'
+	it eq
+	bleq toggle_temp_unit
+
 end:
-	b end
+	b loop
+
+toggle_temp_unit:
+	push {R0-R2, LR}
+
+	ldr R0, =temp_mode
+	ldrb R1, [R0]
+
+	cmp R1, #0
+	beq 1f
+	bne 2f
+
+1:
+	mov R2, #1
+	b write
+
+2:
+	mov R2, #0
+
+write:
+	strb R2, [R0]
+	pop  {R0-R2, PC}
 
 // R1 : input : binary time
 pretty_print:
@@ -57,7 +83,23 @@ pretty_print:
 	mov R1, R4
 	bl lcd_write_data
 
+	bl get_temp_abbr
+	bl lcd_write_data
+
 	pop  {R0-R4, PC}
+
+get_temp_abbr:
+	push {R0, LR}
+
+	ldr R0, =temp_mode
+	ldrb R1, [R0]
+
+	cmp R1, #0
+	ite eq
+	moveq R1, 'C'
+	movne R1, 'F'
+
+	pop  {R0, PC}
 
 // converts celsius register to farhenheit
 // celcius must be in tenths of a degree
@@ -94,6 +136,21 @@ convert_to_c:
 	add R1, R1, R0
 
 	pop  {R0, R2, PC}
+
+// R1 : input : mV reg
+convert_to_temp:
+	push {R0, LR}
+
+	ldr R0, =temp_mode
+	ldrb R0, [R0]
+
+	bl convert_to_c
+
+	cmp R0, #1
+	it eq
+	bleq convert_to_f
+
+	pop  {R0, PC}
 
 .section .data
 
