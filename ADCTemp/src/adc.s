@@ -102,11 +102,29 @@ enable_interrupt:
 ADC_Convert_Handler:
 	mov R12, LR
 
+	bl is_buffer_mode
+	cmp R1, #0
 	ldr R0, =ADC1_BASE
 	ldr R1, [R0, #ADC_DR_OFFSET]
+	beq no_buffer
+	bne yes_buffer
+
+no_buffer:
 	bl convert_to_temp
 	bl lcd_home
 	bl pretty_print
+	b  leave
 
+yes_buffer:
+	// R1 num
+	ldr R2, =buffer_pos
+	ldr R2, [R2] // loc in buffer
+	ldr R0, =temperature_buffer // base address
+
+	str R1, [R0, R2]
+	bl inc_buffer_pos
+
+
+leave:
 	mov LR, R12
 	bx LR

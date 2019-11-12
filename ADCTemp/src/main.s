@@ -37,7 +37,51 @@ loop:
 	cmp R0, 'B'
 	beq set_buffer_size
 
-end:
+	cmp R0, '*'
+	beq toggle_buffer_mode
+
+	b loop
+
+toggle_buffer_mode:
+	bl disable_interrupt
+	bl lcd_clear
+	ldr R1, =buffer_mode_on_msg
+	bl lcd_print_string
+
+	mov R0, #1
+	mov R1, #0
+	bl lcd_set_position
+
+	ldr R1, =buffer_mode_flush_msg
+	bl lcd_print_string
+
+buffer_loop:
+
+	bl key_get_char
+	cmp R0, 'A'
+	bne buffer_loop
+	beq drain_buffer
+
+
+drain_buffer:
+	ldr R4, =buffer_size
+	ldrb R5, [R4] // offset
+
+1:
+	ldr R1, [R4, R5]
+	bl convert_to_temp
+	bl lcd_home
+	bl pretty_print
+
+	mov R1, #500
+	bl delay_ms
+
+	subs R5, R5, #1
+	bne 1b
+
+	bl lcd_clear
+	#bl enable_interrupt
+
 	b loop
 
 toggle_temp_unit:
@@ -72,13 +116,8 @@ set_interval:
 	ldr R1, =set_interval_msg2
 	bl lcd_print_string
 
-set_interval_loop:
 
 	bl key_get_char
-	mov R1, R0
-	#bl is_numeric
-	#cmp R1, #0
-	#beq set_interval_loop
 
 	mov R1, R0
 	bl lcd_write_data
@@ -97,8 +136,6 @@ set_buffer_size:
 	bl lcd_clear
 	ldr R1, =set_buffer_size_msg1
 	bl lcd_print_string
-
-set_buffer_size_loop:
 
 	bl key_get_char
 
@@ -120,58 +157,13 @@ set_buffer_size_loop:
 
 	b loop
 
-// R1 : input : binary time
-pretty_print:
-	push {R0-R4, LR}
-
-	bl num_to_bcd
-
-	ubfx R2, R0, #8, #4  // tens
-	ubfx R3, R0, #4, #4  // ones
-	ubfx R4, R0, #0, #4  // mantissa
-
-	// convert to ascii
-	add R2, R2, #0x30
-	add R3, R3, #0x30
-	add R4, R4, #0x30
-
-	mov R1, R2
-	bl lcd_write_data
-
-	mov R1, R3
-	bl lcd_write_data
-
-	mov R1, '.'
-	bl lcd_write_data
-
-	mov R1, R4
-	bl lcd_write_data
-
-	mov R1, '~'
-	bl lcd_write_data
-
-	bl get_temp_abbr
-	bl lcd_write_data
-
-	pop  {R0-R4, PC}
-
-get_temp_abbr:
-	push {R0, LR}
-
-	ldr R0, =temp_mode
-	ldrb R1, [R0]
-
-	cmp R1, #0
-	ite eq
-	moveq R1, 'C'
-	movne R1, 'F'
-
-	pop  {R0, PC}
-
-
 .section .data
 
 	.global temp_mode
+	.global buffer_mode
+	.global buffer_pos
+	.global buffer_size
+	.global temperature_buffer
 
 	// booleans
 	buffer_mode:     .byte 0 // 0->dont write to buffer | 1->write to buffer
@@ -180,7 +172,7 @@ get_temp_abbr:
 
 	// integers
 	interval:        .byte 1 // [1-9]
-	buffer_size:     .byte 1 // [1-9]
+	buffer_size:     .byte 10 // [1-9]
 	buffer_pos:      .byte 0 // [1-buffer_size]
 
 	.balign 4
@@ -189,7 +181,10 @@ get_temp_abbr:
 
 .section .rodata
 
-	set_interval_msg1:    .asciz "Set interval 1-9"
-	set_interval_msg2:    .asciz "Interval: "
+	set_interval_msg1:     .asciz "Set interval 1-9"
+	set_interval_msg2:     .asciz "Interval: "
 
-	set_buffer_size_msg1: .asciz "Set Buffer Size"
+	set_buffer_size_msg1:  .asciz "Set Buffer Size"
+
+	buffer_mode_on_msg:    .asciz "Buffer Mode On"
+	buffer_mode_flush_msg: .asciz "Press A to exit"
