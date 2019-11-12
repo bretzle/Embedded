@@ -34,6 +34,9 @@ loop:
 	cmp R0, '#'
 	beq set_interval
 
+	cmp R0, 'B'
+	beq set_buffer_size
+
 end:
 	b loop
 
@@ -83,8 +86,37 @@ set_interval_loop:
 	ubfx R1, R1, #0, #4
 	bl set_tim2_delay
 
-	bl enable_interrupt
 	bl lcd_clear
+	bl enable_interrupt
+
+	b loop
+
+
+set_buffer_size:
+	bl disable_interrupt
+	bl lcd_clear
+	ldr R1, =set_buffer_size_msg1
+	bl lcd_print_string
+
+set_buffer_size_loop:
+
+	bl key_get_char
+
+	mov R1, R0
+	bl lcd_write_data
+
+	// update buffer size
+	ubfx R1, R1, #0, #4
+	ldr R3, =buffer_size
+	strb R1, [R3]
+
+	// flush buffer
+	mov R1, #0
+	ldr R3, =buffer_pos
+	strb R1, [R3]
+
+	bl lcd_clear
+	bl enable_interrupt
 
 	b loop
 
@@ -136,59 +168,10 @@ get_temp_abbr:
 
 	pop  {R0, PC}
 
-// converts celsius register to farhenheit
-// celcius must be in tenths of a degree
-//
-// R1 : input
-// R1 : output
-convert_to_f:
-	push {R2, LR}
-
-	mov R2, #9
-	mul R1, R1, R2
-	mov R2, #5
-	udiv R1, R1, R2
-	add R1, R1, #320
-
-	pop  {R2, PC}
-
-// converts mV register to celcius
-//
-// R1 : input
-// R1 : output
-convert_to_c:
-	push {R0, R2, LR}
-
-	mov R0, R1
-
-	mov R1, #3300
-	mov R2, #4095
-	mul R1, R1, R0
-	udiv R1, R1, R2
-	mov R0, #250
-	mov R2, #750
-	sub R1, R1, R2
-	add R1, R1, R0
-
-	pop  {R0, R2, PC}
-
-// R1 : input : mV reg
-convert_to_temp:
-	push {R0, LR}
-
-	ldr R0, =temp_mode
-	ldrb R0, [R0]
-
-	bl convert_to_c
-
-	cmp R0, #1
-	it eq
-	bleq convert_to_f
-
-	pop  {R0, PC}
-
 
 .section .data
+
+	.global temp_mode
 
 	// booleans
 	buffer_mode:     .byte 0 // 0->dont write to buffer | 1->write to buffer
@@ -197,14 +180,16 @@ convert_to_temp:
 
 	// integers
 	interval:        .byte 1 // [1-9]
-	buffer_size:     .byte 1 // [1-100]
+	buffer_size:     .byte 1 // [1-9]
 	buffer_pos:      .byte 0 // [1-buffer_size]
 
 	.balign 4
 	temperature_buffer:
-		.space 100
+		.space 10
 
 .section .rodata
 
-	set_interval_msg1: .asciz "Set interval 1-9"
-	set_interval_msg2: .asciz "Interval: "
+	set_interval_msg1:    .asciz "Set interval 1-9"
+	set_interval_msg2:    .asciz "Interval: "
+
+	set_buffer_size_msg1: .asciz "Set Buffer Size"

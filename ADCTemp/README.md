@@ -8,7 +8,7 @@ Use a analog temperature sensor and an ADC to read the temperature of the room a
 | --- | ------------------------ | -------------------------------------------------------------------- |:------------------:|
 | \*  | Buffer mode              | When on, all samples are stored in RAM                               | :x:                |
 | #   | Set interval             | Allows user to set interval between samples            (1-9 seconds) | :heavy_check_mark: |
-| B   | Set buffer size          | Set the size of buffer (1 - 99 samples)                              | :x:                |
+| B   | Set buffer size          | Set the size of buffer (1 - 9 samples)                               | :heavy_check_mark: |
 | D   | Toggle display unit      | Toggle between °C and °F                                             | :heavy_check_mark: |
 | A   | Display buffered results |                                                                      | :x:                |
 | C   | Continuous Mode          | Display results as they are computed                                 | :x:                |

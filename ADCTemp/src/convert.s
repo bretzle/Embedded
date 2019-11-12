@@ -14,6 +14,7 @@
 .global num_to_bcd
 .global bcd_to_ascii
 .global num_to_ascii
+.global convert_to_temp
 
 @ Converts a 28-bit binary number into 32-bit BCD
 @
@@ -132,3 +133,54 @@ num_to_ascii:
 	bl   bcd_to_ascii
 
 	pop  {R1, PC}
+
+// converts celsius register to farhenheit
+// celcius must be in tenths of a degree
+//
+// R1 : input
+// R1 : output
+convert_to_f:
+	push {R2, LR}
+
+	mov R2, #9
+	mul R1, R1, R2
+	mov R2, #5
+	udiv R1, R1, R2
+	add R1, R1, #320
+
+	pop  {R2, PC}
+
+// converts mV register to celcius
+//
+// R1 : input
+// R1 : output
+convert_to_c:
+	push {R0, R2, LR}
+
+	mov R0, R1
+
+	mov R1, #3300
+	mov R2, #4095
+	mul R1, R1, R0
+	udiv R1, R1, R2
+	mov R0, #250
+	mov R2, #750
+	sub R1, R1, R2
+	add R1, R1, R0
+
+	pop  {R0, R2, PC}
+
+// R1 : input : mV reg
+convert_to_temp:
+	push {R0, LR}
+
+	ldr R0, =temp_mode
+	ldrb R0, [R0]
+
+	bl convert_to_c
+
+	cmp R0, #1
+	it eq
+	bleq convert_to_f
+
+	pop  {R0, PC}
