@@ -29,15 +29,15 @@ loop:
 	bl key_get_char
 
 	cmp R0, 'D'
-	it eq
-	bleq toggle_temp_unit
+	beq toggle_temp_unit
+
+	cmp R0, '#'
+	beq set_interval
 
 end:
 	b loop
 
 toggle_temp_unit:
-	push {R0-R2, LR}
-
 	ldr R0, =temp_mode
 	ldrb R1, [R0]
 
@@ -54,7 +54,39 @@ toggle_temp_unit:
 
 write:
 	strb R2, [R0]
-	pop  {R0-R2, PC}
+	b loop
+
+set_interval:
+	bl disable_interrupt
+	bl lcd_clear
+	ldr R1, =set_interval_msg1
+	bl lcd_print_string
+
+	mov R0, #1
+	mov R1, #0
+	bl lcd_set_position
+
+	ldr R1, =set_interval_msg2
+	bl lcd_print_string
+
+set_interval_loop:
+
+	bl key_get_char
+	mov R1, R0
+	#bl is_numeric
+	#cmp R1, #0
+	#beq set_interval_loop
+
+	mov R1, R0
+	bl lcd_write_data
+
+	ubfx R1, R1, #0, #4
+	bl set_tim2_delay
+
+	bl enable_interrupt
+	bl lcd_clear
+
+	b loop
 
 // R1 : input : binary time
 pretty_print:
@@ -155,6 +187,7 @@ convert_to_temp:
 
 	pop  {R0, PC}
 
+
 .section .data
 
 	// booleans
@@ -170,3 +203,8 @@ convert_to_temp:
 	.balign 4
 	temperature_buffer:
 		.space 100
+
+.section .rodata
+
+	set_interval_msg1: .asciz "Set interval 1-9"
+	set_interval_msg2: .asciz "Interval: "

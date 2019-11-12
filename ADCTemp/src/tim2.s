@@ -31,6 +31,7 @@
 .global tim2_init
 .global start_tim2
 .global stop_tim2
+.global set_tim2_delay
 
 # Initializes the TIM2 (Enable the clock, set ARR, enable interrupt, and starts the clock).
 tim2_init:
@@ -65,6 +66,21 @@ tim2_init:
 
 	pop {R0, R4-R5, PC}
 
+# R1 : input : num of seconds
+set_tim2_delay:
+	push {R0, R4, LR}
+
+	bl stop_tim2
+
+	ldr R0, =16000000
+	mul R0, R0, R1
+	sub R0, R0, #1
+	ldr R4, =TIM2_BASE
+	str R0, [R4, TIMx_ARR_OFFSET]
+
+	bl start_tim2
+
+	pop  {R0, R4, PC}
 
 # Start the timer 2 and enable interrupt
 start_tim2:

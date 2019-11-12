@@ -23,6 +23,8 @@
 
 .global adc_init
 .global start_convert
+.global disable_interrupt
+.global enable_interrupt
 
 adc_init:
 	push {R0-R2, LR}
@@ -74,6 +76,26 @@ start_convert:
 
 	pop  {R0-R1, PC}
 
+
+disable_interrupt:
+	push {R1-R2, LR}
+
+	ldr R1, =ADC1_BASE
+	ldr R2, [R1, ADC_CR1_OFFSET]
+	bic R2, R2, #(1<<5)
+	str R2, [R1, ADC_CR1_OFFSET]
+
+	pop  {R1-R2, PC}
+
+enable_interrupt:
+	push {R1-R2, LR}
+
+	ldr R1, =ADC1_BASE
+	ldr R2, [R1, ADC_CR1_OFFSET]
+	orr R2, R2, #(1<<5)
+	str R2, [R1, ADC_CR1_OFFSET]
+
+	pop  {R1-R2, PC}
 
 .global ADC_Convert_Handler
 .thumb_func
