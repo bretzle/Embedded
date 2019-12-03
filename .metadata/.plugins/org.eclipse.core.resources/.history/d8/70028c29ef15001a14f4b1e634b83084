@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "uart_driver.h"
+#include <uart_driver.h>
 
 #define ARSIZE 10
 #define F_CPU 16000000UL
@@ -19,7 +19,7 @@ int main()
 
 	init_usart2(19200, F_CPU);
 
-	int ch_arr[ARSIZE], count1;
+	int ch_arr[10], count1;
 	int count2, stop, lastchar;
 
 	lastchar = 0;
@@ -70,5 +70,8 @@ int main()
 		count1 = count1 + 1;
 	}
 
-	exit(EXIT_SUCCESS);
+	for (;;){
+
+	}
+//	exit(EXIT_SUCCESS);
 }

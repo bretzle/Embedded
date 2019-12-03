@@ -1080,7 +1080,7 @@ int main()
  8000d26:	3b01      	subs	r3, #1
  8000d28:	633b      	str	r3, [r7, #48]	; 0x30
 
-	/* * Now the traditional bubble sort. */
+	/** Now the traditional bubble sort. */
 	count1 = 0;
  8000d2a:	2300      	movs	r3, #0
  8000d2c:	63fb      	str	r3, [r7, #60]	; 0x3c
@@ -1182,6 +1182,7 @@ int main()
  8000dd6:	429a      	cmp	r2, r3
  8000dd8:	dded      	ble.n	8000db6 <main+0xee>
 	}
+
 	exit(EXIT_SUCCESS);
  8000dda:	2000      	movs	r0, #0
  8000ddc:	f000 f982 	bl	80010e4 <exit>

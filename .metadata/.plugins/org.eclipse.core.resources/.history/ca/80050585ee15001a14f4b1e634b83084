@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "uart_driver.h"
+#include <uart_driver.h>
 
 #define ARSIZE 10
 #define F_CPU 16000000UL
@@ -43,7 +43,7 @@ int main()
 	}
 	lastchar = lastchar - 1;
 
-	/** Now the traditional bubble sort. */
+	/* * Now the traditional bubble sort. */
 	count1 = 0;
 	while (count1 < lastchar)
 	{

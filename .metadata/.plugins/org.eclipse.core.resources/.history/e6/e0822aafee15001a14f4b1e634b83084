@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "uart_driver.h"
+#include <uart_driver.h>
 
 #define ARSIZE 10
 #define F_CPU 16000000UL
@@ -45,23 +45,23 @@ int main()
 
 	/** Now the traditional bubble sort. */
 	count1 = 0;
-	while (count1 < lastchar)
-	{
-		count2 = count1 + 1;
-		while (count2 <= lastchar)
-		{
-			if (ch_arr[count1] > ch_arr[count2])
-			{
-				/* swap */
-				int temp;
-				temp = ch_arr[count1];
-				ch_arr[count1] = ch_arr[count2];
-				ch_arr[count2] = temp;
-			}
-			count2 = count2 + 1;
-		}
-		count1 = count1 + 1;
-	}
+//	while (count1 < lastchar)
+//	{
+//		count2 = count1 + 1;
+//		while (count2 <= lastchar)
+//		{
+//			if (ch_arr[count1] > ch_arr[count2])
+//			{
+//				/* swap */
+//				int temp;
+//				temp = ch_arr[count1];
+//				ch_arr[count1] = ch_arr[count2];
+//				ch_arr[count2] = temp;
+//			}
+//			count2 = count2 + 1;
+//		}
+//		count1 = count1 + 1;
+//	}
 	count1 = 0;
 
 	while (count1 <= lastchar)
