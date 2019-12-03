@@ -1,0 +1,31 @@
+09:07:41 **** Clean-only build of configuration Debug for project ADCTemp ****
+make clean 
+rm -rf *
+ 
+09:07:43 **** Build of configuration Debug for project ADCTemp ****
+make all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "startup/startup_stm32.o" "../startup/startup_stm32.s"
+arm-none-eabi-gcc "../startup/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -DDEBUG -c -O0 -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"startup/sysmem.d" -MT"startup/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "startup/sysmem.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/adc.o" "../src/adc.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/convert.o" "../src/convert.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/helper.o" "../src/helper.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/keypad.o" "../src/keypad.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/lcd.o" "../src/lcd.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/main.o" "../src/main.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/temp.o" "../src/temp.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/tim2.o" "../src/tim2.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/timing.o" "../src/timing.s"
+arm-none-eabi-gcc -o "ADCTemp.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\ADCTemp\LinkerScript.ld" --specs=nosys.specs -Wl,-Map="ADCTemp.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: ADCTemp.elf
+ 
+arm-none-eabi-size   ADCTemp.elf 
+   text	   data	    bss	    dec	    hex	filename
+   2700	     28	   1052	   3780	    ec4	ADCTemp.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S  ADCTemp.elf  > "ADCTemp.list"
+Finished building: ADCTemp.list
+ 
+arm-none-eabi-objcopy  -O binary  ADCTemp.elf  "ADCTemp.bin"
+Finished building: ADCTemp.bin
+ 

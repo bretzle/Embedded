@@ -1,0 +1,18 @@
+2019-12-03 09:05:52,931 [INFO] Activator:176 - 
+
+
+2019-12-03 09:05:52,940 [INFO] Activator:177 - !SESSION log4j initialized
+2019-12-03 09:06:49,876 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.mcu.549958886 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:49,885 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.fpu.2005125404 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:49,895 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.floatabi.2010299699 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:49,902 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.board.2117635551 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:50,118 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.mcu.744581366 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:50,120 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.fpu.760037327 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:50,129 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.floatabi.1582773149 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:06:50,134 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] Managed Build system manifest file error: Option fr.ac6.managedbuild.option.gnu.cross.board.1238193590 uses a null category that is invalid in its context. The option was ignored.
+2019-12-03 09:50:37,733 [INFO] Activator:176 - 
+
+
+2019-12-03 09:50:37,737 [INFO] Activator:177 - !SESSION log4j initialized
+2019-12-03 09:50:51,517 [INFO] RetryExec:97 - I/O exception (java.net.SocketException) caught when processing request to {}->http://sw-center.st.com:80: Socket Closed
+2019-12-03 09:50:51,523 [INFO] RetryExec:113 - Retrying request to {}->http://sw-center.st.com:80
