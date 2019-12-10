@@ -10,13 +10,33 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include "uart_driver.h"
 #include "embedded.h"
+
+#define F_CPU 16000000UL
+#define delay 100
 
 // main
 int main(void){
 
-	delay_ms(5);
+	init_usart2(19200, F_CPU);
 
-	return 0;
+	LED_INIT();
+
+	int number = 1;
+
+	while (1) {
+		for (int i = 0; i < 9; i++) {
+			light_LED(number);
+			delay_ms(delay);
+			number = number << 1;
+		}
+		for (int i = 0; i < 9; i++) {
+			light_LED(number);
+			delay_ms(delay);
+			number = number >> 1;
+		}
+	}
 }
 

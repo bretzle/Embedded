@@ -1,13 +1,23 @@
-#define STK_LOAD = 0x04;
-#define ENABLE = 1<<0
-#define CLKSOURCE = 1<<2
-#define STK_CTRL = 0
-#define COUNT_FLAG = 1<<16
+#include <inttypes.h>
+
+#define STK_BASE (int *) 0xE000E010
+#define STK_CLK_SOURCE (int *) 0xE000E012
+#define STK_LOAD (int *) 0xE000E014
+#define COUNT_FLAG 1<<16
+
+#define freq 16000000UL
 
 void delay_ms(int delay) {
 
-}
+	*STK_BASE = 0;                     // disable clock
+	*STK_CLK_SOURCE = 0;               // use system clock
+	*STK_LOAD = delay * (freq / 8000); // set delay
+	*STK_BASE = 1;                     // enable the clock.
 
-void reset_systick(void) {
-	int *stk = 0xE000E010;
+	while (!(*STK_BASE & (1 << 16))) {
+		// busy wait
+	}
+
+	*STK_BASE = 0; // disable clock
+	return;
 }
