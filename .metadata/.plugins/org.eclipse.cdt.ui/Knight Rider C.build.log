@@ -1,0 +1,24 @@
+09:22:11 **** Incremental Build of configuration Debug for project Knight Rider C ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+../Src/timing.c: In function 'reset_systick':
+../Src/timing.c:12:13: warning: initialization makes pointer from integer without a cast [-Wint-conversion]
+  int *stk = 0xE000E010;
+             ^~~~~~~~~~
+../Src/timing.c:12:7: warning: unused variable 'stk' [-Wunused-variable]
+  int *stk = 0xE000E010;
+       ^~~
+arm-none-eabi-gcc -o "Knight Rider C.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\Knight Rider C\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Knight Rider C.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Knight Rider C.elf
+ 
+arm-none-eabi-objdump -h -S  Knight\ Rider\ C.elf  > "Knight Rider C.list"
+arm-none-eabi-size   Knight\ Rider\ C.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19336	    472	   1584	  21392	   5390	Knight Rider C.elf
+Finished building: default.size.stdout
+Finished building: Knight Rider C.list
+ 
+ 
+
+09:22:17 Build Finished. 0 errors, 2 warnings. (took 5s.579ms)
+

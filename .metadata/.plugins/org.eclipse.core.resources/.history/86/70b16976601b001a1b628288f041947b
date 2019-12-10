@@ -1,0 +1,14 @@
+#define SYSTICK_BASE = 0xE000E010;
+#define STK_LOAD = 0x04;
+#define ENABLE
+#define CLKSOURCE =
+#define STK_CTRL =
+#define COUNT_FLAG =
+
+void delay_ms(int delay) {
+
+}
+
+void reset_systick(void) {
+
+}
