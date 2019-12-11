@@ -1,9 +1,0 @@
-#define SYSTICK_BASE = 0xE000E010;
-
-void delay_ms(int delay) {
-
-}
-
-void reset_systick(void) {
-
-}
