@@ -27,4 +27,5 @@ void delay_ms(int delay) {
 	}
 
 	*STK_BASE = 0; // disable clock
+	return;
 }

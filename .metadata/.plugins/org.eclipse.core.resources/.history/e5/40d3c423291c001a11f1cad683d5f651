@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    timing.c
+  * @file    led.c
   * @author  John Bretz
   * @version V1.0
-  * @brief   Timing api.
+  * @brief   LED api.
   ******************************************************************************
 */
 
@@ -11,8 +11,8 @@
 #define STK_BASE (int *) 0xE000E010
 #define STK_CLK_SOURCE (int *) 0xE000E012
 #define STK_LOAD (int *) 0xE000E014
-
 #define COUNT_FLAG 1<<16
+
 #define freq 16000000UL
 
 void delay_ms(int delay) {
@@ -27,4 +27,5 @@ void delay_ms(int delay) {
 	}
 
 	*STK_BASE = 0; // disable clock
+	return;
 }

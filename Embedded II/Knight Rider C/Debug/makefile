@@ -36,8 +36,8 @@ Knight\ Rider\ C.list \
 all: Knight\ Rider\ C.elf secondary-outputs
 
 # Tool invocations
-Knight\ Rider\ C.elf: $(OBJS) $(USER_OBJS) C:\Users\bretzj\Desktop\embedded\Knight\ Rider\ C\STM32F446RETX_FLASH.ld
-	arm-none-eabi-gcc -o "Knight Rider C.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\Knight Rider C\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Knight Rider C.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Knight\ Rider\ C.elf: $(OBJS) $(USER_OBJS) C:\Users\bretzj\Desktop\embedded\Embedded\ II\Knight\ Rider\ C\STM32F446RETX_FLASH.ld
+	arm-none-eabi-gcc -o "Knight Rider C.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\Embedded II\Knight Rider C\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Knight Rider C.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
