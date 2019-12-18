@@ -1,0 +1,49 @@
+
+#include "timing.h";
+
+static void write_instruction(int inst);
+static void write_data(int data);
+
+#define RCC_AHB1ENR (volatile int *) 0x40023830
+#define GPIOA_MODER (volatile int *) 0x40020000
+#define GPIOC_MODER (volatile int *) 0x40020800
+#define GPIOAEN 0x1
+#define GPIOCEN 0x4
+
+void lcd_init(void) {
+	// setup ports
+	*RCC_AHB1ENR |= GPIOAEN;
+	*RCC_AHB1ENR |= GPIOCEN;
+
+	*GPIOA_MODER |= 0x555500;
+	*GPIOC_MODER |= 0x150000;
+
+	// wait
+	delay_us(40);
+
+	// write function (0x38)
+
+	// wait
+
+	// write function (0x38)
+
+	// wait
+
+	// turn display on
+
+	// wait
+
+	// clear display
+
+	// write function (0x06)
+
+	// wait
+}
+
+void write_instruction(int inst) {
+
+}
+
+void write_data(int data) {
+
+}

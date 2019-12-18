@@ -1,0 +1,2 @@
+timing.c:18:6:delay_ms	16	static
+timing.c:32:6:delay_us	16	static

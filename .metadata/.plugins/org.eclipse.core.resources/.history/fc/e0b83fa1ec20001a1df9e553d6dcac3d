@@ -1,0 +1,29 @@
+
+#include "timing.h";
+
+static void write_instruction(int inst);
+static void write_data(int inst);
+
+void lcd_init(void) {
+	// setup ports
+
+	// wait
+
+	// write function (0x38)
+
+	// wait
+
+	// write function (0x38)
+
+	// wait
+
+	// turn display on
+
+	// wait
+
+	// clear display
+
+	// write function (0x06)
+
+	// wait
+}
