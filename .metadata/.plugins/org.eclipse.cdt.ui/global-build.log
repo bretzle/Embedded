@@ -515,3 +515,1264 @@ Finished building: default.size.stdout
 Finished building: LCD Lab.list
  
  
+09:29:13 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19616	    472	   1584	  21672	   54a8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+09:35:48 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:8:2: warning: implicit declaration of function 'enable_GPIO' [-Wimplicit-function-declaration]
+  enable_GPIO('B');
+  ^~~~~~~~~~~
+../Src/lcd.c:9:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:12:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:14:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:17:6: warning: conflicting types for 'enable_GPIO'
+ void enable_GPIO(char port) {
+      ^~~~~~~~~~~
+../Src/lcd.c:8:2: note: previous implicit declaration of 'enable_GPIO' was here
+  enable_GPIO('B');
+  ^~~~~~~~~~~
+../Src/lcd.c: In function 'enable_GPIO':
+../Src/lcd.c:18:47: error: 'RCC_AHB1ENR' undeclared (first use in this function)
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) RCC_AHB1ENR;
+                                               ^~~~~~~~~~~
+../Src/lcd.c:18:47: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:36:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:8:2: warning: implicit declaration of function 'enable_GPIO' [-Wimplicit-function-declaration]
+  enable_GPIO('B');
+  ^~~~~~~~~~~
+../Src/lcd.c:9:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:12:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:14:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:17:6: warning: conflicting types for 'enable_GPIO'
+ void enable_GPIO(char port) {
+      ^~~~~~~~~~~
+../Src/lcd.c:8:2: note: previous implicit declaration of 'enable_GPIO' was here
+  enable_GPIO('B');
+  ^~~~~~~~~~~
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Src/lcd.o: In function `lcd_init':
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:9: undefined reference to `init_PB0_to_PB2_mode'
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:12: undefined reference to `init_PC8_to_PC11_mode'
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:14: undefined reference to `lcd_set_up'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: LCD Lab.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:36:40 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:10:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:13:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:15:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Src/lcd.o: In function `lcd_init':
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:10: undefined reference to `init_PB0_to_PB2_mode'
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:13: undefined reference to `init_PC8_to_PC11_mode'
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:15: undefined reference to `lcd_set_up'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: LCD Lab.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:38:32 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:10:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:13:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:15:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:50:13: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ static void init_PB0_to_PB2_mode() {
+             ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:50:13: error: static declaration of 'init_PB0_to_PB2_mode' follows non-static declaration
+../Src/lcd.c:10:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PB0_to_PB2_mode':
+../Src/lcd.c:52:27: error: 'GPIOB_BASE' undeclared (first use in this function)
+  gpiob_base = (uint32_t*) GPIOB_BASE;
+                           ^~~~~~~~~~
+../Src/lcd.c:52:27: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:54:14: error: 'MODER' undeclared (first use in this function)
+   gpiob_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:55:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpiob_base[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+                        ^~~~~~
+../Src/lcd.c:51:21: warning: variable 'gpiob_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpiob_base;
+                     ^~~~~~~~~~
+../Src/lcd.c: At top level:
+../Src/lcd.c:60:13: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ static void init_PC8_to_PC11_mode() {
+             ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:60:13: error: static declaration of 'init_PC8_to_PC11_mode' follows non-static declaration
+../Src/lcd.c:13:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PC8_to_PC11_mode':
+../Src/lcd.c:62:27: error: 'GPIOC_BASE' undeclared (first use in this function)
+  gpioc_base = (uint32_t*) GPIOC_BASE;
+                           ^~~~~~~~~~
+../Src/lcd.c:64:14: error: 'MODER' undeclared (first use in this function)
+   gpioc_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:65:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpioc_base[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+                        ^~~~~~
+../Src/lcd.c:61:21: warning: variable 'gpioc_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpioc_base;
+                     ^~~~~~~~~~
+At top level:
+../Src/lcd.c:60:13: warning: 'init_PC8_to_PC11_mode' defined but not used [-Wunused-function]
+ static void init_PC8_to_PC11_mode() {
+             ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:50:13: warning: 'init_PB0_to_PB2_mode' defined but not used [-Wunused-function]
+ static void init_PB0_to_PB2_mode() {
+             ^~~~~~~~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:38:46 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:10:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:13:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:15:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:50:6: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ void init_PB0_to_PB2_mode() {
+      ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:10:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PB0_to_PB2_mode':
+../Src/lcd.c:52:27: error: 'GPIOB_BASE' undeclared (first use in this function)
+  gpiob_base = (uint32_t*) GPIOB_BASE;
+                           ^~~~~~~~~~
+../Src/lcd.c:52:27: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:54:14: error: 'MODER' undeclared (first use in this function)
+   gpiob_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:55:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpiob_base[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+                        ^~~~~~
+../Src/lcd.c:51:21: warning: variable 'gpiob_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpiob_base;
+                     ^~~~~~~~~~
+../Src/lcd.c: At top level:
+../Src/lcd.c:60:6: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ void init_PC8_to_PC11_mode() {
+      ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:13:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PC8_to_PC11_mode':
+../Src/lcd.c:62:27: error: 'GPIOC_BASE' undeclared (first use in this function)
+  gpioc_base = (uint32_t*) GPIOC_BASE;
+                           ^~~~~~~~~~
+../Src/lcd.c:64:14: error: 'MODER' undeclared (first use in this function)
+   gpioc_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:65:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpioc_base[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+                        ^~~~~~
+../Src/lcd.c:61:21: warning: variable 'gpioc_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpioc_base;
+                     ^~~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:39:15 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:14:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:17:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:19:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:54:6: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ void init_PB0_to_PB2_mode() {
+      ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:14:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PB0_to_PB2_mode':
+../Src/lcd.c:58:14: error: 'MODER' undeclared (first use in this function)
+   gpiob_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:58:14: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:59:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpiob_base[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+                        ^~~~~~
+../Src/lcd.c:55:21: warning: variable 'gpiob_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpiob_base;
+                     ^~~~~~~~~~
+../Src/lcd.c: At top level:
+../Src/lcd.c:64:6: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ void init_PC8_to_PC11_mode() {
+      ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:17:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PC8_to_PC11_mode':
+../Src/lcd.c:68:14: error: 'MODER' undeclared (first use in this function)
+   gpioc_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:69:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpioc_base[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+                        ^~~~~~
+../Src/lcd.c:65:21: warning: variable 'gpioc_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpioc_base;
+                     ^~~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:39:38 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:14:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:17:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:19:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:54:6: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ void init_PB0_to_PB2_mode() {
+      ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:14:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PB0_to_PB2_mode':
+../Src/lcd.c:58:14: error: 'MODER' undeclared (first use in this function)
+   gpiob_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:58:14: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:59:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpiob_base[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+                        ^~~~~~
+../Src/lcd.c:55:21: warning: variable 'gpiob_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpiob_base;
+                     ^~~~~~~~~~
+../Src/lcd.c: At top level:
+../Src/lcd.c:64:6: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ void init_PC8_to_PC11_mode() {
+      ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:17:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PC8_to_PC11_mode':
+../Src/lcd.c:68:14: error: 'MODER' undeclared (first use in this function)
+   gpioc_base[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^~~~~
+../Src/lcd.c:69:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpioc_base[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+                        ^~~~~~
+../Src/lcd.c:65:21: warning: variable 'gpioc_base' set but not used [-Wunused-but-set-variable]
+  volatile uint32_t* gpioc_base;
+                     ^~~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:40:09 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:23:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:26:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:28:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:63:6: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ void init_PB0_to_PB2_mode() {
+      ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:23:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PB0_to_PB2_mode':
+../Src/lcd.c:68:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpiob_base[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+                        ^~~~~~
+../Src/lcd.c:68:24: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c: At top level:
+../Src/lcd.c:73:6: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ void init_PC8_to_PC11_mode() {
+      ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:26:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c: In function 'init_PC8_to_PC11_mode':
+../Src/lcd.c:78:24: error: 'OUTPUT' undeclared (first use in this function)
+   gpioc_base[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+                        ^~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:40:24 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:33:2: warning: implicit declaration of function 'init_PB0_to_PB2_mode' [-Wimplicit-function-declaration]
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:36:2: warning: implicit declaration of function 'init_PC8_to_PC11_mode' [-Wimplicit-function-declaration]
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:38:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+../Src/lcd.c: At top level:
+../Src/lcd.c:73:6: warning: conflicting types for 'init_PB0_to_PB2_mode'
+ void init_PB0_to_PB2_mode() {
+      ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:33:2: note: previous implicit declaration of 'init_PB0_to_PB2_mode' was here
+  init_PB0_to_PB2_mode();
+  ^~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:83:6: warning: conflicting types for 'init_PC8_to_PC11_mode'
+ void init_PC8_to_PC11_mode() {
+      ^~~~~~~~~~~~~~~~~~~~~
+../Src/lcd.c:36:2: note: previous implicit declaration of 'init_PC8_to_PC11_mode' was here
+  init_PC8_to_PC11_mode();
+  ^~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Src/lcd.o: In function `lcd_init':
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:38: undefined reference to `lcd_set_up'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: LCD Lab.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:41:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:48:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Src/lcd.o: In function `lcd_init':
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:48: undefined reference to `lcd_set_up'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: LCD Lab.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:43:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+             ^
+../Src/lcd.c:44:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:44:05 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:14: error: subscripted value is neither array nor pointer nor vector
+   *GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+              ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+             ^
+../Src/lcd.c:44:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:45:20 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PB0 to PB2 to output mode.
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2)); // make sure all bits are set to zero.
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2); // set mode from PC7 to PC11 to output mode.
+             ^
+../Src/lcd.c:44:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:46:00 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:44:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:46:41 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:44:2: warning: implicit declaration of function 'lcd_set_up'; did you mean 'fd_set'? [-Wimplicit-function-declaration]
+  lcd_set_up();
+  ^~~~~~~~~~
+  fd_set
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:47:43 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:48:01 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:34:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:40:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:41:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:48:37 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c: In function 'enable_GPIO':
+../Src/lcd.c:43:11: error: unknown type name 'uint32_t'
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+           ^~~~~~~~
+../Src/lcd.c:43:36: error: 'uint32_t' undeclared (first use in this function)
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+                                    ^~~~~~~~
+../Src/lcd.c:43:36: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:43:45: error: expected expression before ')' token
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+                                             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:48:57 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c: In function 'enable_GPIO':
+../Src/lcd.c:43:11: error: unknown type name 'uint32_t'
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+           ^~~~~~~~
+../Src/lcd.c:43:36: error: 'uint32_t' undeclared (first use in this function)
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+                                    ^~~~~~~~
+../Src/lcd.c:43:36: note: each undeclared identifier is reported only once for each function it appears in
+../Src/lcd.c:43:45: error: expected expression before ')' token
+  volatile uint32_t* rcc_ahb1enr = (uint32_t*) 0x40023830;
+                                             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+09:49:25 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:15:40 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER];
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:15:59 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0];
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:16:06 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:29:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[0];
+             ^
+../Src/lcd.c:30:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+../Src/lcd.c:35:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:36:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:24:22 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c:24:28: warning: initialization makes pointer from integer without a cast [-Wint-conversion]
+ volatile int *GPIOB_BASE = 0x40020400;
+                            ^~~~~~~~~~
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:37:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:38:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:24:57 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:37:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:38:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:25:05 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:32:21: error: assignment of read-only location '*GPIOB_BASE'
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+                     ^~
+../Src/lcd.c:37:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:38:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:25:23 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:32:21: error: assignment of read-only location '*GPIOB_BASE'
+   GPIOB_BASE[MODER] |= OUTPUT << (bit * 2);
+                     ^~
+../Src/lcd.c:37:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:38:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:29:34 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:37:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] &= ~(0b11 << (bit * 2));
+             ^
+../Src/lcd.c:38:13: error: subscripted value is neither array nor pointer nor vector
+   GPIOC_BASE[MODER] |= OUTPUT << (bit * 2);
+             ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:30:26 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19960	    480	   1584	  22024	   5608	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+10:40:09 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19960	    480	   1584	  22024	   5608	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+10:44:00 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19960	    480	   1584	  22024	   5608	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+10:58:34 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19864	    484	   1580	  21928	   55a8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:06:12 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_cmd_d':
+../Src/lcd.c:49:2: error: 'GPIOB_BASE' undeclared (first use in this function); did you mean 'GPIOC_BASE'?
+  GPIOB_BASE[BSRR] |= (RS_CLR | RW_CLR | E_SET);
+  ^~~~~~~~~~
+  GPIOC_BASE
+../Src/lcd.c:49:2: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+11:08:19 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19896	    484	   1580	  21960	   55c8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:08:30 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19896	    484	   1580	  21960	   55c8	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+11:10:35 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19896	    484	   1580	  21960	   55c8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:13:36 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20008	    484	   1580	  22072	   5638	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:13:49 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20008	    484	   1580	  22072	   5638	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+11:14:58 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19800	    484	   1580	  21864	   5568	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:15:24 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19800	    484	   1580	  21864	   5568	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+11:18:35 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19800	    484	   1580	  21864	   5568	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:23:35 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19816	    484	   1580	  21880	   5578	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:27:38 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+11:29:40 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+11:30:22 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+13:14:47 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+13:17:21 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+13:17:36 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+13:23:51 **** Clean-only build of configuration Debug for project LCD ****
+make clean 
+rm -rf *
+ 
+13:23:52 **** Build of configuration Debug for project LCD ****
+make all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "startup/startup_stm32.o" "../startup/startup_stm32.s"
+arm-none-eabi-gcc "../startup/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -DDEBUG -c -O0 -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"startup/sysmem.d" -MT"startup/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "startup/sysmem.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/convert.o" "../src/convert.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/lcd.o" "../src/lcd.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/main.o" "../src/main.s"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/timing.o" "../src/timing.s"
+arm-none-eabi-gcc -o "LCD.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\Embedded I\LCD\LinkerScript.ld" --specs=nosys.specs -Wl,-Map="LCD.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD.elf
+ 
+arm-none-eabi-size   LCD.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1376	     20	   1052	   2448	    990	LCD.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S  LCD.elf  > "LCD.list"
+Finished building: LCD.list
+ 
+arm-none-eabi-objcopy  -O binary  LCD.elf  "LCD.bin"
+Finished building: LCD.bin
+ 
+13:31:19 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19744	    484	   1580	  21808	   5530	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+13:34:17 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19792	    484	   1580	  21856	   5560	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+13:34:55 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19792	    484	   1580	  21856	   5560	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+13:39:27 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19792	    484	   1580	  21856	   5560	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+13:39:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19792	    484	   1580	  21856	   5560	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+15:33:07 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:31:2: error: invalid operands to binary * (have 'int' and 'volatile int *')
+  *rcc_ahb1enr |= (1 << 2);
+  ^
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:33:48 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19688	    484	   1580	  21752	   54f8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+15:37:41 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/timing.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/timing.d" -MT"Src/timing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/timing.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19688	    484	   1580	  21752	   54f8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+15:38:36 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c:42:6: error: conflicting types for 'lcd_cmd_d'
+ void lcd_cmd_d(char instruction, int delay) {
+      ^~~~~~~~~
+../Src/lcd.c:25:6: note: previous declaration of 'lcd_cmd_d' was here
+ void lcd_cmd_d(int, int);
+      ^~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+15:38:43 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19680	    484	   1580	  21744	   54f0	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+15:40:18 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19680	    484	   1580	  21744	   54f0	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+15:40:54 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19680	    484	   1580	  21744	   54f0	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+15:54:28 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/main.c: In function 'main':
+../Src/main.c:20:7: warning: unused variable 'test' [-Wunused-variable]
+  char test = -5;
+       ^~~~
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19768	    484	   1580	  21832	   5548	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:07:02 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/lcd.c:38:6: error: conflicting types for 'lcd_cmd_d'
+ void lcd_cmd_d(int instruction, int delay) {
+      ^~~~~~~~~
+../Src/lcd.c:21:6: note: previous declaration of 'lcd_cmd_d' was here
+ void lcd_cmd_d(char, int);
+      ^~~~~~~~~
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:07:17 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19808	    484	   1580	  21872	   5570	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:08:04 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19808	    484	   1580	  21872	   5570	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:10:28 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19808	    484	   1580	  21872	   5570	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:14:47 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19832	    484	   1580	  21896	   5588	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:17:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20024	    484	   1580	  22088	   5648	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:18:32 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20024	    484	   1580	  22088	   5648	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 

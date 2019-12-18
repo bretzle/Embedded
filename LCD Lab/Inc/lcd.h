@@ -5,7 +5,7 @@ void lcd_clear(void);
 
 void lcd_home(void);
 
-void lcd_set_position(int row, int col);
+void lcd_set_position(char row, char col);
 
 void lcd_print_string(char string[]);
 

@@ -1,0 +1,35 @@
+#include "timing.h"
+#include <inttypes.h>
+#include <stdio.h>
+#include <string.h>
+
+
+void lcd_init(void) {
+	init_GPIOx_clock('B');
+	init_PB0_to_PB2_mode();
+
+	init_GPIOx_clock('C');
+	init_PC8_to_PC11_mode();
+
+	lcd_set_up();
+}
+
+void lcd_clear(void) {
+
+}
+
+void lcd_home(void) {
+
+}
+
+void lcd_set_position(int row, int col) {
+
+}
+
+void lcd_print_string(char *string[]) {
+
+}
+
+void lcd_print_num(int number) {
+
+}
