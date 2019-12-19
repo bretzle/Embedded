@@ -1,6 +1,0 @@
-
-#include "timing.h";
-
-void lcd_init(void) {
-	// setup ports
-}

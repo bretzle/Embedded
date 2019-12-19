@@ -2,42 +2,42 @@
   ******************************************************************************
   * @file    timing.c
   * @author  John Bretz
-  * @version V1.0
+  * @version V2.0
   * @brief   Timing api.
   ******************************************************************************
 */
 
+#include "timing.h"
 
-#define STK_BASE (int *) 0xE000E010
-#define STK_CLK_SOURCE (int *) 0xE000E012
-#define STK_LOAD (int *) 0xE000E014
 
-#define COUNT_FLAG 1<<16
-#define freq 16000000UL
+static void wait_delay();
+static void reset_regs();
 
-void delay_ms(int delay) {
+static volatile uint32_t* systick = SYSTICK;
 
-	*STK_BASE = 0;             // disable clock
-	*STK_CLK_SOURCE = 0;       // use system clock
-	*STK_LOAD = delay * (freq / 8000); // set delay
-	*STK_BASE = 1;             // enable the clock.
-
-	while (!(*STK_BASE & (1 << 16))) {
-		// busy wait
-	}
-
-	*STK_BASE = 0; // disable clock
+void delay_ms(uint32_t theDelay) {
+	reset_regs(systick);
+	systick[1] = theDelay * (F_CPU / 8000);
+	wait_delay(systick);
 }
 
-void delay_us(int delay) {
-	*STK_BASE = 0;          // disable clock
-	*STK_CLK_SOURCE = 0;    // use system clock
-	*STK_LOAD = delay * (freq / 8000000); // set delay
-	*STK_BASE = 1;          // enable the clock.
+void delay_us(uint32_t theDelay) {
+	reset_regs(systick);
+	systick[1] = theDelay * (F_CPU / 8000000);
+	wait_delay(systick);
+}
 
-	while (!(*STK_BASE & (1 << 16))) {
-		// busy wait
+static void reset_regs() {
+	systick[2] = 0;
+	systick[0] = 0;
+}
+
+static void wait_delay() {
+	systick[0] = 1; // enable the clock.
+
+	while (!(systick[0] & (1 << 16))) {
+		// nothing to do.
 	}
 
-	*STK_BASE = 0; // disable clock
+	systick[0] = 0;
 }

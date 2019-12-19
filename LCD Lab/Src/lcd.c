@@ -51,16 +51,16 @@ void lcd_cmd_d(int instruction, int delay) {
 }
 
 void lcd_data(int data) {
-	GPIOC_BASE[ODR] |= RS_SET;
-	GPIOC_BASE[ODR] &= RW_CLR;
-	GPIOC_BASE[ODR] |= E_SET;
+	GPIOC_BASE[BSRR] |= RS_SET;
+	GPIOC_BASE[BSRR] |= (1 << (9+16));
+	GPIOC_BASE[BSRR] |= E_SET;
 
-	GPIOA_BASE[ODR] &= ~(0xFF << 4);
-	GPIOA_BASE[ODR] |= ((data & 0xFF) << 4);
+	GPIOA_BASE[BSRR] |= (0xFF << (4+16));
+	GPIOA_BASE[BSRR] |= ((data & 0xFF) << 4);
 
-	GPIOC_BASE[ODR] &= E_CLR;
+	GPIOC_BASE[BSRR] |= (1 << (10 + 16));
 
-	delay_ms(40);
+	delay_ms(2);
 }
 
 
@@ -74,7 +74,7 @@ void lcd_home(void) {
 
 void lcd_set_position(char row, char col) {
 	int cmd = (1 << 7) + (col + (row * 0x40));
-	lcd_cmd_d(cmd, 0);
+	lcd_cmd_d(cmd, 37);
 }
 
 void lcd_print_string(char string[]) {

@@ -1,16 +1,10 @@
+/* header file */
+#include <inttypes.h>
 
-/*
- * A busy wait that will last num ms
- */
-void delay_ms(int num);
+/* all symbolic numbers */
+#define F_CPU 16000000UL
+#define SYSTICK (volatile uint32_t *) 0xE000E010
 
-/*
- * a Busy wait that will last num seconds
- */
-void delay_sec(int num);
-
-/*
- * A busy wait that will last num us
- */
-void delay_us(int num);
-
+/* public method prototypes */
+void delay_ms(uint32_t);
+void delay_us(uint32_t);
