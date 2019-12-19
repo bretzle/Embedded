@@ -1,4 +1,6 @@
 #include "timing.h"
+#include <string.h>
+#include <stdio.h>
 
 #define MODER 0
 #define IDR 4
@@ -8,11 +10,11 @@
 #define SET 1
 #define OUTPUT 0b01
 #define RS_SET 1 << 8
-#define RS_CLR 1 << (8 + 16)
 #define RW_SET 1 << 9
-#define RW_CLR 1 << (9 + 16)
 #define E_SET  1 << 10
-#define E_CLR  1 << (10 + 16)
+#define RS_CLR ~(RS_SET)
+#define RW_CLR ~(RW_SET)
+#define E_CLR ~(E_SET)
 
 volatile int *rcc_ahb1enr = (int *) 0x40023830;
 volatile int *GPIOA_BASE = (int *) 0x40020000;
@@ -36,29 +38,29 @@ void lcd_init(void) {
 }
 
 void lcd_cmd_d(int instruction, int delay) {
-	GPIOC_BASE[ODR] &= ~RS_SET;
-	GPIOC_BASE[ODR] &= ~RW_SET;
-	GPIOC_BASE[ODR] |=   E_SET;
+	GPIOC_BASE[ODR] &= RS_CLR;
+	GPIOC_BASE[ODR] &= RW_CLR;
+	GPIOC_BASE[ODR] |= E_SET;
 
 	GPIOA_BASE[ODR] &= ~(0xFF << 4);
 	GPIOA_BASE[ODR] |= ((instruction & 0xFF) << 4);
 
-	GPIOC_BASE[ODR] &= ~E_SET;
+	GPIOC_BASE[ODR] &= E_CLR;
 
 	delay_us(delay);
 }
 
 void lcd_data(int data) {
-	GPIOC_BASE[ODR] |=  RS_SET;
-	GPIOC_BASE[ODR] &= ~RW_SET;
-	GPIOC_BASE[ODR] |=   E_SET;
+	GPIOC_BASE[ODR] |= RS_SET;
+	GPIOC_BASE[ODR] &= RW_CLR;
+	GPIOC_BASE[ODR] |= E_SET;
 
 	GPIOA_BASE[ODR] &= ~(0xFF << 4);
 	GPIOA_BASE[ODR] |= ((data & 0xFF) << 4);
 
-	GPIOC_BASE[ODR] &= ~E_CLR;
+	GPIOC_BASE[ODR] &= E_CLR;
 
-	delay_us(37);
+	delay_ms(40);
 }
 
 
@@ -71,13 +73,19 @@ void lcd_home(void) {
 }
 
 void lcd_set_position(char row, char col) {
-
+	int cmd = (1 << 7) + (col + (row * 0x40));
+	lcd_cmd_d(cmd, 0);
 }
 
-void lcd_print_string(char *string[]) {
-
+void lcd_print_string(char string[]) {
+	int str_len = strlen(string);
+	for (int i=0; i<str_len; i++) {
+		lcd_data(string[i]);
+	}
 }
 
 void lcd_print_num(int number) {
-
+	char num_str[32];
+	sprintf(num_str, "%d", number);
+	lcd_print_string(num_str);
 }

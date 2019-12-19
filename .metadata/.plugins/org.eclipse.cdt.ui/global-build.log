@@ -1776,3 +1776,582 @@ Finished building: default.size.stdout
 Finished building: LCD Lab.list
  
  
+17:24:33 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/lcd.c: In function 'lcd_print_string':
+../Src/lcd.c:86:16: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  int str_len = strlen(string);
+                ^~~~~~
+../Src/lcd.c:86:16: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/lcd.c:86:16: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/lcd.c: In function 'lcd_print_num':
+../Src/lcd.c:94:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  sprintf(num_str, "%d", number);
+  ^~~~~~~
+../Src/lcd.c:94:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Src/lcd.c:94:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20288	    484	   1580	  22352	   5750	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:25:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19880	    484	   1580	  21944	   55b8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:26:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_set_position':
+../Src/lcd.c:74:2: error: unknown type name 'uint8_t'
+  uint8_t ddrm_adr = col;
+  ^~~~~~~
+../Src/lcd.c:76:2: error: unknown type name 'uint8_t'
+  uint8_t cmd = (1 << 7) + ddrm_adr;
+  ^~~~~~~
+../Src/lcd.c:77:2: warning: implicit declaration of function 'lcd_cmd'; did you mean 'lcd_cmd_d'? [-Wimplicit-function-declaration]
+  lcd_cmd(cmd);
+  ^~~~~~~
+  lcd_cmd_d
+../Src/lcd.c: In function 'lcd_print_string':
+../Src/lcd.c:81:16: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  int str_len = strlen(string);
+                ^~~~~~
+../Src/lcd.c:81:16: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/lcd.c:81:16: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/lcd.c: In function 'lcd_print_num':
+../Src/lcd.c:89:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  sprintf(num_str, "%d", number);
+  ^~~~~~~
+../Src/lcd.c:89:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Src/lcd.c:89:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:27:01 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_set_position':
+../Src/lcd.c:77:2: warning: implicit declaration of function 'lcd_cmd'; did you mean 'lcd_cmd_d'? [-Wimplicit-function-declaration]
+  lcd_cmd(cmd);
+  ^~~~~~~
+  lcd_cmd_d
+../Src/lcd.c: In function 'lcd_print_string':
+../Src/lcd.c:81:16: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  int str_len = strlen(string);
+                ^~~~~~
+../Src/lcd.c:81:16: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/lcd.c:81:16: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/lcd.c: In function 'lcd_print_num':
+../Src/lcd.c:89:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  sprintf(num_str, "%d", number);
+  ^~~~~~~
+../Src/lcd.c:89:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Src/lcd.c:89:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Src/lcd.o: In function `lcd_set_position':
+C:/Users/bretzj/Desktop/embedded/LCD Lab/Debug/../Src/lcd.c:77: undefined reference to `lcd_cmd'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:40: LCD Lab.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:27:16 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_print_string':
+../Src/lcd.c:81:16: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  int str_len = strlen(string);
+                ^~~~~~
+../Src/lcd.c:81:16: warning: incompatible implicit declaration of built-in function 'strlen'
+../Src/lcd.c:81:16: note: include '<string.h>' or provide a declaration of 'strlen'
+../Src/lcd.c: In function 'lcd_print_num':
+../Src/lcd.c:89:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  sprintf(num_str, "%d", number);
+  ^~~~~~~
+../Src/lcd.c:89:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Src/lcd.c:89:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19840	    484	   1580	  21904	   5590	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:27:24 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19840	    484	   1580	  21904	   5590	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:27:48 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19840	    484	   1580	  21904	   5590	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:28:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19864	    484	   1580	  21928	   55a8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:30:40 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/lcd.c: In function 'lcd_print_num':
+../Src/lcd.c:88:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+  sprintf(num_str, "%d", number);
+  ^~~~~~~
+../Src/lcd.c:88:2: warning: incompatible implicit declaration of built-in function 'sprintf'
+../Src/lcd.c:88:2: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19832	    484	   1580	  21896	   5588	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:30:57 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19832	    484	   1580	  21896	   5588	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:31:27 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20008	    484	   1580	  22072	   5638	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:32:46 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20032	    484	   1580	  22096	   5650	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:48:56 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20056	    484	   1580	  22120	   5668	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:50:13 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20088	    484	   1580	  22152	   5688	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:50:45 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20168	    484	   1580	  22232	   56d8	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:53:22 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20032	    484	   1580	  22096	   5650	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:55:57 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20032	    484	   1580	  22096	   5650	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:57:28 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_data':
+../Src/lcd.c:58:22: error: 'E_CLR' undeclared (first use in this function); did you mean 'FD_CLR'?
+  GPIOC_BASE[ODR] &= ~E_CLR;
+                      ^~~~~
+                      FD_CLR
+../Src/lcd.c:58:22: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Src/subdir.mk:33: Src/lcd.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+17:57:42 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+17:58:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+17:58:35 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:00:13 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:00:41 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:01:55 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:03:23 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20032	    484	   1580	  22096	   5650	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:04:37 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:05:52 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:14:21 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:15:09 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:16:09 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:16:38 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:17:50 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20040	    484	   1580	  22104	   5658	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:19:05 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:19:39 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:23:48 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:24:42 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:26:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:27:15 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+../Src/lcd.c: In function 'lcd_init':
+../Src/lcd.c:36:2: warning: implicit declaration of function 'lcd_clear'; did you mean 'lcd_cmd_d'? [-Wimplicit-function-declaration]
+  lcd_clear();
+  ^~~~~~~~~
+  lcd_cmd_d
+../Src/lcd.c: At top level:
+../Src/lcd.c:67:6: warning: conflicting types for 'lcd_clear'
+ void lcd_clear(void) {
+      ^~~~~~~~~
+../Src/lcd.c:36:2: note: previous implicit declaration of 'lcd_clear' was here
+  lcd_clear();
+  ^~~~~~~~~
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20032	    484	   1580	  22096	   5650	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:28:08 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:29:32 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:29:57 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+ 
+18:30:53 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
+18:31:10 **** Incremental Build of configuration Debug for project LCD Lab ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/lcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"Src/lcd.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/lcd.o"
+arm-none-eabi-gcc -o "LCD Lab.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\bretzj\Desktop\embedded\LCD Lab\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LCD Lab.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: LCD Lab.elf
+ 
+arm-none-eabi-objdump -h -S  LCD\ Lab.elf  > "LCD Lab.list"
+arm-none-eabi-size   LCD\ Lab.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20016	    484	   1580	  22080	   5640	LCD Lab.elf
+Finished building: default.size.stdout
+Finished building: LCD Lab.list
+ 
+ 
