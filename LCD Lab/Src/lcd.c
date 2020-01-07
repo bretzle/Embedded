@@ -89,3 +89,9 @@ void lcd_print_num(int number) {
 	sprintf(num_str, "%d", number);
 	lcd_print_string(num_str);
 }
+
+void lcd_print_char(char character) {
+	char str[32];
+	sprintf(str, "%c", character);
+	lcd_print_string(str);
+}

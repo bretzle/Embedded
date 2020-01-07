@@ -9,9 +9,16 @@
 
 
 #include "lcd.h"
+#include "keypad.h"
 #include "timing.h"
 
-int main(void){
+
+int main(void) {
+//	return just_lcd();
+	return with_keypad();
+}
+
+int just_lcd() {
 	lcd_init();
 
 	while (1) {
@@ -40,3 +47,25 @@ int main(void){
 	return 0;
 }
 
+int with_keypad() {
+	lcd_init();
+	keypad_init();
+
+	while(1) {
+		char letter = keypad_getchar();
+
+		switch (letter) {
+			case '*':
+				lcd_clear();
+				break;
+			case '#':
+				lcd_home();
+				break;
+			default:
+				lcd_print_char(letter);
+				break;
+		}
+	}
+
+	return 0;
+}
