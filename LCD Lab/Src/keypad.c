@@ -11,6 +11,12 @@
 #include "register.h"
 #include "timing.h"
 
+
+#define ROW_MASK ~0xFFF0
+#define FULL_NIBBLE 0xF
+#define CLEAR 1
+
+/// The algorithm for determining which key is being pressed.
 static int scan();
 
 static int *const GPIOC = (int *) GPIOC_BASE;
@@ -36,7 +42,7 @@ int keypad_getkey(void) {
 
 		/// repeat determining if the key has been released.
 		while (row_logic != 0b1111) {
-			row_logic = (GPIOC[IDR] >> 4) & ~0xFFF0;
+			row_logic = (GPIOC[IDR] >> 4) & ROW_MASK;
 		}
 	}
 
@@ -52,34 +58,29 @@ char keypad_getchar(void) {
 		'1', '2', '3', 'A',
 		'4', '5', '6', 'B',
 		'7', '8', '9', 'C',
-		'*', '0', '#', 'D'};
+		'*', '0', '#', 'D'
+	};
 
 	return keys[keypad_getkey() - 1];
 }
 
+/// The algorithm for determining which key is being pressed.
 static int scan() {
-	static int four_set_bits = 0b1111;
-	static int clear_bit = 1;
-	int pressed = 0;
-	int key_value = 0;
-
-	/// The algorithm for determining which key is being pressed.
-	for (int col = 1; col <= 4 && pressed == 0; col++) {
-		int col_logic = four_set_bits & ~(clear_bit << (col - 1));
+	for (int col = 1; col <= 4; col++) {
+		int col_logic = FULL_NIBBLE & ~(CLEAR << (col - 1));
 		GPIOC[BSRR] |= 0b1111 << 16; // clear previous odr logic.
 		GPIOC[BSRR] |= col_logic;	// set new logic.
 
-		for (int row = 1; row <= 4 && pressed == 0; row++) {
+		for (int row = 1; row <= 4; row++) {
 			// get the row logic for comparing.
-			int row_logic = (GPIOC[IDR] >> 4) & ~0xFFF0;
+			int row_logic = (GPIOC[IDR] >> 4) & ROW_MASK;
 
 			/// determine if the current row is being pressed.
-			if (row_logic == (four_set_bits & ~(clear_bit << (row - 1)))) {
-				pressed = 1;
-				key_value = (row - 1) * 4 + col;
+			if (row_logic == (FULL_NIBBLE & ~(CLEAR << (row - 1)))) {
+				return (row - 1) * 4 + col;
 			}
 		}
 	}
 
-	return key_value;
+	return 0;
 }

@@ -1,5 +1,5 @@
-keypad.c:18:6:keypad_init	16	static
-keypad.c:30:5:keypad_getkey	16	static
-keypad.c:46:5:keypad_getkey_noblock	8	static
-keypad.c:50:6:keypad_getchar	8	static
-keypad.c:60:12:scan	32	static
+keypad.c:24:6:keypad_init	16	static
+keypad.c:36:5:keypad_getkey	16	static
+keypad.c:52:5:keypad_getkey_noblock	8	static
+keypad.c:56:6:keypad_getchar	8	static
+keypad.c:68:12:scan	24	static
