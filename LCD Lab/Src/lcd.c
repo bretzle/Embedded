@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    lcd.c
+  * @author  John Bretz
+  * @version V1.1
+  * @brief   Functions for LCD api.
+  ******************************************************************************
+*/
+
 #include "timing.h"
 #include <string.h>
 #include <stdio.h>
@@ -91,7 +100,7 @@ void lcd_print_num(int number) {
 }
 
 void lcd_print_char(char character) {
-	char str[32];
+	char str[1];
 	sprintf(str, "%c", character);
 	lcd_print_string(str);
 }
