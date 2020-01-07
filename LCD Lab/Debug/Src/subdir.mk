@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/keypad.c \
 ../Src/lcd.c \
 ../Src/main.c \
 ../Src/syscalls.c \
@@ -12,6 +13,7 @@ C_SRCS += \
 ../Src/uart_driver.c 
 
 OBJS += \
+./Src/keypad.o \
 ./Src/lcd.o \
 ./Src/main.o \
 ./Src/syscalls.o \
@@ -20,6 +22,7 @@ OBJS += \
 ./Src/uart_driver.o 
 
 C_DEPS += \
+./Src/keypad.d \
 ./Src/lcd.d \
 ./Src/main.d \
 ./Src/syscalls.d \
@@ -29,6 +32,8 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
+Src/keypad.o: ../Src/keypad.c
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/keypad.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Src/lcd.o: ../Src/lcd.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F4 -DSTM32F446RETx -DDEBUG -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/lcd.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Src/main.o: ../Src/main.c

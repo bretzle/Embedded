@@ -6,3 +6,4 @@ lcd.c:71:6:lcd_home	8	static
 lcd.c:75:6:lcd_set_position	24	static
 lcd.c:80:6:lcd_print_string	24	static
 lcd.c:87:6:lcd_print_num	48	static
+lcd.c:93:6:lcd_print_char	48	static
