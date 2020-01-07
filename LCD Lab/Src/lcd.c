@@ -8,16 +8,10 @@
 */
 
 #include "timing.h"
+#include "register.h"
 #include <string.h>
 #include <stdio.h>
 
-#define MODER 0
-#define IDR 4
-#define ODR 5
-#define BSRR 6
-
-#define SET 1
-#define OUTPUT 0b01
 #define RS_SET 1 << 8
 #define RW_SET 1 << 9
 #define E_SET  1 << 10
@@ -25,18 +19,22 @@
 #define RW_CLR ~(RW_SET)
 #define E_CLR ~(E_SET)
 
-volatile int *rcc_ahb1enr = (int *) 0x40023830;
-volatile int *GPIOA_BASE = (int *) 0x40020000;
-volatile int *GPIOC_BASE = (int *) 0x40020800;
+static int *const GPIOA = (int *) GPIOA_BASE;
+static int *const GPIOC = (int *) GPIOC_BASE;
 
+/// Send a command to the LCD display with a delay
+/// @param instruction the cmd to send to the LCD
+/// @param delay the number of microseconds to delay
+///              to allow the cmd to process
 void lcd_cmd_d(int, int);
 
 void lcd_init(void) {
-	*rcc_ahb1enr |= (1 << 0);
-	GPIOA_BASE[MODER] |= 0x555500;
+	volatile int *const RCC = (int *) RCC_BASE;
 
-	*rcc_ahb1enr |= (1 << 2);
-	GPIOC_BASE[MODER] |= 0x150000;
+	RCC[AHB1ENR] |= (GPIOAEN | GPIOCEN);
+
+	GPIOA[MODER] |= 0x555500; // data pins
+	GPIOC[MODER] |= 0x150000; // control pins
 
 	delay_ms(40);
 	lcd_cmd_d(0x38, 37);
@@ -47,27 +45,27 @@ void lcd_init(void) {
 }
 
 void lcd_cmd_d(int instruction, int delay) {
-	GPIOC_BASE[ODR] &= RS_CLR;
-	GPIOC_BASE[ODR] &= RW_CLR;
-	GPIOC_BASE[ODR] |= E_SET;
+	GPIOC[ODR] &= RS_CLR;
+	GPIOC[ODR] &= RW_CLR;
+	GPIOC[ODR] |= E_SET;
 
-	GPIOA_BASE[ODR] &= ~(0xFF << 4);
-	GPIOA_BASE[ODR] |= ((instruction & 0xFF) << 4);
+	GPIOA[ODR] &= ~(0xFF << 4);
+	GPIOA[ODR] |= ((instruction & 0xFF) << 4);
 
-	GPIOC_BASE[ODR] &= E_CLR;
+	GPIOC[ODR] &= E_CLR;
 
 	delay_us(delay);
 }
 
 void lcd_data(int data) {
-	GPIOC_BASE[BSRR] |= RS_SET;
-	GPIOC_BASE[BSRR] |= (1 << (9+16));
-	GPIOC_BASE[BSRR] |= E_SET;
+	GPIOC[BSRR] |= RS_SET;
+	GPIOC[BSRR] |= (1 << (9+16));
+	GPIOC[BSRR] |= E_SET;
 
-	GPIOA_BASE[BSRR] |= (0xFF << (4+16));
-	GPIOA_BASE[BSRR] |= ((data & 0xFF) << 4);
+	GPIOA[BSRR] |= (0xFF << (4+16));
+	GPIOA[BSRR] |= ((data & 0xFF) << 4);
 
-	GPIOC_BASE[BSRR] |= (1 << (10 + 16));
+	GPIOC[BSRR] |= (1 << (10 + 16));
 
 	delay_ms(2);
 }
@@ -100,7 +98,7 @@ void lcd_print_num(int number) {
 }
 
 void lcd_print_char(char character) {
-	char str[1];
+	char str[2];
 	sprintf(str, "%c", character);
 	lcd_print_string(str);
 }
