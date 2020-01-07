@@ -1,10 +1,17 @@
-/* header file */
 #include <inttypes.h>
 
-/* all symbolic numbers */
+#ifndef TIMING_H
+#define TIMING_H
+
 #define F_CPU 16000000UL
 #define SYSTICK (volatile uint32_t *) 0xE000E010
 
-/* public method prototypes */
+/// A blocking delay that will last N milliseconds
+/// @param num the number of milliseconds to delay for
 void delay_ms(uint32_t);
+
+/// A blocking delay that will last N microseconds
+/// @param num the number of microseconds to delay for
 void delay_us(uint32_t);
+
+#endif
