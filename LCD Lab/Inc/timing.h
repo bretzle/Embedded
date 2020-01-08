@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    timing.h
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Function prototypes for the timing api.
+  ******************************************************************************
+*/
+
 #include <inttypes.h>
 
 #ifndef TIMING_H

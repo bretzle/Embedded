@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    keypad.h
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Function prototypes for the keypad.
+  ******************************************************************************
+*/
 
 #ifndef KEYPAD_H
 #define KEYPAD_H

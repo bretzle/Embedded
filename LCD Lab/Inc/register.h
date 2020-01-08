@@ -1,3 +1,11 @@
+/**
+  ******************************************************************************
+  * @file    register.h
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Defines for useful constants for registers and gpio busses.
+  ******************************************************************************
+*/
 
 #ifndef REGISTER_H
 #define REGISTERS_H
