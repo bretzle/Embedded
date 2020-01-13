@@ -49,6 +49,7 @@ void lcd_cmd_d(int instruction, int delay) {
 	GPIOC[ODR] &= RW_CLR;
 	GPIOC[ODR] |= E_SET;
 
+	// send instruction
 	GPIOA[ODR] &= ~(0xFF << 4);
 	GPIOA[ODR] |= ((instruction & 0xFF) << 4);
 
@@ -62,6 +63,7 @@ void lcd_data(int data) {
 	GPIOC[BSRR] |= (1 << (9+16));
 	GPIOC[BSRR] |= E_SET;
 
+	// send data
 	GPIOA[BSRR] |= (0xFF << (4+16));
 	GPIOA[BSRR] |= ((data & 0xFF) << 4);
 
