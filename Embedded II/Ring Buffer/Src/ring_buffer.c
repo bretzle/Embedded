@@ -3,11 +3,9 @@
 #define ARRAY_LENGTH(array) sizeof(array)/sizeof(array[0])
 
 void put(RingBuffer * ring, char byte) {
-    RingBuffer buffer = *ring;
-    
-    (*ring).buffer[buffer.put] = byte;
+    (*ring).buffer[(*ring).put] = byte;
 
-    if (buffer.put == ARRAY_LENGTH(buffer.buffer) - 1) {
+    if ((*ring).put == ARRAY_LENGTH((*ring).buffer) - 1) {
         (*ring).put = 0;
     } else {
         (*ring).put += 1;
@@ -15,11 +13,9 @@ void put(RingBuffer * ring, char byte) {
 }
 
 char get(RingBuffer * ring) {
-    RingBuffer buffer = *ring;
+    int value = (*ring).buffer[(*ring).get];
 
-    int value = buffer.buffer[buffer.get];
-
-    if (buffer.get == ARRAY_LENGTH(buffer.buffer) - 1) {
+    if ((*ring).get == ARRAY_LENGTH((*ring).buffer) - 1) {
         (*ring).get = 0;
     } else {
         (*ring).get += 1;
