@@ -17,6 +17,7 @@
 int read_mem(int);
 void write_mem(int, int);
 void dump_mem(int, int);
+void help();
 int check_addr(int);
 
 // main
@@ -42,17 +43,17 @@ int main()
       if (check_addr(address))
       {
         int value = read_mem((uint32_t)address);
-        printf("0x%d\n", value);
+        printf("0x%x\n", value);
       }
       break;
     // Write
     case 'w':
       val = 0;
-      sscanf(input, "%s %x %d", cmd, &address, &val); // fetch data from input.
+      sscanf(input, "%s %x %x", cmd, &address, &val); // fetch data from input.
       if (check_addr(address))
       {
         write_mem(address, val);
-        printf("write %x with %d\n", address, val);
+        printf("write 0x%x with 0x%x\n", address, val);
       }
       break;
     // Dump
@@ -69,9 +70,14 @@ int main()
         printf("\n");
       }
       break;
+    // help
+    case 'h':
+    	help();
+    	break;
     // Invalid selection
     default:
-      break;
+      printf("Unknown command.\n");
+      help();
     }
   }
 
@@ -124,4 +130,11 @@ int check_addr(int address)
     printf("The address must be a multiple of 4!\n");
   }
   return valid;
+}
+
+void help() {
+    printf("Valid commands are: rm, wm, dm\n");
+    printf("\trm: reads from memory {address} | ex: rm 0x20001000\n");
+    printf("\twm: write something to memory {address} {value} | ex: wm 0x20001000 0x7\n");
+    printf("\tdm: dumps some number of bytes {address} {length} | ex: dm 0x20001000 100\n");
 }

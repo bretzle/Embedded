@@ -36,6 +36,7 @@ int _write(int file, char *ptr, int len)
 
 	for (DataIdx = 0; DataIdx < len; DataIdx++)
 	{
+
 		usart2_putch(*ptr++);
 	}
 	return len;
