@@ -6,6 +6,7 @@
 typedef struct {
     int put;
     int get;
+    int amount;
     char buffer[BUFFER_SIZE];
 } RingBuffer;
 

@@ -11,14 +11,14 @@
 
 // main
 int main() {
-    RingBuffer buffer = {0,0};
+    RingBuffer buffer = {0,0,0};
 
     char byte;
 
     put(&buffer, 'a');
     put(&buffer, 'b');
     put(&buffer, 'c');
-    put(&buffer, 'd');
+    // put(&buffer, 'd');
 
     byte = get(&buffer);
     byte = get(&buffer);
