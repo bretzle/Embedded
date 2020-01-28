@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    ring_buffer.h
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Prototypes for a Ring Buffer.
+  ******************************************************************************
+*/
+
 #ifndef RING_BUFFER_H
 #define RING_BUFFER_H
 
@@ -13,11 +22,14 @@ typedef struct {
 // Puts a new character into the buffer
 // Will block until their is space to fit a new element
 void put_b(RingBuffer *, char);
+
 // Gets the next character from the buffer
 // Will block if the buffer is empty
 char get_b(RingBuffer *);
+
 // returns true if their is room for at least one element in the buffer
 int has_space(RingBuffer *);
+
 // returns true if their is at least one room in the buffer
 int has_element(RingBuffer *);
 
@@ -29,6 +41,7 @@ char put(RingBuffer *, char);
 // Will return the element if retrieved else -1
 char get(RingBuffer *);
 
+// Prints `put`, `get`, `amount` to stdout for debugging purposes
 void print(RingBuffer *);
 
 #endif

@@ -1,6 +1,16 @@
+/**
+  ******************************************************************************
+  * @file    ring_buffer.c
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Implementation of a Ring Buffer.
+  ******************************************************************************
+*/
+
 #include "ring_buffer.h"
 #include <stdio.h>
 
+// Macro to calculate the length of an array
 #define ARRAY_LENGTH(array) sizeof(array)/sizeof(array[0])
 
 void put_b(RingBuffer * ring, char byte) {
