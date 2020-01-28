@@ -10,7 +10,7 @@
 #ifndef RING_BUFFER_H
 #define RING_BUFFER_H
 
-#define BUFFER_SIZE 3
+#define BUFFER_SIZE 10
 
 typedef struct {
     int put;

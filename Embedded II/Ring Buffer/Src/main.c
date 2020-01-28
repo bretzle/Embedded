@@ -16,35 +16,41 @@ int main() {
 
     init_usart2(19200, 16000000);
 
-    RingBuffer buffer = {0,0,0};
+    // RingBuffer buffer = {0,0,0};
 
-    char byte;
+    // char byte;
 
-    // Put should be 2
-    // Size should be 2
-    printf("Adding 2 elements.\n");
-    put(&buffer, 'a');
-    put(&buffer, 'b');
-    print(&buffer);
+    // // Put should be 2
+    // // Size should be 2
+    // printf("Adding 2 elements.\n");
+    // put(&buffer, 'a');
+    // put(&buffer, 'b');
+    // print(&buffer);
 
-    // Put should loop back to 0
-    // Size should be 3
-    printf("Adding one more\n");
-    put(&buffer, 'c');
-    print(&buffer);
+    // // Put should loop back to 0
+    // // Size should be 3
+    // printf("Adding one more\n");
+    // put(&buffer, 'c');
+    // print(&buffer);
 
-    // Get should loop back to 0
-    // Size should be 0
-    printf("Reading buffer 3 times\n");
-    byte = get(&buffer);
-    byte = get(&buffer);
-    byte = get(&buffer);
-    print(&buffer);
+    // // Get should loop back to 0
+    // // Size should be 0
+    // printf("Reading buffer 3 times\n");
+    // byte = get(&buffer);
+    // byte = get(&buffer);
+    // byte = get(&buffer);
+    // print(&buffer);
 
-    // byte should be -1 or 255
-    printf("Try to read when empty\n");
-    byte = get(&buffer);
-    printf("%d\n", byte);
+    // // byte should be -1 or 255
+    // printf("Try to read when empty\n");
+    // byte = get(&buffer);
+    // printf("%d\n", byte);
+
+    char input[30];
+
+    fgets(input, 30, stdin);
+
+    printf("%s", input);
 
     while(1);
 }
