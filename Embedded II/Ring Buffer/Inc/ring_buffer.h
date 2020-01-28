@@ -29,4 +29,6 @@ char put(RingBuffer *, char);
 // Will return the element if retrieved else -1
 char get(RingBuffer *);
 
+void print(RingBuffer *);
+
 #endif

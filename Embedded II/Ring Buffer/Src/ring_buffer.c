@@ -1,4 +1,5 @@
 #include "ring_buffer.h"
+#include <stdio.h>
 
 #define ARRAY_LENGTH(array) sizeof(array)/sizeof(array[0])
 
@@ -60,4 +61,10 @@ int has_space(RingBuffer * ring) {
 
 int has_element(RingBuffer * ring) {
 	return (*ring).amount > 0;
+}
+
+void print(RingBuffer * ring) {
+   printf("\tPut: %d\n", (*ring).put);
+   printf("\tGet: %d\n", (*ring).get);
+   printf("\tSize: %d\n", (*ring).amount); 
 }
