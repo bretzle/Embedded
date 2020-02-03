@@ -16,6 +16,8 @@ int main() {
 
     init_usart2(19200, 16000000);
 
+    printf("Ring Buffer Lab\n");
+
     // RingBuffer buffer = {0,0,0};
 
     // char byte;
