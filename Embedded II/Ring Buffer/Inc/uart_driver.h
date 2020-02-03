@@ -14,6 +14,11 @@
 #define RCC_APB1ENR (volatile uint32_t*) 0x40023840
 #define RCC_AHB1ENR (volatile uint32_t*) 0x40023830
 
+// NVIC registers
+#define ISER0 (volatile uint32_t*) 0xE000E100
+#define ISER1 (volatile uint32_t*) 0xE000E104
+#define ISER2 (volatile uint32_t*) 0xE000E108
+
 #define GPIOAEN 0		// GPIOA Enable is bit 0 in RCC_APB1LPENR
 #define USART2EN 17  // USART2 enable is bit 17 in RCC_AHB1LPENR
 
@@ -31,10 +36,15 @@
 #define UE 13 //UART enable
 #define TE 3  // Transmitter enable
 #define RE 2  // Receiver enable
+#define TXEIE 7 // TXE interrupt enable
+#define RXNEIE 5 // RXNE interrupt enable
 
 // Status register bits
 #define TXE 7  // Transmit register empty
 #define RXNE 5  // Receive register is not empty..char received
+
+// NVIC register bits
+#define USART2_INTERRUPT 6
 
 // Function prototypes
 extern void init_usart2(uint32_t baud, uint32_t sysclk);
