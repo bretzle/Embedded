@@ -65,10 +65,10 @@ void init_usart2(uint32_t baud, uint32_t sysclk) {
 	// M = 0..1 start bit, data size is 8, 1 stop bit
 	// PCE= 0..Parity check not enabled
 	// no interrupts... using polling
-    *(USART_CR1) = (1 << UE) | (1 << TE) | (1 << RE) | (1 << RXNEIE); // Enable UART, Tx and Rx
-    *(USART_CR2) = 0;  // This is the default, but do it anyway
-    *(USART_CR3) = 0;  // This is the default, but do it anyway
-    *(USART_BRR) = sysclk / baud;
+	*(USART_CR1) = (1 << UE) | (1 << TE) | (1 << RE) | (1 << RXNEIE); // Enable UART, Tx and Rx
+	*(USART_CR2) = 0;  // This is the default, but do it anyway
+	*(USART_CR3) = 0;  // This is the default, but do it anyway
+	*(USART_BRR) = sysclk / baud;
 
 	/* I'm not sure if this is needed for standard IO*/
 	 //setvbuf(stderr, NULL, _IONBF, 0);
