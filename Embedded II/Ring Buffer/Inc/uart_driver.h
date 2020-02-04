@@ -19,7 +19,7 @@
 #define ISER1 (volatile uint32_t*) 0xE000E104
 #define ISER2 (volatile uint32_t*) 0xE000E108
 
-#define GPIOAEN 0		// GPIOA Enable is bit 0 in RCC_APB1LPENR
+#define GPIOAEN 0	 // GPIOA Enable is bit 0 in RCC_APB1LPENR
 #define USART2EN 17  // USART2 enable is bit 17 in RCC_AHB1LPENR
 
 // GPIOA registers

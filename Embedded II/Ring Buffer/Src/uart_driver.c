@@ -2,7 +2,7 @@
  * uart_driver.c
  *
  *  Created on: Nov 8, 2016
- *      Author: barnekow
+ *      Author: barnekow, John Bretz
  */
 #include "uart_driver.h"
 #include "ring_buffer.h"
@@ -12,6 +12,7 @@
 static RingBuffer recieve = {0, 0, 0};
 static RingBuffer transmit = {0, 0, 0};
 
+// Overwrites _read in  syscall
 int _read(int file, char* ptr, int len) {
 	int DataIdx;
 
@@ -26,6 +27,7 @@ int _read(int file, char* ptr, int len) {
 	return byteCnt;
 }
 
+// Overwrites _write in syscall
 int _write(int file, char* ptr, int len) {
 	int DataIdx;
 
@@ -36,12 +38,15 @@ int _write(int file, char* ptr, int len) {
 	return len;
 }
 
+// gets a character from the recieve buffer
 char usart2_getch(){
 	return get(&recieve);
 }
 
+// adds a character to the transmit buffer
 void usart2_putch(char c){
 	put(&transmit, c);
+	// Enable transmit interrupt
 	*USART_CR1 |= (1 << TXEIE);
 }
 
@@ -78,6 +83,7 @@ void init_usart2(uint32_t baud, uint32_t sysclk) {
 
 void USART2_IRQHandler(void) {
 	// RXNE
+	// Add the character to the buffers
 	if (*USART_SR & (1<<RXNE)) {
 		char c = *USART_DR;
 		put(&transmit, c);
@@ -89,6 +95,7 @@ void USART2_IRQHandler(void) {
 	}
 
 	// TXE
+	// Echo back to the serial console
 	if (*USART_SR & (1<<TXE)) {
 		if (has_element(&transmit)) {
 			*USART_DR = get(&transmit);
