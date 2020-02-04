@@ -19,6 +19,7 @@
 #include "main.h"
 #include "music.h"
 #include "lcd.h"
+#include "timing.h"
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim3;
@@ -29,7 +30,6 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM10_Init(void);
-void play_song(NOTE*);
 
 /**
   * @brief  The application entry point.
@@ -46,23 +46,93 @@ int main(void)
 	lcd_init();
 
 	NOTE music_score[] = {
-		NOTE_A3,
-		NOTE_A3,
-		NOTE_A3,
-		NOTE_F3,
-		NOTE_C4,
+		{A3, QU},
+        {A3, QU},
+        {A3, QU},
+        {F3, E+S},
+        {C4, S},
+        {A3, QU},
+        {F3, E+S},
+        {C4, S},
+        {A3, H},
+        {E4, QU},
+        {E4, QU},
+        {E4, QU},
+        {F4, E+S},
+        {C4, S},
+        {Ab3, QU},
+        {F3, E+S},
+        {C4, S},
+        {A3, H},
+        {A4, QU},
+        {A3, E+S},
+        {A3, S},
+        {A4, QU},
+        {Ab4, E+S},
+        {G4, S},
+        {Gb4, S},
+        {E4, S},
+        {F4, E},
+
+		{0, E+S},
+
+		{Bb3, E},
+		{Eb4, QU},
+		{D4, E+S},
+		{Db4, S},
+		{C4, S},
+		{B3, S},
+		{C4, E},
+
+		{0, E},
+
+		{F3, E},
+        {Ab3, QU},
+        {F3, E+S},
+        {A3, S},
+        {C4, QU},
+        {A3, E+S},
+        {C4, S},
+        {E4, H},
+        {A4, QU},
+        {A3, E+S},
+        {A3, S},
+        {A4, QU},
+        {Ab4, E+S},
+        {G4, S},
+        {Gb4, S},
+        {E4, S},
+        {F4, E},
+
+		{0, E},
+
+		{Bb3, E},
+        {Eb4, QU},
+        {D4, E+S},
+        {Db4, S},
+        {C4, S},
+        {B3, S},
+        {C4, E},
+
+		{0, E},
+
+		{F3, E},
+        {Ab3, QU},
+        {F3, E+S},
+        {C4, S},
+        {A3, QU},
+        {F3, E+S},
+        {C4, S},
+        {A3, H},
+
 		NOTE_END,
 	};
 
-	play_song(music_score);
+	play_song(&music_score);
+
+//	HAL_TIM_OC_Stop(&htim3, TIM_CHANNEL_1);
 
 	while (1);
-}
-
-void play_song(NOTE score[]) {
-	for (int i=0; score[i].freq != 0; i++) {
-		lcd_print_num(score[i].freq);
-	}
 }
 
 /**
