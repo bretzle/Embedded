@@ -10,11 +10,12 @@
 #ifndef RING_BUFFER_H
 #define RING_BUFFER_H
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 25
 
 typedef struct {
     int put;
     int get;
+    int amount;
     char buffer[BUFFER_SIZE];
 } RingBuffer;
 

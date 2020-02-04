@@ -9,58 +9,40 @@
 #include <inttypes.h>
 #include <stdio.h>
 
-static RingBuffer transmit = {0, 0};
-static RingBuffer recieve = {0, 0};
+static RingBuffer recieve = {0, 0, 0};
+static RingBuffer transmit = {0, 0, 0};
 
-// These will override _read and _write in syscalls.c, which are
-// prototyped as weak
-int _read(int file, char *ptr, int len) {
+int _read(int file, char* ptr, int len) {
 	int DataIdx;
-	// Modified the for loop in order to get the correct behavior for fgets
+
 	int byteCnt = 0;
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
-		//*ptr++ = __io_getchar();
+	for (DataIdx = 0; DataIdx < len; DataIdx++) {
 		byteCnt++;
-		//*ptr++ = usart2_getch();
 		*ptr = usart2_getch();
-		if(*ptr == '\n') break;
+		if (*ptr == '\n') break;
 		ptr++;
 	}
 
-	//return len;
-	return byteCnt; // Return byte count
+	return byteCnt;
 }
 
-int _write(int file, char *ptr, int len) {
+int _write(int file, char* ptr, int len) {
 	int DataIdx;
 
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
-	{
+	for (DataIdx = 0; DataIdx < len; DataIdx++) {
 		usart2_putch(*ptr++);
 	}
+
 	return len;
 }
 
-
-
 char usart2_getch(){
-	char c;
-	while((*(USART_SR)&(1<<RXNE)) != (1<<RXNE));
-	c = ((char) *USART_DR);  // Read character from usart
-	usart2_putch(c);  // Echo back
-
-	if (c == '\r'){  // If character is CR
-		usart2_putch('\n');  // send it
-		c = '\n';   // Return LF. fgets is terminated by LF
-	}
-
-	return c;
+	return get(&recieve);
 }
 
 void usart2_putch(char c){
-	while((*(USART_SR)&(1<<TXE)) != (1<<TXE));
-	*(USART_DR) = c;
+	put(&transmit, c);
+	*USART_CR1 |= (1 << TXEIE);
 }
 
 void init_usart2(uint32_t baud, uint32_t sysclk) {
@@ -83,8 +65,7 @@ void init_usart2(uint32_t baud, uint32_t sysclk) {
 	// M = 0..1 start bit, data size is 8, 1 stop bit
 	// PCE= 0..Parity check not enabled
 	// no interrupts... using polling
-	*(USART_CR1) |= (1 << TXEIE | 1 << RXNEIE); // Enable receive and transmit interrupts.
-    *(USART_CR1) = (1 << UE) | (1 << TE) | (1 << RE); // Enable UART, Tx and Rx
+    *(USART_CR1) = (1 << UE) | (1 << TE) | (1 << RE) | (1 << RXNEIE); // Enable UART, Tx and Rx
     *(USART_CR2) = 0;  // This is the default, but do it anyway
     *(USART_CR3) = 0;  // This is the default, but do it anyway
     *(USART_BRR) = sysclk / baud;
@@ -96,20 +77,23 @@ void init_usart2(uint32_t baud, uint32_t sysclk) {
 }
 
 void USART2_IRQHandler(void) {
-//	*USART_CR1 |= (1 << TXEIE | 1 << RXNEIE);
-
-	// recieve
+	// RXNE
 	if (*USART_SR & (1<<RXNE)) {
-		put(&recieve, *USART_DR & 0xFF);
-		*USART_CR1 |= (1<<TXEIE);
+		char c = *USART_DR;
+		put(&transmit, c);
+		if (c == '\r') {
+			usart2_putch('\n');
+			c = '\n';
+		}
+		put(&recieve, c);
 	}
 
-	// transmit
+	// TXE
 	if (*USART_SR & (1<<TXE)) {
-		if (has_element(&transmit) == 0) {
-			*USART_CR1 &= ~(1<<TXEIE);
-		} else {
+		if (has_element(&transmit)) {
 			*USART_DR = get(&transmit);
+		} else {
+			*USART_CR1 &= ~(1 << TXEIE);
 		}
 	}
 }
