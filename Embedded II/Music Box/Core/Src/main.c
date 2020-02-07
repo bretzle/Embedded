@@ -74,7 +74,7 @@ int main(void)
         {E4, S},
         {F4, E},
 
-		{0, E+S},
+		{0, S},
 
 		{Bb3, E},
 		{Eb4, QU},
@@ -84,7 +84,7 @@ int main(void)
 		{B3, S},
 		{C4, E},
 
-		{0, E},
+		{0, S},
 
 		{F3, E},
         {Ab3, QU},
@@ -104,7 +104,7 @@ int main(void)
         {E4, S},
         {F4, E},
 
-		{0, E},
+		{0, S},
 
 		{Bb3, E},
         {Eb4, QU},
@@ -114,7 +114,7 @@ int main(void)
         {B3, S},
         {C4, E},
 
-		{0, E},
+		{0, S},
 
 		{F3, E},
         {Ab3, QU},

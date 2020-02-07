@@ -14,12 +14,12 @@ static NOTE* song;
 void play_song(NOTE* score) {
     song = score;
 
-    HAL_TIM_Base_Start_IT(&htim10);
+//    HAL_TIM_Base_Start_IT(&htim10);
 
-	// while (score->len != 0) {
-	// 	tone(score->freq, score->len);
-	// 	score++;
-	// }
+	 while (score->len != 0) {
+	 	tone(score->freq, score->len);
+	 	score++;
+	 }
 }
 
 static void tone(int freq, int duration) {
