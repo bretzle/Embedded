@@ -7,7 +7,7 @@
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim10;
 
-void change_freq(int freq) {
+static void change_freq(int freq) {
     htim3.Init.Period = freq;
     HAL_TIM_OC_Init(&htim3);
 }
@@ -19,6 +19,8 @@ static void change_delay(int len) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim == &htim10) {
+
+        // stop the timers
         HAL_TIM_Base_Stop_IT(&htim10);
         HAL_TIM_OC_Stop(&htim3, TIM_CHANNEL_1);
 
@@ -29,12 +31,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             int arr_val = freq != 0 ? 16000000 / (2 * freq) : 0;
             int del = len * 20;
 
+            // change note frequency
             change_freq(arr_val);
+
+            // change note duration
             change_delay(del);
 
+            // startup the timers
             HAL_TIM_OC_Start(&htim3, TIM_CHANNEL_1);
             HAL_TIM_Base_Start_IT(&htim10);
 
+            // inc pointer
             cur_song++;
         }
     }
