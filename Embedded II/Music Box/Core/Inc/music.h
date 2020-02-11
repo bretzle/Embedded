@@ -14,6 +14,8 @@ typedef struct {
     int len;
 } NOTE;
 
+extern NOTE* cur_song;
+
 #define Ab3 208
 #define A3  220
 #define F3  175
