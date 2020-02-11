@@ -1,3 +1,10 @@
+/**
+  ******************************************************************************
+  * @file           : music.c
+  * @brief          : Functions to play a song on the piezo speaker
+  ******************************************************************************
+  */
+
 #include "music.h"
 #include "main.h"
 #include "timing.h"

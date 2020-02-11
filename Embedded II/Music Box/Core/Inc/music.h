@@ -2,6 +2,8 @@
 #ifndef _MUSIC_H
 #define _MUSIC_H
 
+
+// Note lengths
 #define BPM 120
 #define QU 60000/BPM
 #define H 2*QU
@@ -9,6 +11,7 @@
 #define S QU/4
 #define W 4*QU
 
+// Represents a note/tone
 typedef struct {
     int freq;
     int len;
@@ -17,6 +20,7 @@ typedef struct {
 // Pointer to a song to play on the speaker
 extern NOTE* cur_song;
 
+// Note frequencies
 #define Ab3 208
 #define A3  220
 #define F3  175
@@ -33,6 +37,7 @@ extern NOTE* cur_song;
 #define Db4 277
 #define B3  247
 
+// Represents the end of a song
 #define NOTE_END {0, 0}
 
 #endif
