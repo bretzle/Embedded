@@ -14,6 +14,7 @@ typedef struct {
     int len;
 } NOTE;
 
+// Pointer to a song to play on the speaker
 extern NOTE* cur_song;
 
 #define Ab3 208
@@ -33,8 +34,5 @@ extern NOTE* cur_song;
 #define B3  247
 
 #define NOTE_END {0, 0}
-
-// Plays a song on the speaker
-void play_song(NOTE*);
 
 #endif
