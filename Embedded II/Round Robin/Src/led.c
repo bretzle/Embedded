@@ -28,3 +28,15 @@ void light_LED(int number) {
 	*GPIOB_ODR |= (number & 0x3F)  << 5; // bottom 6 bits
 	*GPIOB_ODR |= (number & 0x3C0) << 6; // top 4 bits
 }
+
+void light(int led, int status) {
+	if (status) {
+		// enable
+		*GPIOB_ODR |= ((1 << led) & 0x3F)  << 5; // bottom 6 bits
+		*GPIOB_ODR |= ((1 << led) & 0x3C0) << 6; // top 4 bits
+	} else {
+		// disable
+		*GPIOB_ODR &= ~(((1 << led) & 0x3F)  << 5); // bottom 6 bits
+		*GPIOB_ODR &= ~(((1 << led) & 0x3C0) << 6); // top 4 bits
+	}
+}
