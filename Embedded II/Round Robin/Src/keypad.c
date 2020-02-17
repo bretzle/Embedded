@@ -9,7 +9,6 @@
 
 #include "keypad.h"
 #include "register.h"
-#include "timing.h"
 
 
 #define ROW_MASK ~0xFFF0

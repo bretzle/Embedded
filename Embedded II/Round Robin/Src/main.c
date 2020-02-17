@@ -52,7 +52,21 @@ void t2() {
 	lcd_init();
 	keypad_init();
 
-	while(1);
+	while(1) {
+		char letter = keypad_getchar();
+
+		switch (letter) {
+			case '*':
+				lcd_clear();
+				break;
+			case '#':
+				lcd_home();
+				break;
+			default:
+				lcd_print_char(letter);
+				break;
+		}
+	}
 }
 
 void t3() {

@@ -7,8 +7,8 @@
   ******************************************************************************
 */
 
-#include "timing.h"
 #include "register.h"
+#include "timer.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -22,13 +22,23 @@
 static int *const GPIOA = (int *) GPIOA_BASE;
 static int *const GPIOC = (int *) GPIOC_BASE;
 
+static TIM* tim4 = (TIM*) TIM4_BASE;
+
+static int lcd_flag = 0;
+
 /// Send a command to the LCD display with a delay
 /// @param instruction the cmd to send to the LCD
 /// @param delay the number of microseconds to delay
 ///              to allow the cmd to process
 void lcd_cmd_d(int, int);
 
+static void delay_ms(int);
+static void delay_us(int);
+
 void lcd_init(void) {
+	init_tim4();
+	enable_tim4_int(tim4);
+
 	volatile int *const RCC = (int *) RCC_BASE;
 
 	RCC[AHB1ENR] |= (GPIOAEN | GPIOCEN);
@@ -103,4 +113,28 @@ void lcd_print_char(char character) {
 	char str[2];
 	sprintf(str, "%c", character);
 	lcd_print_string(str);
+}
+
+void delay_ms(int num) {
+	tim4->PSC = 16000 - 1;
+	tim4->ARR = num;
+	start(tim4);
+
+	while (!lcd_flag);
+	lcd_flag = 0;
+}
+
+void delay_us(int num) {
+	tim4->PSC = 16 - 1;
+	tim4->ARR = num;
+	start(tim4);
+
+	while (!lcd_flag);
+	lcd_flag = 0;
+}
+
+void TIM4_IRQHandler(void) {
+	tim4->SR &= ~1;
+	stop(tim4);
+	lcd_flag = 1;
 }
