@@ -81,5 +81,5 @@ void PendSV_Handler(void) {
 }
 
 int calc_brute_delay(int num) {
-	return (num * 8000) / (num_tasks * 2);
+	return (num * 8000) / (num_tasks * 4);
 }

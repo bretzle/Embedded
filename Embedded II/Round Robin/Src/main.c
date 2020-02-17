@@ -11,17 +11,19 @@
 #include "embedded.h"
 #include "timer.h"
 
-int count_flags[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static TIM* tim2 = (TIM *) TIM2_BASE;
+static TIM* tim3 = (TIM *) TIM3_BASE;
 
-static TIM* tim1 = (TIM *) TIM1_BASE;
-
-static int* RCC_APB2ENR = (int*) 0x40023844;
+static int led_flag = 0;
 
 void delay_ms(int);
 void SysTick_Init();
 
 void t1() {
 	int number = 1;
+	init_tim3();
+	enable_tim3_int(tim3);
+	tim3->PSC = 16000 - 1;
 
 	while (1) {
 		for (int i = 0; i < 9; i++) {
@@ -60,10 +62,7 @@ int main(void) {
 #define STK_BASE (int *) 0xE000E010
 #define STK_CLK_SOURCE (int *) 0xE000E012
 #define STK_LOAD (int *) 0xE000E014
-#define NVIC (int *) 0x
 
-#define COUNT_FLAG 1<<16
-#define freq 16000000UL
 
 void SysTick_Init() {
 	*STK_BASE = 0;       // disable clock
@@ -73,16 +72,19 @@ void SysTick_Init() {
 	*STK_BASE |= 1;      // enable the clock.
 }
 
-void init_tim1(void) {
-	*RCC_APB2ENR |= 1; // enable RCC
-	tim1->DIER |= 1<<6; // enable trigger interrupt
-}
-
 void SysTick_Handler(void) {
 	tasker_tick();
 }
 
 void delay_ms(int number) {
-	number = calc_brute_delay(number);
-	for (int i=0; i<number; i++);
+	led_flag = 0;
+	set_arr(tim3, number);
+	start(tim3);
+	while (!led_flag);
+}
+
+void TIM3_IRQHandler(void) {
+	tim3->SR &= ~1;
+	stop(tim3);
+	led_flag = 1;
 }

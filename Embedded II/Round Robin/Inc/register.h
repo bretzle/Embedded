@@ -1,0 +1,5 @@
+
+#define RCC_APB1ENR 0x40023840
+#define NVIC_BASE 0xE000E000
+
+#define ISER0_OFF 0x100

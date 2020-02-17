@@ -26,7 +26,14 @@ typedef struct {
 } TIM;
 
 #define TIM1_BASE 0x40010000
+#define TIM2_BASE 0x40000000
+#define TIM3_BASE 0x40000400
 
-void init_tim1(void);
+void init_tim2(void);
+void init_tim3(void);
+
+void set_arr(TIM*, int);
+void start(TIM*);
+void stop(TIM*);
 
 #endif
