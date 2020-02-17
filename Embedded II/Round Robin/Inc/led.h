@@ -16,3 +16,5 @@ void LED_INIT(void);
  * Displays a ten bit binary number on the LED array
  */
 void light_LED(int number);
+
+void led_delay(void);

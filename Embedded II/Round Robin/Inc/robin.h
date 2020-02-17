@@ -10,6 +10,7 @@ typedef struct {
 	int ticks_remaining;
 } task;
 
-void tasker_tick();
+void tasker_tick(void);
 void init_tasker(int total_tasks, int main_ticks);
 void init_task(int task_num, int stack_size, void(*entry_point)(void), int ticks);
+void SysTick_Init(void);

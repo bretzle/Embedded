@@ -1,4 +1,5 @@
 #include "robin.h"
+#include <stdlib.h>
 
 #define STK_BASE (int *) 0xE000E010
 #define STK_CLK_SOURCE (int *) 0xE000E012
@@ -53,7 +54,7 @@ void init_task(int task_num, int stack_size, void(*entry_point)(void), int ticks
     tasks[task_num].ticks_remaining = 0;
 }
 
-void tasker_tick() {
+void tasker_tick(void) {
     tasks[current_task].ticks_remaining--;
 
     if (tasks[current_task].ticks_remaining == 0) {
