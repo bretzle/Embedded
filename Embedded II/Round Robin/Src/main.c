@@ -10,37 +10,49 @@
 #include "robin.h"
 #include "embedded.h"
 #include "timer.h"
+#include "lcd.h"
+#include "keypad.h"
 
 static TIM* tim2 = (TIM *) TIM2_BASE;
 static TIM* tim3 = (TIM *) TIM3_BASE;
 
 static int led_flag = 0;
 
-void delay_ms(int);
 void SysTick_Init();
+void led_delay(void);
 
 void t1() {
 	int number = 1;
 	init_tim3();
 	enable_tim3_int(tim3);
-	tim3->PSC = 16000 - 1;
+	set_psc(tim3, 16000 - 1);
 
 	while (1) {
 		for (int i = 0; i < 9; i++) {
 			light_LED(number);
-			delay_ms(100);
+			led_delay();
 			number = number << 1;
 		}
 		for (int i = 0; i < 9; i++) {
 			light_LED(number);
-			delay_ms(100);
+			led_delay();
 			number = number >> 1;
 		}
 	}
 }
 
+void led_delay(void) {
+	led_flag = 0;
+	set_arr(tim3, 100);
+	start(tim3);
+	while (!led_flag);
+}
+
 void t2() {
-	while (1);
+	lcd_init();
+	keypad_init();
+
+	while(1);
 }
 
 void t3() {
@@ -74,13 +86,6 @@ void SysTick_Init() {
 
 void SysTick_Handler(void) {
 	tasker_tick();
-}
-
-void delay_ms(int number) {
-	led_flag = 0;
-	set_arr(tim3, number);
-	start(tim3);
-	while (!led_flag);
 }
 
 void TIM3_IRQHandler(void) {

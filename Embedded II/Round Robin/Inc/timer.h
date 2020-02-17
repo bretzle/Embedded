@@ -32,7 +32,10 @@ typedef struct {
 void init_tim2(void);
 void init_tim3(void);
 
+void enable_tim3_int(TIM*);
+
 void set_arr(TIM*, int);
+void set_psc(TIM*, int);
 void start(TIM*);
 void stop(TIM*);
 
