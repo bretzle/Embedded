@@ -13,19 +13,8 @@
 #include "lcd.h"
 #include "keypad.h"
 
-static TIM* tim2 = (TIM *) TIM2_BASE;
-static TIM* tim3 = (TIM *) TIM3_BASE;
-
-static int led_flag = 0;
-
-void SysTick_Init();
-void led_delay(void);
-
 void t1() {
 	int number = 1;
-	init_tim3();
-	enable_tim3_int(tim3);
-	set_psc(tim3, 16000 - 1);
 
 	while (1) {
 		for (int i = 0; i < 9; i++) {
@@ -39,13 +28,6 @@ void t1() {
 			number = number >> 1;
 		}
 	}
-}
-
-void led_delay(void) {
-	led_flag = 0;
-	set_arr(tim3, 100);
-	start(tim3);
-	while (!led_flag);
 }
 
 void t2() {
@@ -83,27 +65,4 @@ int main(void) {
 	SysTick_Init();
 
 	while(1);
-}
-
-#define STK_BASE (int *) 0xE000E010
-#define STK_CLK_SOURCE (int *) 0xE000E012
-#define STK_LOAD (int *) 0xE000E014
-
-
-void SysTick_Init() {
-	*STK_BASE = 0;       // disable clock
-	*STK_CLK_SOURCE = 0; // use system clock
-	*STK_LOAD = 100;     // set delay
-	*STK_BASE |= 1 << 1; // enable interrupt
-	*STK_BASE |= 1;      // enable the clock.
-}
-
-void SysTick_Handler(void) {
-	tasker_tick();
-}
-
-void TIM3_IRQHandler(void) {
-	tim3->SR &= ~1;
-	stop(tim3);
-	led_flag = 1;
 }

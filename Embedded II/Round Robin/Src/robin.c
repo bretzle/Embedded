@@ -1,5 +1,9 @@
 #include "robin.h"
 
+#define STK_BASE (int *) 0xE000E010
+#define STK_CLK_SOURCE (int *) 0xE000E012
+#define STK_LOAD (int *) 0xE000E014
+
 static int num_tasks;
 static task* tasks;
 static int current_task;
@@ -80,6 +84,14 @@ void PendSV_Handler(void) {
     asm volatile("pop {r4-r11, lr}\n\t" "bx lr");
 }
 
-int calc_brute_delay(int num) {
-	return (num * 8000) / (num_tasks * 4);
+void SysTick_Init() {
+	*STK_BASE = 0;       // disable clock
+	*STK_CLK_SOURCE = 0; // use system clock
+	*STK_LOAD = 100;     // set delay
+	*STK_BASE |= 1 << 1; // enable interrupt
+	*STK_BASE |= 1;      // enable the clock.
+}
+
+void SysTick_Handler(void) {
+	tasker_tick();
 }
