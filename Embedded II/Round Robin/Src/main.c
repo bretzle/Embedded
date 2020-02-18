@@ -22,9 +22,101 @@
 #include "lcd.h"
 #include "keypad.h"
 #include "uart_driver.h"
+#include "music.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+int read_mem(int);
+void write_mem(int, int);
+void dump_mem(int, int);
+int check_addr(int);
+void help(void);
+
+NOTE* cur_song;
+
+NOTE imperial_march[] = {
+	{A3, QU},
+	{A3, QU},
+	{A3, QU},
+	{F3, E + S},
+	{C4, S},
+	{A3, QU},
+	{F3, E + S},
+	{C4, S},
+	{A3, H},
+	{E4, QU},
+	{E4, QU},
+	{E4, QU},
+	{F4, E + S},
+	{C4, S},
+	{Ab3, QU},
+	{F3, E + S},
+	{C4, S},
+	{A3, H},
+	{A4, QU},
+	{A3, E + S},
+	{A3, S},
+	{A4, QU},
+	{Ab4, E + S},
+	{G4, S},
+	{Gb4, S},
+	{E4, S},
+	{F4, E},
+
+	{0, E + S},
+
+	{Bb3, E},
+	{Eb4, QU},
+	{D4, E + S},
+	{Db4, S},
+	{C4, S},
+	{B3, S},
+	{C4, E},
+
+	{0, E},
+
+	{F3, E},
+	{Ab3, QU},
+	{F3, E + S},
+	{A3, S},
+	{C4, QU},
+	{A3, E + S},
+	{C4, S},
+	{E4, H},
+	{A4, QU},
+	{A3, E + S},
+	{A3, S},
+	{A4, QU},
+	{Ab4, E + S},
+	{G4, S},
+	{Gb4, S},
+	{E4, S},
+	{F4, E},
+
+	{0, E},
+
+	{Bb3, E},
+	{Eb4, QU},
+	{D4, E + S},
+	{Db4, S},
+	{C4, S},
+	{B3, S},
+	{C4, E},
+
+	{0, E},
+
+	{F3, E},
+	{Ab3, QU},
+	{F3, E + S},
+	{C4, S},
+	{A3, QU},
+	{F3, E + S},
+	{C4, S},
+	{A3, H},
+
+	NOTE_END,
+};
 
 // Controls lights
 void t1() {
@@ -63,9 +155,9 @@ void t2() {
 	}
 }
 
-// memory console
+// Console
 void t3() {
-	char input[30]; // inputs from the user.
+	char input[30];
 	char cmd[5];
 	int address, len, val;
 
@@ -107,16 +199,22 @@ void t3() {
     	case 'h':
     		help();
     		break;
-    	// Invalid selection
-    	default:
-    		printf("Unknown command.\n");
-    		help();
+    	// play song
+    	case 'p':
+    		start_song();
+    		break;
+		case 's':
+			pause();
+			break;
     	}
 	}
 }
 
 // music box
 void t4() {
+	init_music();
+	cur_song = imperial_march;
+
 	while (1);
 }
 

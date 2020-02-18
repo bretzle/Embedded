@@ -42,7 +42,7 @@ int check_addr(int address) {
     return valid;
 }
 
-void help() {
+void help(void) {
     printf("Valid commands are: rm, wm, dm\n");
     printf("\trm: reads from memory {address} | ex: rm 0x20001000\n");
     printf("\twm: write something to memory {address} {value} | ex: wm 0x20001000 0x7\n");
