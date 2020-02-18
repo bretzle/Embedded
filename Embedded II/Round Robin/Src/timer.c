@@ -32,6 +32,11 @@ void stop(TIM* base) {
     base->CR1 &= ~1;
 }
 
+void enable_tim2_int(TIM* base) {
+    base->DIER |= 1;
+    *iser0 |= 1<<28;
+}
+
 void enable_tim3_int(TIM* base) {
     base->DIER |= 1;
     *iser0 |= 1<<29;

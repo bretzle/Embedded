@@ -11,9 +11,10 @@
 ///
 /// SysTick is reserved for the task switching
 ///
-/// Knight Rider lights use Timer 3
+/// Knight Rider lights use Timer 2
 /// LCD+keypad uses Timer 4
 /// Memory Console uses no Timer
+/// Music Box uses Timer 3 and 10
 
 #include "robin.h"
 #include "led.h"

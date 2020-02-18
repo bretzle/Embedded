@@ -15,7 +15,7 @@
 
 #define GPIOB_ENABLE 0x2
 
-static TIM* tim3 = (TIM *) TIM3_BASE;
+static TIM* tim2 = (TIM *) TIM2_BASE;
 static int led_flag = 0;
 
 void LED_INIT(void) {
@@ -27,9 +27,9 @@ void LED_INIT(void) {
 	*GPIOB_MODER &= ~0xAA2AA800;
 
 	// setup timer
-	init_tim3();
-	enable_tim3_int(tim3);
-	set_psc(tim3, 16000 - 1);
+	init_tim2();
+	enable_tim2_int(tim2);
+	set_psc(tim2, 16000 - 1);
 }
 
 void light_LED(int number) {
@@ -53,13 +53,13 @@ void light(int led, int status) {
 
 void led_delay(void) {
 	led_flag = 0;
-	set_arr(tim3, 100);
-	start(tim3);
+	set_arr(tim2, 100);
+	start(tim2);
 	while (!led_flag);
 }
 
-void TIM3_IRQHandler(void) {
-	tim3->SR &= ~1;
-	stop(tim3);
+void TIM2_IRQHandler(void) {
+	tim2->SR &= ~1;
+	stop(tim2);
 	led_flag = 1;
 }
