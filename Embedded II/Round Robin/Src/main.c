@@ -164,28 +164,21 @@ void t3() {
 	while (1) {
 		fgets(input, 30, stdin); // gets input from console.
 
-    	/* Handle different commands */
-    	switch (input[0]) {
-    	// Read
-    	case 'r':
-    		sscanf(input, "%s %x", cmd, &address); // fetch data from input.
+		if (starts_with(input, "rm")) {
+			sscanf(input, "%s %x", cmd, &address); // fetch data from input.
     		if (check_addr(address)) {
     	    	int value = read_mem((uint32_t)address);
     	    	printf("0x%x\n", value);
     	  	}
-    	  	break;
-    	// Write
-    	case 'w':
-    		val = 0;
+		} else if (starts_with(input, "wm")) {
+			val = 0;
     		sscanf(input, "%s %x %x", cmd, &address, &val); // fetch data from input.
     		if (check_addr(address)) {
     			write_mem(address, val);
     			printf("write 0x%x with 0x%x\n", address, val);
     		}
-    		break;
-    	// Dump
-    	case 'd':
-    		sscanf(input, "%s %x %d", cmd, &address, &len); // fetch data from input.
+		} else if (starts_with(input, "dm")) {
+			sscanf(input, "%s %x %d", cmd, &address, &len); // fetch data from input.
     		// Determine if the length is reasonable.
     		if (len > 100 || len < 0) {
     			len = 16;
@@ -194,19 +187,17 @@ void t3() {
     			dump_mem(address, len);
     			printf("\n");
     		}
-    		break;
-    	// help
-    	case 'h':
-    		help();
-    		break;
-    	// play song
-    	case 'p':
-    		start_song();
-    		break;
-		case 's':
+		} else if (starts_with(input, "play")) {
+			start_song();
+		} else if (starts_with(input, "pause")) {
 			pause();
-			break;
-    	}
+		} else if (starts_with(input, "resume")) {
+			resume();
+		} else if (starts_with(input, "replay")) {
+			replay();
+		} else if (starts_with(input, "help")) {
+			help();
+		}
 	}
 }
 

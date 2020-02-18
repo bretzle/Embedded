@@ -48,3 +48,12 @@ void help(void) {
     printf("\twm: write something to memory {address} {value} | ex: wm 0x20001000 0x7\n");
     printf("\tdm: dumps some number of bytes {address} {length} | ex: dm 0x20001000 100\n");
 }
+
+int starts_with(const char* string, const char* prefix) {
+    while(*prefix) {
+        if (*prefix++ != *string++)
+            return 0;
+    }
+
+    return 1;
+}
