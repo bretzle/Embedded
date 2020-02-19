@@ -36,8 +36,27 @@ extern NOTE* cur_song;
 // Represents the end of a song
 #define NOTE_END {0, 0}
 
+/**
+ * Initializes everything needed for playing a song
+ */
 void init_music(void);
+
+/**
+ * Starts playing the song located at `cur_song`
+ */
 void start_song(void);
+
+/**
+ * Pauses the song if one is playing
+ */
 void pause(void);
+
+/**
+ * Resumes the song
+ */
 void resume(void);
+
+/**
+ * Restarts the song and continues playing
+ */
 void replay(void);
