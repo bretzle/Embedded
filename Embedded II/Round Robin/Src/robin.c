@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    robin.c
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Contains logic for round robin task switching.
+  ******************************************************************************
+*/
+
 #include "robin.h"
 #include <stdlib.h>
 

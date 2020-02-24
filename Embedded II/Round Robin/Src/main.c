@@ -13,8 +13,10 @@
 ///
 /// Knight Rider lights use Timer 2
 /// LCD+keypad uses Timer 4
-/// Memory Console uses no Timer
+/// Console uses no Timer
 /// Music Box uses Timer 3 and 10
+///
+/// Run the help command to see available commands
 
 #include "robin.h"
 #include "led.h"

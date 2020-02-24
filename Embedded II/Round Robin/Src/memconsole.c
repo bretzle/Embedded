@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    console.c
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Contains memory functions used by the console.
+  ******************************************************************************
+*/
+
 #include "stdio.h"
 
 /**

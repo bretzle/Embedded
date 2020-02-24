@@ -1,3 +1,12 @@
+/**
+  ******************************************************************************
+  * @file    music.c
+  * @author  John Bretz
+  * @version V1.0
+  * @brief   Allows the playing of music.
+  ******************************************************************************
+*/
+
 #include "music.h"
 #include "timer.h"
 #include "register.h"
