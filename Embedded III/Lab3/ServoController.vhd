@@ -16,10 +16,10 @@ USE ieee.numeric_std.ALL;
 
 ENTITY ServoController IS
     PORT (
-        input : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-        clk : IN STD_LOGIC;
-        rst : IN STD_LOGIC;
-        output : OUT STD_LOGIC
+        input : IN STD_LOGIC_VECTOR(7 DOWNTO 0); -- DATA
+        clk : IN STD_LOGIC;                      -- CLK
+        rst : IN STD_LOGIC;                      -- RST
+        output : OUT STD_LOGIC                   -- PWM
     );
 END ENTITY ServoController;
 
