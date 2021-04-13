@@ -1,3 +1,8 @@
+//! John Bretz
+//! CE2820
+//! lcd.c
+//! Api impl of LT24 LCD display
+
 #include <stdio.h>
 #include <unistd.h>
 #include "system.h"

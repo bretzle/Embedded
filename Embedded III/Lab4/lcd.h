@@ -1,7 +1,7 @@
 //! John Bretz
 //! CE2820
 //! lcd.h
-//! Api the LT25 LCD display
+//! Api the LT24 LCD display
 
 #ifndef LCD_H_
 #define LCD_H_
