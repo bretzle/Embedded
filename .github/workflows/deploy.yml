@@ -15,8 +15,11 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Build
+      - name: install
         run: cargo install mdbook
+
+      - name: build
+        run: mdbook build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
