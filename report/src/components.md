@@ -1,1 +1,10 @@
 # Components
+- [Push Buttons](./components/buttons.md)
+- [Switches](./components/switches.md)
+- [LEDs](./components/led.md)
+- [Seven Segment](./components/sev_seg.md)
+- [Servo](./components/servo.md)
+- [LCD Display](./components/lcd.md)
+- [LCD Touch](./components/touch.md)
+- [Joystick](./components/joystick.md)
+- [Accelerometer](./components/accelerometer.md)
