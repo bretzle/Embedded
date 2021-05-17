@@ -6,3 +6,6 @@
 - What can it do? 
 - How was it designed? 
 - What tools were used?
+
+## Table of Contents
+{{#include SUMMARY.md:2:}}
