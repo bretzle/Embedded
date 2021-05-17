@@ -22,9 +22,3 @@
 | Joystick Sequencer    | `0xFF20_2090` | `0xFF20_2097` |
 | Joystick Sample Store | `0xFF20_2200` | `0xFF20_23FF` |
 | Accelerometer         | `0xFF20_2440` | `0xFF20_247F` |
-
-- Overall Block diagram of your complete system.
-- How would your wire up your system? 
-- What pins go where?
-- Reference the schematic 
-- Overall Memory Map
