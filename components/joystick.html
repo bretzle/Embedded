@@ -167,10 +167,30 @@
                     <main>
                         <h1 id="joystick"><a class="header" href="#joystick">Joystick</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>An analog joystick similar to those found on game controllers. Allows vector based controls.</p>
+<p><img src="https://cdn.discordapp.com/attachments/371689406823661570/843241408223772742/unknown.png" alt="Picture of joystick" /></p>
 <h2 id="memory-map"><a class="header" href="#memory-map">Memory Map</a></h2>
 <h2 id="theory-of-operation"><a class="header" href="#theory-of-operation">Theory of Operation</a></h2>
+<p>The joystick makes use of a general purpose ADC. <code>Vrx</code>, <code>Vry</code> and <code>Sw</code> are connected to arduino ADC pins. Once the ADC is turned on the joystick inputs can be read by the system.</p>
 <h2 id="hardware-connections"><a class="header" href="#hardware-connections">Hardware Connections</a></h2>
+<table><thead><tr><th>Name</th><th>Direction</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+<tr><td>VCC</td><td>out</td><td>+5V connection</td><td></td></tr>
+<tr><td>GND</td><td>out</td><td>ground connection</td><td></td></tr>
+<tr><td>Vrx</td><td>in</td><td>Horizontal analog signal</td><td>Connects to A0</td></tr>
+<tr><td>Vry</td><td>in</td><td>Vertical analog signal</td><td>Connects to A1</td></tr>
+<tr><td>Sw</td><td>in</td><td>Clicking Switch</td><td>Connects to A2</td></tr>
+</tbody></table>
+<p><em>See DE10-Lite <a href="https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-2912030810549-de10-lite-user-manual.pdf">Manual</a> for FPGA pins</em></p>
 <h2 id="testing-and-usage"><a class="header" href="#testing-and-usage">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;analog.h&quot;
+
+int32_t data[2];
+
+analog_init();
+get_analog_data(data);
+
+printf(&quot;X: %10d, Y: %10d\n&quot;, data[0], data[1]);
+</code></pre>
 
                     </main>
 

@@ -167,9 +167,18 @@
                     <main>
                         <h1 id="leds"><a class="header" href="#leds">LEDs</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>There are 10 LEDs that can be controlled on the board</p>
 <h2 id="memory-map"><a class="header" href="#memory-map">Memory Map</a></h2>
+<p>The component utilizes 10 bits, 1 for each LED.</p>
+<p>When a bit is high the LED will turn on.</p>
+<pre><code>+-------+-----+-----+-------+-------+-------+
+| LED 9 | ... | ... | LED 2 | LED 1 | LED 0 |
++-------+-----+-----+-------+-------+-------+
+</code></pre>
 <h2 id="theory-of-operation"><a class="header" href="#theory-of-operation">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. Simply read the memory itself or use the api calls.</p>
 <h2 id="hardware-connections"><a class="header" href="#hardware-connections">Hardware Connections</a></h2>
+<p>The components is hardwired to the LEDs on the board</p>
 <h2 id="testing-and-usage"><a class="header" href="#testing-and-usage">Testing and Usage</a></h2>
 <pre><code class="language-c">write_leds(0x3FF); // Turns on all leds
 write_leds(0x001); // Turns off all leds except the first

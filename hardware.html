@@ -168,6 +168,21 @@
                         <h1 id="hardware-setup"><a class="header" href="#hardware-setup">Hardware Setup</a></h1>
 <h3 id="top-level-schematic"><a class="header" href="#top-level-schematic">Top level Schematic</a></h3>
 <p><img src="https://cdn.discordapp.com/attachments/371689406823661570/842882954601824277/unknown.png" alt="Top Level Schematic" /></p>
+<h3 id="board-block-diagram"><a class="header" href="#board-block-diagram">Board Block Diagram</a></h3>
+<p><img src="https://cdn.discordapp.com/attachments/371689406823661570/843220247725080576/unknown.png" alt="Board Block Diagram" /></p>
+<h3 id="overall-memory-map"><a class="header" href="#overall-memory-map">Overall Memory Map</a></h3>
+<table><thead><tr><th>Component</th><th>Start</th><th>End</th></tr></thead><tbody>
+<tr><td>LEDs</td><td><code>0xFF20_0000</code></td><td><code>0xFF20_000F</code></td></tr>
+<tr><td>Switches</td><td><code>0xFF20_0040</code></td><td><code>0xFF20_004F</code></td></tr>
+<tr><td>Pushbuttons</td><td><code>0xFF20_0050</code></td><td><code>0xFF20_005F</code></td></tr>
+<tr><td>HexDecoder</td><td><code>0xFF20_2050</code></td><td><code>0xFF20_205F</code></td></tr>
+<tr><td>Servos</td><td><code>0xFF20_2060</code></td><td><code>0xFF20_206F</code></td></tr>
+<tr><td>LCD</td><td><code>0xFF20_2070</code></td><td><code>0xFF20_207F</code></td></tr>
+<tr><td>Touch Control</td><td><code>0xFF20_2080</code></td><td><code>0xFF20_2087</code></td></tr>
+<tr><td>Joystick Sequencer</td><td><code>0xFF20_2090</code></td><td><code>0xFF20_2097</code></td></tr>
+<tr><td>Joystick Sample Store</td><td><code>0xFF20_2200</code></td><td><code>0xFF20_23FF</code></td></tr>
+<tr><td>Accelerometer</td><td><code>0xFF20_2440</code></td><td><code>0xFF20_247F</code></td></tr>
+</tbody></table>
 <ul>
 <li>Overall Block diagram of your complete system.</li>
 <li>How would your wire up your system? </li>

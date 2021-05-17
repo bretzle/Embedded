@@ -167,10 +167,28 @@
                     <main>
                         <h1 id="accelerometer"><a class="header" href="#accelerometer">Accelerometer</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The accelerometer is a sensor build into the board that can detect movements on all 3 axes.</p>
 <h2 id="memory-map"><a class="header" href="#memory-map">Memory Map</a></h2>
 <h2 id="theory-of-operation"><a class="header" href="#theory-of-operation">Theory of Operation</a></h2>
+<p>Internally the device uses an I2C bus to communicate with the rest of the system. The component must be initialized prior to retrieving data from the device. This device does not make use of interrupts.</p>
 <h2 id="hardware-connections"><a class="header" href="#hardware-connections">Hardware Connections</a></h2>
+<p>Uses the accelerometer's pins more specifically:</p>
+<table><thead><tr><th>Name</th><th>Direction</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>G_SENSOR_SDO</code></td><td>inout</td><td>I2C address select</td></tr>
+<tr><td><code>G_SENSOR_SDI</code></td><td>inout</td><td>I2C serial data</td></tr>
+<tr><td><code>G_SENSOR_SCLK</code></td><td>inout</td><td>I2C serial clock</td></tr>
+<tr><td><code>G_SENSOR_CS_N</code></td><td>out</td><td>Enables I2C communication</td></tr>
+</tbody></table>
+<p><em>See DE10-Lite <a href="https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-2912030810549-de10-lite-user-manual.pdf">Manual</a> for FPGA pins</em></p>
 <h2 id="testing-and-usage"><a class="header" href="#testing-and-usage">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;accel.h&quot;
+
+accel_init();
+
+int16_t data[3];
+
+get_accel_data(data);
+</code></pre>
 
                     </main>
 

@@ -175,9 +175,45 @@
 <li>How was it designed? </li>
 <li>What tools were used?</li>
 </ul>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="./introduction.html">Introduction</a></li>
+<li><a href="./hardware.html">Hardware Setup</a></li>
+<li><a href="./components.html">Components</a>
+<ul>
+<li><a href="./components/buttons.html">Push Buttons</a></li>
+<li><a href="./components/switches.html">Switches</a></li>
+<li><a href="./components/led.html">LEDs</a></li>
+<li><a href="./components/sev_seg.html">Seven Segment</a></li>
+<li><a href="./components/servo.html">Servo</a></li>
+<li><a href="./components/lcd.html">LCD Display</a></li>
+<li><a href="./components/touch.html">LCD Touch</a></li>
+<li><a href="./components/joystick.html">Joystick</a></li>
+<li><a href="./components/accelerometer.html">Accelerometer</a></li>
+</ul>
+</li>
+<li><a href="./conclusions.html">Summary &amp; Conclusions</a></li>
+<li><a href="./api.html">Appendix I: API</a></li>
+<li><a href="./example.html">Appendix II: Example</a></li>
+</ul>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="hardware-setup"><a class="header" href="#hardware-setup">Hardware Setup</a></h1>
 <h3 id="top-level-schematic"><a class="header" href="#top-level-schematic">Top level Schematic</a></h3>
 <p><img src="https://cdn.discordapp.com/attachments/371689406823661570/842882954601824277/unknown.png" alt="Top Level Schematic" /></p>
+<h3 id="board-block-diagram"><a class="header" href="#board-block-diagram">Board Block Diagram</a></h3>
+<p><img src="https://cdn.discordapp.com/attachments/371689406823661570/843220247725080576/unknown.png" alt="Board Block Diagram" /></p>
+<h3 id="overall-memory-map"><a class="header" href="#overall-memory-map">Overall Memory Map</a></h3>
+<table><thead><tr><th>Component</th><th>Start</th><th>End</th></tr></thead><tbody>
+<tr><td>LEDs</td><td><code>0xFF20_0000</code></td><td><code>0xFF20_000F</code></td></tr>
+<tr><td>Switches</td><td><code>0xFF20_0040</code></td><td><code>0xFF20_004F</code></td></tr>
+<tr><td>Pushbuttons</td><td><code>0xFF20_0050</code></td><td><code>0xFF20_005F</code></td></tr>
+<tr><td>HexDecoder</td><td><code>0xFF20_2050</code></td><td><code>0xFF20_205F</code></td></tr>
+<tr><td>Servos</td><td><code>0xFF20_2060</code></td><td><code>0xFF20_206F</code></td></tr>
+<tr><td>LCD</td><td><code>0xFF20_2070</code></td><td><code>0xFF20_207F</code></td></tr>
+<tr><td>Touch Control</td><td><code>0xFF20_2080</code></td><td><code>0xFF20_2087</code></td></tr>
+<tr><td>Joystick Sequencer</td><td><code>0xFF20_2090</code></td><td><code>0xFF20_2097</code></td></tr>
+<tr><td>Joystick Sample Store</td><td><code>0xFF20_2200</code></td><td><code>0xFF20_23FF</code></td></tr>
+<tr><td>Accelerometer</td><td><code>0xFF20_2440</code></td><td><code>0xFF20_247F</code></td></tr>
+</tbody></table>
 <ul>
 <li>Overall Block diagram of your complete system.</li>
 <li>How would your wire up your system? </li>
@@ -199,61 +235,210 @@
 </ul>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="push-buttons"><a class="header" href="#push-buttons">Push Buttons</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The board comes equiped with two push buttons.</p>
 <h2 id="memory-map"><a class="header" href="#memory-map">Memory Map</a></h2>
+<p>Each button takes up 2 bits in memory.</p>
+<p>'1' is pressed. '0' is not pressed</p>
+<pre><code>+----------+----------+
+| Button 2 | Button 1 |
++----------+----------+
+</code></pre>
 <h2 id="theory-of-operation"><a class="header" href="#theory-of-operation">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. Simply read the memory itself or use the api calls.</p>
 <h2 id="hardware-connections"><a class="header" href="#hardware-connections">Hardware Connections</a></h2>
+<p>The component is hardwired to the buttons on the board</p>
 <h2 id="testing-and-usage"><a class="header" href="#testing-and-usage">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;pushbutton.h&quot;
+
+while (1)
+{
+	if (is_button_pressed(BUTTON_1))
+	{
+		printf(&quot;Button 1 is pressed!\n&quot;);
+	}
+}
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="switches"><a class="header" href="#switches">Switches</a></h1>
 <h2 id="overview-1"><a class="header" href="#overview-1">Overview</a></h2>
+<p>The DE10-Lite comes prequipped with 10 slide switches.</p>
 <h2 id="memory-map-1"><a class="header" href="#memory-map-1">Memory Map</a></h2>
+<p>The component utilizes 10 bits, 1 for each switch.</p>
+<pre><code>+----------+-----+-----+----------+----------+----------+
+| Switch 9 | ... | ... | Switch 2 | Switch 1 | Switch 0 |
++----------+-----+-----+----------+----------+----------+
+</code></pre>
 <h2 id="theory-of-operation-1"><a class="header" href="#theory-of-operation-1">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. Simply read the memory itself or use the api calls.</p>
 <h2 id="hardware-connections-1"><a class="header" href="#hardware-connections-1">Hardware Connections</a></h2>
+<p>The components is hardwired to the switches on the board</p>
 <h2 id="testing-and-usage-1"><a class="header" href="#testing-and-usage-1">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;switches.h&quot;
+
+while (1)
+{
+	printf(&quot;Value: %d\n&quot;, read_switches());
+}
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="leds"><a class="header" href="#leds">LEDs</a></h1>
 <h2 id="overview-2"><a class="header" href="#overview-2">Overview</a></h2>
+<p>There are 10 LEDs that can be controlled on the board</p>
 <h2 id="memory-map-2"><a class="header" href="#memory-map-2">Memory Map</a></h2>
+<p>The component utilizes 10 bits, 1 for each LED.</p>
+<p>When a bit is high the LED will turn on.</p>
+<pre><code>+-------+-----+-----+-------+-------+-------+
+| LED 9 | ... | ... | LED 2 | LED 1 | LED 0 |
++-------+-----+-----+-------+-------+-------+
+</code></pre>
 <h2 id="theory-of-operation-2"><a class="header" href="#theory-of-operation-2">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. Simply read the memory itself or use the api calls.</p>
 <h2 id="hardware-connections-2"><a class="header" href="#hardware-connections-2">Hardware Connections</a></h2>
+<p>The components is hardwired to the LEDs on the board</p>
 <h2 id="testing-and-usage-2"><a class="header" href="#testing-and-usage-2">Testing and Usage</a></h2>
 <pre><code class="language-c">write_leds(0x3FF); // Turns on all leds
 write_leds(0x001); // Turns off all leds except the first
 </code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="seven-segment"><a class="header" href="#seven-segment">Seven Segment</a></h1>
 <h2 id="overview-3"><a class="header" href="#overview-3">Overview</a></h2>
+<p>There are six seven-segment displays on the the DE10-Lite. Each display has its own decoder in hardware. These decoders support all hexadecimal characters.</p>
 <h2 id="memory-map-3"><a class="header" href="#memory-map-3">Memory Map</a></h2>
+<p>Each decoder is 5 bits in memory where the first 4 are the digit to display
+and an enable bit. When the enable bit is set to 0 nothing will be displayed.</p>
+<pre><code>Ex.
+  +---+---+---+---+---+
+  | 1 | 0 | 0 | 1 | 1 |   Would display 9 on the display
+  +---+---+---+---+---+
+   ^----Data----^   ^ Enable bit
+  +---+---+---+---+---+
+  | 1 | 0 | 0 | 1 | 0 |   No display
+  +---+---+---+---+---+
+</code></pre>
 <h2 id="theory-of-operation-3"><a class="header" href="#theory-of-operation-3">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. One can simply call the api's functions to write to each display.</p>
 <h2 id="hardware-connections-3"><a class="header" href="#hardware-connections-3">Hardware Connections</a></h2>
+<p>The decoders are built into the system itself and are hardwired to the displays.</p>
 <h2 id="testing-and-usage-3"><a class="header" href="#testing-and-usage-3">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;seven_seg.h&quot;
+
+write_hex_display(123456, 10); // writes &quot;123456&quot;
+
+write_hex_display(0xDEADBEEF, 16); // writes &quot;DEADBEEF&quot;
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="servo"><a class="header" href="#servo">Servo</a></h1>
 <h2 id="overview-4"><a class="header" href="#overview-4">Overview</a></h2>
+<p>The system has two servo controllers that can control two independant hobby servo motors. </p>
 <h2 id="memory-map-4"><a class="header" href="#memory-map-4">Memory Map</a></h2>
+<p>Each servo is effectivly an 8-bit register.</p>
 <h2 id="theory-of-operation-4"><a class="header" href="#theory-of-operation-4">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized in software.</p>
+<p>The value determines the position of the servo. Eacg servo has <code>90</code>° of movement. When the register holds <code>0</code>-<code>200</code> the servo will move from <code>0</code>-<code>90</code>°. If the value is <code>&gt;200</code> the servo will &quot;turn off&quot; (Allowing free range of motion)</p>
+<p>Internally the controller creates a pwm signal that will tell the servo the position to move to.</p>
 <h2 id="hardware-connections-4"><a class="header" href="#hardware-connections-4">Hardware Connections</a></h2>
+<p>Each servo will require a connection to VCC (+5V), GND, and an arduino pin to drive.</p>
 <h2 id="testing-and-usage-4"><a class="header" href="#testing-and-usage-4">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;servo.h&quot;
+
+// Move the first servo to 45° and the second to 90°
+move_servos_degree(45, 90);
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="lcd-display"><a class="header" href="#lcd-display">LCD Display</a></h1>
 <h2 id="overview-5"><a class="header" href="#overview-5">Overview</a></h2>
+<p>The LCD component makes use of the LT24 Display. The display is 320x240 pixels and uses 16-bit color opposed to the traditional 24. The component makes use of Framebuffers in memory to handle pixel data.</p>
 <h2 id="memory-map-5"><a class="header" href="#memory-map-5">Memory Map</a></h2>
+<p>The component allocates 150 KibiBytes on the heap when the framebuffers are initialized. This data must be freed after use. </p>
 <h2 id="theory-of-operation-5"><a class="header" href="#theory-of-operation-5">Theory of Operation</a></h2>
+<p>The LCD will be automatically initialized when the system powers up. The display makes use of two framebuffers. The display has direct memory access to the frontbuffer. The buffers can be swapped by calling <code>lcd_present</code>. The display also supports touch interaction (<a href="components/./touch.html">See components/touch</a>).</p>
 <h2 id="hardware-connections-5"><a class="header" href="#hardware-connections-5">Hardware Connections</a></h2>
+<p>The display uses the entire 40 pin GPIO Bus. </p>
+<p><em>More info can be found in the <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwiFgNTmhNHwAhURbc0KHZDBDokQFjAAegQIBRAD&amp;url=https%3A%2F%2Fwww.terasic.com.tw%2Fcgi-bin%2Fpage%2Farchive_download.pl%3FLanguage%3DEnglish%26No%3D892%26FID%3D527f33a451f2c9a404934446366f5342&amp;usg=AOvVaw01SB6SgxbhnAOCPr9bi4va">LT24 Datasheet</a></em></p>
 <h2 id="testing-and-usage-5"><a class="header" href="#testing-and-usage-5">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;lcd.h&quot;
+
+lcd_init(); // initialize the framebuffer
+
+lcd_clear(); // clears the screen by setting every pixel to white
+
+lcd_draw_rectangle(0, 0, WIDTH, HEIGHT, RED); // draws a red line from (0,0) to (WIDTH, HEIGHT) 
+
+lcd_present(); // swaps the framebuffers and draws changes
+
+lcd_free(); // Once done drawing free the framebuffers
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="lcd-touch"><a class="header" href="#lcd-touch">LCD Touch</a></h1>
 <h2 id="overview-6"><a class="header" href="#overview-6">Overview</a></h2>
+<p>The LT24 LCD display is also a touch screen.</p>
 <h2 id="memory-map-6"><a class="header" href="#memory-map-6">Memory Map</a></h2>
+<p>This component has a control register and a data register. Interacting with both of these should be done through the provided API.</p>
 <h2 id="theory-of-operation-6"><a class="header" href="#theory-of-operation-6">Theory of Operation</a></h2>
+<p>The touch subsystem of the LCD utilizes an ADC as well as an SPI bus to communicate with that ADC.</p>
+<p>The LCD must be initialized via <code>touch_init()</code> prior to reading touch data.</p>
 <h2 id="hardware-connections-6"><a class="header" href="#hardware-connections-6">Hardware Connections</a></h2>
+<p>This subsystem uses the same pins as the LCD display. See LCD Display documentation for more <a href="components/./lcd.html">info</a></p>
 <h2 id="testing-and-usage-6"><a class="header" href="#testing-and-usage-6">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;touch.h&quot;
+#include &quot;lcd.h&quot;
+
+lcd_init();
+touch_init();
+
+int32_t data[2];
+
+// Make any pixel red that is touched
+while (1)
+{
+	get_touch_data(data);
+	set_pixel(data[0], data[1], RED)
+}
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="joystick"><a class="header" href="#joystick">Joystick</a></h1>
 <h2 id="overview-7"><a class="header" href="#overview-7">Overview</a></h2>
+<p>An analog joystick similar to those found on game controllers. Allows vector based controls.</p>
+<p><img src="https://cdn.discordapp.com/attachments/371689406823661570/843241408223772742/unknown.png" alt="Picture of joystick" /></p>
 <h2 id="memory-map-7"><a class="header" href="#memory-map-7">Memory Map</a></h2>
 <h2 id="theory-of-operation-7"><a class="header" href="#theory-of-operation-7">Theory of Operation</a></h2>
+<p>The joystick makes use of a general purpose ADC. <code>Vrx</code>, <code>Vry</code> and <code>Sw</code> are connected to arduino ADC pins. Once the ADC is turned on the joystick inputs can be read by the system.</p>
 <h2 id="hardware-connections-7"><a class="header" href="#hardware-connections-7">Hardware Connections</a></h2>
+<table><thead><tr><th>Name</th><th>Direction</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+<tr><td>VCC</td><td>out</td><td>+5V connection</td><td></td></tr>
+<tr><td>GND</td><td>out</td><td>ground connection</td><td></td></tr>
+<tr><td>Vrx</td><td>in</td><td>Horizontal analog signal</td><td>Connects to A0</td></tr>
+<tr><td>Vry</td><td>in</td><td>Vertical analog signal</td><td>Connects to A1</td></tr>
+<tr><td>Sw</td><td>in</td><td>Clicking Switch</td><td>Connects to A2</td></tr>
+</tbody></table>
+<p><em>See DE10-Lite <a href="https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-2912030810549-de10-lite-user-manual.pdf">Manual</a> for FPGA pins</em></p>
 <h2 id="testing-and-usage-7"><a class="header" href="#testing-and-usage-7">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;analog.h&quot;
+
+int32_t data[2];
+
+analog_init();
+get_analog_data(data);
+
+printf(&quot;X: %10d, Y: %10d\n&quot;, data[0], data[1]);
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="accelerometer"><a class="header" href="#accelerometer">Accelerometer</a></h1>
 <h2 id="overview-8"><a class="header" href="#overview-8">Overview</a></h2>
+<p>The accelerometer is a sensor build into the board that can detect movements on all 3 axes.</p>
 <h2 id="memory-map-8"><a class="header" href="#memory-map-8">Memory Map</a></h2>
 <h2 id="theory-of-operation-8"><a class="header" href="#theory-of-operation-8">Theory of Operation</a></h2>
+<p>Internally the device uses an I2C bus to communicate with the rest of the system. The component must be initialized prior to retrieving data from the device. This device does not make use of interrupts.</p>
 <h2 id="hardware-connections-8"><a class="header" href="#hardware-connections-8">Hardware Connections</a></h2>
+<p>Uses the accelerometer's pins more specifically:</p>
+<table><thead><tr><th>Name</th><th>Direction</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>G_SENSOR_SDO</code></td><td>inout</td><td>I2C address select</td></tr>
+<tr><td><code>G_SENSOR_SDI</code></td><td>inout</td><td>I2C serial data</td></tr>
+<tr><td><code>G_SENSOR_SCLK</code></td><td>inout</td><td>I2C serial clock</td></tr>
+<tr><td><code>G_SENSOR_CS_N</code></td><td>out</td><td>Enables I2C communication</td></tr>
+</tbody></table>
+<p><em>See DE10-Lite <a href="https://www.intel.com/content/dam/altera-www/global/en_US/portal/dsn/42/doc-us-dsnbk-42-2912030810549-de10-lite-user-manual.pdf">Manual</a> for FPGA pins</em></p>
 <h2 id="testing-and-usage-8"><a class="header" href="#testing-and-usage-8">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;accel.h&quot;
+
+accel_init();
+
+int16_t data[3];
+
+get_accel_data(data);
+</code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="summary--conclusions"><a class="header" href="#summary--conclusions">Summary &amp; Conclusions</a></h1>
 <p>what went well?</p>
 <p>what diffuclties did you encouter?</p>

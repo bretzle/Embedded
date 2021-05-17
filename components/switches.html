@@ -167,10 +167,25 @@
                     <main>
                         <h1 id="switches"><a class="header" href="#switches">Switches</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The DE10-Lite comes prequipped with 10 slide switches.</p>
 <h2 id="memory-map"><a class="header" href="#memory-map">Memory Map</a></h2>
+<p>The component utilizes 10 bits, 1 for each switch.</p>
+<pre><code>+----------+-----+-----+----------+----------+----------+
+| Switch 9 | ... | ... | Switch 2 | Switch 1 | Switch 0 |
++----------+-----+-----+----------+----------+----------+
+</code></pre>
 <h2 id="theory-of-operation"><a class="header" href="#theory-of-operation">Theory of Operation</a></h2>
+<p>Nothing needs to be initialized. Simply read the memory itself or use the api calls.</p>
 <h2 id="hardware-connections"><a class="header" href="#hardware-connections">Hardware Connections</a></h2>
+<p>The components is hardwired to the switches on the board</p>
 <h2 id="testing-and-usage"><a class="header" href="#testing-and-usage">Testing and Usage</a></h2>
+<pre><code class="language-c">#include &quot;switches.h&quot;
+
+while (1)
+{
+	printf(&quot;Value: %d\n&quot;, read_switches());
+}
+</code></pre>
 
                     </main>
 
